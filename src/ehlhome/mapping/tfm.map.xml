@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/tfm">
+	<forwards />
+	<exceptions />
+	<controllers>
+	
+  		<!--路况发布-->
+		<controller name="tfmMap" clazz="com.ehl.tfm.action.TfmMap">
+		    <action name="readRoadFlow"></action>
+		    <action name="synLinkDir"></action>		    
+  		</controller>
+	</controllers>
+</mapping>

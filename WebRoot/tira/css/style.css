@@ -1,0 +1,18 @@
+/*---全局样式------------------------------------------------------*/
+*{ padding:0; margin:0;}
+body{ font:"宋体", Helvetica, sans-serif; font-size:12px;}
+/*---字体样式------------------------------------------------------*/
+.bluefont{ color:#60A1DD; font-weight:bold; font-size:14px;}
+.twoHeight{ background-color:#60A1DD; height:2px;}
+.fiveHeight{ background-color:#60A1DD; height:5px;}
+
+.titleBack { background:url(../images/gov_WMCMS_71.gif) repeat-x; height:24px; line-height:24px;}
+.titleFont{ font-weight:bold; font-size:14px; color:#333333;}
+.tdFont{ color:#589CDB; line-height:19px;}
+.redFont a{ color:#FF0000; text-decoration:none;}
+.redFont a:hover{ color:#FF0000; text-decoration:underline;}
+.redFont{ color:#FF0000; line-height:19px; text-align:right; padding-right:6px;}
+
+/*---TABLE样式------------------------------------------------------*/
+.table{ border:1px solid #BBBBBB; border-top:none;}
+.tdBorder{ border-bottom:1px dashed #CAC9CE;font-size:14px;}

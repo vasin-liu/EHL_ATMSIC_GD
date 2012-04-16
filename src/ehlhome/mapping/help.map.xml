@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/help">
+	<forwards />
+	<exceptions />
+	<controllers>
+
+		<!--留言  -->
+		<controller name="leave" clazz="com.ehl.help.action.LeaveAction">
+			<action name="insert"></action>
+			<action name="getById"></action>
+			<action name="modifyById"></action>
+			<action name="deleteById"></action>
+			<action name="toDetailPage">
+				 <forward name="success"  path="/help/ehl/leave.jsp" />
+			</action>
+			<action name="toQueryPage">
+				 <forward name="success"  path="/help/ehl/leaveQuery.jsp" />
+			</action>
+			<action name="select"></action>
+			<action name="reply"></action>
+		</controller>
+		<!--留言回复  -->
+		<controller name="reply" clazz="com.ehl.help.action.ReplyAction">
+			<action name="insert"></action>
+			<action name="getById"></action>
+			<action name="modifyById"></action>
+			<action name="deleteById"></action>
+		</controller>
+		
+	</controllers>
+</mapping>

@@ -1,0 +1,13 @@
+*{ padding:0; margin:0; list-style:none;}
+body{ background:url(../image/login/gd/back.png) top center;}
+
+.whitefont{ color:#ffffff; font-size:14px; font-weight:bold; text-align:center; line-height:23px;}
+.whitefont a{ color:#ffffff; text-decoration:none;border:none}
+.whitefont a:hover { color:#b9e73d; text-decoration:underline;border:none}
+.loginnavback{ background:url(../image/login/gd/login_navback.png) no-repeat; height:27px;}
+a img
+{ 
+	border:none;
+}
+
+input{ border:1px solid #30b2d0; line-height:19px; height:19px;}

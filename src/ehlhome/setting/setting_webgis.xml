@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+
+	<!-- GIS地图连接配置参数 atms46sde-->	
+	<property name="gisserver" value="10.40.30.206"></property>
+	<property name="gisinstance" value="5151"></property>
+	<property name="gisdatabase" value="."></property>
+	<property name="gisuser" value="SDE"></property>
+	<property name="gispassword" value="ehl1234"></property>
+	<property name="gisversion" value="SDE.DEFAULT"></property>
+		
+	<!-- GIS地图加载配置参数 -->
+		<property name="gisscaleparameter" value="2"></property>
+	<property name="gistilesize" value="256"></property>
+	<property name="gismaxzoomlevel" value="10"></property>
+	<property name="gisdefaultlevel" value="3"></property>
+	<property name="gismaxx" value="117.726571479962" /> 
+  <property name="gismaxy" value="27.0752814754709" /> 
+  <property name="gisminx" value="109.31901853077" /> 
+  <property name="gisminy" value="18.6677285262797" /> 
+  <property name="giscenterx" value="113.522795005366" /> 
+  <property name="giscentery" value="22.8715050008753" /> 
+
+	<property name="gismappath" value="/EHL_ATMSIC_GD/maps/gzzd/"></property>
+	<!-- WebGIS系统图片存放路径  -->
+	<property name="ImageBaseDir" value="/EHL_ATMSIC_GD/webgis/images/"></property>
+
+	<!-- 切图比例尺参数 -->
+	<property name="gisScaleLevel_1" value="13802287"></property>  
+	<property name="gisScaleLevel_2" value="6901144"></property>  
+	<property name="gisScaleLevel_3" value="3450572"></property>  
+	<property name="gisScaleLevel_4" value="1725286"></property>  
+	<property name="gisScaleLevel_5" value="862843"></property>  
+	<property name="gisScaleLevel_6" value="431421"></property>  
+	<property name="gisScaleLevel_7" value="215661"></property>  
+	<property name="gisScaleLevel_8" value="107830"></property>  
+	<property name="gisScaleLevel_9" value="53915"></property>
+	<property name="gisScaleLevel_10" value="26958"></property>
+	<property name="gisScaleLevel_11" value="13479"></property>
+
+	<!-- 在第几级别上显示 -->
+	<property name="gisFeatureLevel" value="7"></property>  
+	<property name="gisFlowLevel" value="7"></property> 
+	
+	<!-- 鹰眼长宽 -->
+	<property name="gisAngleWidth" value="250"></property>  
+	<property name="gisAngleHeight" value="180"></property>  
+  
+  	<!-- 兰勃特投影六参数 -->
+  
+	<property name="Lambert_centralMeridian" value="113.8"></property>
+	<property name="Lambert_latitudeOfOrigin" value="20.0"></property>
+	<property name="Lambert_falseEasting" value="500000.0"></property>
+	<property name="Lambert_falseNorthing" value="0.0"></property>
+	<property name="Lambert_standardParallel1" value="22.0"></property>
+	<property name="Lambert_standardParallel2" value="23.0"></property>	
+	<property name="useProject" value="true"></property>
+	<!-- 定义数据的实际中心点 -->
+		<property name="gisfactcenterx" value="113.368720979316"></property>
+	<property name="gisfactcentery" value="22.7057830308147"></property>
+</properties>

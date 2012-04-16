@@ -1,0 +1,296 @@
+/*JIA 2009,4month*/
+/*首页 全局 样式----------------------------------------------------------------*/
+ /*外补丁内补丁为零*/
+html,body,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6,table,td,th,form,fieldset,img,dl{
+	margin:0;
+	padding:0; }
+
+/*设置或检索表格的行和单元格的边是合并在一起还是按照标准的HTML样式分开 属性设置相邻单元格的边框间的距离*/
+table { 
+      border-collapse: collapse; 
+      border-spacing: 0;
+	  font-size:12px;
+} 
+/*文字居中,大小12PX,字体“"宋体", Helvetica, sans-serif”,字体深灰色,背景以X轴平铺,背景居上,上边内补丁5PX*/ 
+body {
+	text-align:center;
+	font:12px,"宋体", Helvetica, sans-serif;
+	background:url(../images/ypw/back_02.gif) repeat-x top;
+	background-color:#fff;
+	color:#595959;
+}
+/*首页 文字链接样式*/
+/*文字灰色,文本装饰为无*/
+A:link {
+	color:#595959;
+	text-decoration:none; }
+ 
+/* unvisited link */
+/*文字灰色,文本装饰为无*/
+A:visited {
+	color:#595959;
+	text-decoration:none; }
+ 
+/* visited links */
+/*文字红色,文本装饰为无*/
+A:hover {
+	color:#FF0000;
+	text-decoration:none; }
+	
+/*文字深灰色,文本装饰为无*/
+.mainLeftTable A:link {
+	color:#2A90C7;
+	text-decoration:none; }
+ 
+/* unvisited link */
+/*文字深灰色,文本装饰为无*/
+.mainLeftTable A:visited {
+	color:#2A90C7;
+	text-decoration:none; }
+ 
+/* visited links */
+/*文字红色,文本装饰为无*/
+.mainLeftTable A:hover {
+	color:#FF0000;
+	text-decoration:none; }
+	
+/*首页 顶部HEAD样式*/
+.head {
+    background:url(../images/ypw/head.png) no-repeat;
+	width:950px;
+	height:110px;
+}
+/*首页 登录 样式*/
+.loginBack{
+    background:url(../images/ypw/login_back.png) repeat-x;
+	width:950px;
+	height:27px;
+	line-height:27px;
+	color:#fff;
+	}
+/*select 样式*/
+select {
+    color:#595959;
+}
+/*input 样式*/
+/*灰色边框*/
+INPUT{
+	border: 0;
+}
+/*背景以X轴方向平铺,高18PX,行高18PX*/
+input.text
+{
+	 background:url(../images/ypw/input[text].png) repeat-x;
+	 width:100px;
+	 height:19px;
+	 line-height:19px;
+	 color:#595959; 
+}
+/*首页 CENTER 样式*/
+/*main左侧样式*/
+.mainLeftTitle{
+     background:url(../images/ypw/new_notice.png) no-repeat;
+	 width:188px;
+	 height:25px;
+}
+.mainLeftTitleFont{
+	 color:#04516D;
+	 text-align:left;
+	 padding-left:20px;
+	 line-height:25px;
+}
+.mainLeftTitleFontMore{
+	 color:#04516D;
+	 text-align:left;
+	 padding-left:8px;
+	 line-height:25px;
+}
+.mainLeftTable{
+     border:1px solid #9CCCE8;
+}
+.mainLeftTable ul{
+     width:180px;
+     list-style:none;
+}
+.mainLeftTable ul li{
+     text-align:left;
+     color:#2A90C7;
+	 line-height:19px;
+}
+.mainLeftTable ul .padding{
+     padding-left:8px;
+}
+.mainLeftTable span{
+     color:#FF0000;
+}
+.mainLeftMore{
+     text-align:right;
+	 padding-right:5px;
+}
+Img{
+     border:0px;}
+.mainLeftTable ol{
+     width:180px;
+     list-style:none;
+}
+.mainLeftTable ol li{
+     background:url(../images/ypw/sys_back.png) no-repeat;
+	 width:143px;
+	 height:26px;
+     text-align:center;
+     color:#2A90C7;
+	 line-height:26px;
+	 padding-bottom:5px;
+}
+/*main 右侧样式*/
+.mainRightDuty{
+     background:url(../images/ypw/duty.png) no-repeat;
+	 width:159px;
+	 height:29px;
+}
+.mainRightDutyFont{
+     font-weight:bold;
+	 color:#FFFFFF;
+	 text-align:left;
+	 line-height:25px;
+	 padding-left:20px;
+}
+.mainRightTable{
+     border:1px solid #9CCCE8;
+}
+.mainRightTable ul{
+     list-style:none;
+	 height:260px;
+}
+.mainRightTable ul li {
+     display:block;
+	 line-height:21px;
+	 text-align:left;
+	 padding-left:10px;
+}
+.mainRightTable ol{
+     list-style:none;
+	 height:260px;
+}
+.mainRightTable ol li {
+     display:block;
+	 line-height:21px;
+	 padding-bottom:5px;
+}
+/*表格样式 小写C+16进制代码 = 字体颜色样式名称*/
+/*1PX浅蓝色实线边框*/
+.table {border:1px solid #A5D1EC;
+}
+/*表格样式 TITLE----------------------------------------------------------------*/
+/*高22PX;背景以X轴平铺;字体行高22PX,文本居中*/
+.tableTitleTopBack{ 
+     height:22px; 
+	 background:url(../images/ypw/title_back.gif) repeat-x; 
+	 line-height:22px; 
+	 text-align:center;
+}
+/*表格 td 边框样式 右边+下边----------------------------------------------------*/
+/*1PX浅蓝色实线边框(下边和右边);文本居中*/
+.tableTdRightBottom{ 
+     border-bottom:1px solid #b5d6e6; 
+	 border-right:1px solid #b5d6e6; 
+	 text-align:center;
+}
+/*表格 td 边框样式 右边----------------------------------------------------------------*/
+/*1PX浅蓝色实线边框(右边);文本居中*/
+.tableTdRight{ 
+     border-right:1px solid #b5d6e6; 
+	 text-align:center;
+}
+/*表格 td 边框样式 下边----------------------------------------------------------------*/
+/*1PX浅蓝色实线边框(下边);文本居中*/
+.tableTdBottom{ 
+     border-bottom:1px solid #b5d6e6; 
+	 text-align:center;
+}
+
+/*main 中间样式*/
+/*蓝色*/
+.instructions {
+     background:url(../images/ypw/instructions.png) no-repeat;
+	 height:25px;
+	 width:292px;
+}
+.instructionsFont{
+     color:#FFFFFF;
+	 text-align:left;
+	 padding-left:35px;
+	 line-height:25px;
+}
+.instructionsText{
+     width:290px;
+     border:1px solid #9CCCE8;
+     }
+.instructionsText ul{
+     list-style:none;
+}
+.instructionsText ul li {
+     display:block;
+	 line-height:21px;
+}
+.instructionsText span{
+     float:right;
+	 cursor:pointer;
+}
+/*绿色*/
+.instructionsGreen {
+     background:url(../images/ypw/instructions_green.png) no-repeat;
+	 height:25px;
+	 width:292px;
+}
+.instructionsTextGreen{
+     width:290px;
+     border:1px solid #C4E4B3;
+     }
+.instructionsTextGreen ul{
+     list-style:none;
+}
+.instructionsTextGreen ul li {
+     display:block;
+	 line-height:21px;
+}
+.instructionsTextGreen span{
+     float:right;
+	 cursor:pointer;
+}
+/*青色*/
+.instructionsCyan  {
+     background:url(../images/ypw/instructions_cyan.png) no-repeat;
+	 height:25px;
+	 width:292px;
+}
+.instructionsTextCyan {
+     width:290px;
+     border:1px solid #A8E0EE;
+     }
+.instructionsTextCyan ul{
+     list-style:none;
+}
+.instructionsTextCyan ul li {
+     display:block;
+	 line-height:21px;
+}
+.instructionsTextCyan span{
+     float:right;
+	 cursor:pointer;
+}
+
+/*FOOT样式*/
+.foot{
+     background:url(../images/ypw/foot.png) repeat-x;
+	 height:74px;
+	 text-align:left;
+	 color:#FFFFFF;}
+.foot ul{
+     list-style:none;
+}
+.foot ul li {
+     display:block;
+	 line-height:21px;
+	 color:#FFFFFF;
+}

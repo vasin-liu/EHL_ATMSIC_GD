@@ -1,0 +1,35 @@
+.list_table{
+	border-top: 1 solid  #A0A0A0;
+	border-right: 0 solid  #FFFFFF;
+	border-bottom: 0 solid  #FFFFFF;
+	border-left: 1 solid  #A0A0A0;
+	background-color: #FFFFFF;
+	border-collapse:collapse;
+	font-size:12px;		
+	position: relative;
+	padding: 0px;
+}	
+.list_thead{
+	border-top: 0 solid  #FFFFFF;
+	border-right: 1 solid  #A0A0A0;
+	border-bottom: 1 solid #A0A0A0;
+	border-left: 1 solid  #A0A0A0;
+	background-color: #B4C1E2;
+	line-height: 22px;
+	color: #000000;
+	border-collapse : separate;
+	empty-cells:show;
+	text-align: center;	
+}
+.list_td{
+	border-top: 0 solid  #FFFFFF;
+	border-right: 1 solid  #A0A0A0;
+	border-bottom: 1 solid  #A0A0A0;
+	border-left: 0 solid  #A0A0A0;
+	background-color: #DFEAF7;
+	line-height: 22px;
+	color: #000000;
+	border-collapse : separate;
+	empty-cells:show;
+	text-align: center;	
+}

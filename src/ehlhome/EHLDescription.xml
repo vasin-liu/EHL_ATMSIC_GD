@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow>
+	<initial-actions>
+		<action id="100" name="易华录工作流系统">
+			<!-- 执行初始化动作 --> 
+		</action>
+		<result old-status="Finished" status="Underway" step="1">
+			System.out.println("执行结果描述");
+		</result>
+	</initial-actions>
+	<steps>
+		<step id="1" name="步骤1">
+			<actions>
+				<condition>
+				  <!-- 执行条件 -->
+				</condition>
+				<action id="1" name="动作1">
+				  <!-- 执行动作1 -->	
+				</action>
+				<action id="2" name="动作1">
+				  <!-- 执行动作2 -->	
+				</action>
+				<result old-status="Finished" status="Underway" step="2" owner="所有人">
+				  System.out.println("执行结果描述");
+				</result>
+			</actions>
+		</step>
+		<step id="2" name="步骤2">
+			<actions>
+				<condition>
+				  <!-- 执行条件 -->
+				</condition>
+				<action id="3" name="动作3">
+				  <!-- 执行动作3 -->	
+				</action>
+				<result old-status="Finished" status="Finished" step="-1" owner="所有人">
+				  System.out.println("执行结果描述");
+				</result>
+			</actions>		
+		</step>
+	</steps>
+</workflow>

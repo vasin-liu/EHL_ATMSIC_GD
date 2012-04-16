@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tree id="0">
+		<item text="第一章 系统运行环境" id="010100" im0="book.gif" im1="books_open2.gif" im2="books_close2.gif">
+			<item text="数据库服务器" id="dataServer" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="WEB服务器" id="webServer" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="客户端" id="clientServer" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+		</item>
+		<item text="第二章 系统编码设计" id="010200" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+			<item text="代码类别编码说明" id="codeTypeExp" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="参数类别编码说明" id="paramExp" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="功能菜单编码说明" id="funcMenuExp" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="操作类型编码说明" id="operationExp" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="机构编码说明" id="departExp" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="车辆编码说明" id="carExp" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+		</item>
+		<item text="第三章 系统操作说明" id="010300" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+			<item text="用户权限管理" id="010301" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+				<item text="用户管理" id="user" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+				<item text="角色管理" id="role" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+				<item text="权限管理" id="priv" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+		        <item text="功能管理" id="function" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+				<item text="操作类型管理" id="operation" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+	        </item>
+	        <item text="组织机构管理" id="010400" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+				<item text="机构管理" id="department" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+				<item text="人员管理" id="person" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+				<item text="车辆管理" id="car" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+		     </item>
+		     <item text="系统管理" id="010500" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+				<item text="系统参数维护" id="param" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+				<item text="代码类别维护" id="codeType" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+				<item text="数据字典维护" id="code" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+		        <item text="系统日志维护" id="log" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+	        </item>
+		</item>
+</tree>

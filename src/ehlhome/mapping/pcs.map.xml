@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/pcs">
+	<forwards />
+	<exceptions />
+	<controllers>
+		<!--组织机构树的加载2008-04-08 -->
+		<controller name="departmentTree" clazz="com.ehl.sm.pcs.DepartmentTree">			
+			<action name="getTreeListById"></action>
+			<action name="insertRoot"></action>
+		</controller>
+		<!--组织机构管理 2008-04-10 -->
+		<controller name="departmentManage" clazz="com.ehl.sm.pcs.DepartmentManage">			
+			<action name="delete"></action>
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+			<action name="getJgccbm"></action>
+		</controller>
+		
+		<!--人员管理 2008-04-17 -->
+		<controller name="personManage" clazz="com.ehl.sm.pcs.PersonManage">			
+			<action name="delete"></action>
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+			<action name="filter"></action>
+			<action name="load"></action>
+			<action name="saveOrder"></action>
+			<action name="personForOrder"></action>
+			<action name="getDeptByJGID"></action>
+			<action name="saveFile"></action>
+			<action name="onload"></action>			
+			
+		</controller>
+		<!--车辆管理 -->
+		<controller name="carManage" clazz="com.ehl.sm.pcs.CarManage">			
+			<action name="delete"></action>
+			<action name="getDataById"></action>
+			<action name="getDataListById"></action>
+			<action name="updateData"></action>
+			<action name="filter"></action>
+			<action name="load"></action>
+			<action name="loadLog"></action>
+			<action name="onload"></action>			
+		</controller>
+				
+		<!--PDA管理  -->
+		<controller name="PDAManage" clazz="com.ehl.sm.pcs.PDAManage">			
+			<action name="delete"></action>
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+			<action name="filter"></action>
+			<action name="load"></action>
+			<action name="saveOrder"></action>
+			<action name="getDeptByJGID"></action>
+			
+		</controller>
+		
+		<controller name="tree" clazz="com.ehl.sm.pcs.PersonTree">			
+			<action name="setTree"></action>
+		</controller>
+	
+	</controllers>
+</mapping>

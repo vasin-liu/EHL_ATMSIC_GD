@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/login">
+	<forwards />
+	<exceptions />
+	<controllers>
+	      <!--首页登录 -->
+		<controller name="login" clazz="com.ehl.login.Login">
+		     <action name="login">
+       			<forward name="success"   redirect="true" path="/index.jsp" />
+		    	<forward name="failure"   redirect="true" path="/login.jsp" />
+		    </action>
+			<action name="isLogin"></action>
+			<action name="logout"></action>
+		</controller>
+		 <!--首页登录 -->
+		<controller name="loginGrid" clazz="com.ehl.login.Login">
+		     <action name="login">
+       			<forward name="success"   redirect="true" path="/grid.jsp?login=yes" />
+		    	<forward name="failure"   redirect="false" path="/loginToGrid.jsp?login=yes" />
+		    </action>
+			<action name="isLogin"></action>
+			<action name="logout"></action>
+		</controller>
+		 <!--会话保持 -->
+		<controller name="sessionKeep" clazz="com.ehl.login.SessionKeepAction">
+			<action name="keepSession"></action>
+			<action name="showSession"></action>
+		</controller>
+	   
+	</controllers>
+</mapping>

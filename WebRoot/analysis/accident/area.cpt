@@ -1,0 +1,1119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20100901">
+<TableDataMap>
+<TableData name="ds1" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="startDate"/>
+<O>
+<![CDATA[2011-08-11]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="unitName"/>
+<O>
+<![CDATA[4401\',\'4402]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="endDate"/>
+<O>
+<![CDATA[2011-10-13]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="roadLevel"/>
+<O>
+<![CDATA[\'高速公路1\']]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[EHL_ATMSIC_GD]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[${if(FIND('高速',roadLevel) != 0,"
+select temp1.jgid,
+       temp1.jgmc,
+       decode(temp2.roadlevel, null, '高速公路', temp2.roadlevel) col1,
+decode(temp2.num, null, 0, temp2.num) col2
+ from (select subStr(jgid, 0, 4) jgid, substr(jgmc, 0, 2) jgmc
+          from t_sys_department
+         where jgid < '446000000000'
+           and jgid != '440000000000'
+           and substr(jgid, 1, 2) = '44'
+           and substr(jgid, 3, 2) != '00'
+           and substr(jgid, 5, 2) = '00'
+           and substr(jgid, 0, 4) in ('"+ unitName + "')
+           ) temp1
+  left join (select substr(t1.reportunit, 0, 4) reportunit,
+                    count(t1.alarmid) num,sum(abs((t1.endkmvalue + t1.endmvalue / 1000) - (t1.kmvalue + t1.kmvalue / 1000))) length,
+                    '高速公路' as roadlevel
+               from t_attemper_alarm t1
+              where t1.eventtype = '001024'
+                and t1.roadid like '%高速%'
+                and t1.roadid not like '%（旧）%'
+                AND t1.CASEHAPPENTIME BETWEEN
+               TO_DATE('" + startDate + " 00:00:00', 'YYYY/MM/DD HH24:MI:SS') AND
+               TO_DATE('" + endDate + " 23:59:59', 'YYYY/MM/DD HH24:MI:SS')
+              group by substr(t1.reportunit, 0, 4)) temp2 on substr(temp2.reportunit,
+                                                                    0,
+                                                                    4) =
+                                                             temp1.jgid
+ " + if(and(FIND("国道",roadLevel) == 0,FIND('省道',roadLevel) == 0),""," UNION ")
+ ,"")}
+ 
+ ${if(FIND('国道',roadLevel) != 0,"
+select temp1.jgid,
+       temp1.jgmc,
+       decode(temp2.roadlevel, null, '国道', temp2.roadlevel) col1,
+       decode(temp2.num, null, 0, temp2.num) col2
+  from (select subStr(jgid, 0, 4) jgid, substr(jgmc, 0, 2) jgmc
+          from t_sys_department
+         where jgid < '446000000000'
+           and jgid != '440000000000'
+           and substr(jgid, 1, 2) = '44'
+           and substr(jgid, 3, 2) != '00'
+           and substr(jgid, 5, 2) = '00'
+           and substr(jgid, 0, 4) in ('"+ unitName + "')
+           ) temp1
+  left join (select substr(t1.reportunit, 0, 4) reportunit,
+                    count(t1.alarmid) num,
+                    sum(abs((endkmvalue + t1.endmvalue / 1000) -
+                            (t1.kmvalue + t1.kmvalue / 1000))) length,
+                    '国道' as roadlevel
+               from t_attemper_alarm t1
+              where t1.eventtype = '001024'
+                and t1.roadid like '%国道%'
+                and t1.roadid not like '%（旧）%'
+                AND t1.CASEHAPPENTIME BETWEEN
+               TO_DATE('" + startDate + " 00:00:00', 'YYYY/MM/DD HH24:MI:SS') AND
+               TO_DATE('" + endDate + " 23:59:59', 'YYYY/MM/DD HH24:MI:SS')
+              group by substr(t1.reportunit, 0, 4)) temp2 on substr(temp2.reportunit,
+                                                                    0,
+                                                                    4) =
+                                                             temp1.jgid
+"+ if(FIND('省道',roadLevel) != 0,' UNION',''),"")}
+
+ ${if(FIND('省道',roadLevel) != 0,"
+select temp1.jgid,
+       temp1.jgmc,
+       decode(temp2.roadlevel, null, '省道', temp2.roadlevel) col1,
+       decode(temp2.num, null, 0, temp2.num) col2
+  from (select subStr(jgid, 0, 4) jgid, substr(jgmc, 0, 2) jgmc
+          from t_sys_department
+         where jgid < '446000000000'
+           and jgid != '440000000000'
+           and substr(jgid, 1, 2) = '44'
+           and substr(jgid, 3, 2) != '00'
+           and substr(jgid, 5, 2) = '00'
+           and substr(jgid, 0, 4) in ('"+ unitName + "')
+           ) temp1
+  left join (select substr(t1.reportunit, 0, 4) reportunit,
+                    count(t1.alarmid) num,
+                    sum(abs((t1.endkmvalue + t1.endmvalue / 1000) -
+                            (t1.kmvalue + t1.kmvalue / 1000))) length,
+                    '省道' as roadlevel
+               from t_attemper_alarm t1
+              where t1.eventtype = '001024'
+                and t1.roadid like '%省道%'
+                and t1.roadid not like '%（旧）%'
+                AND t1.CASEHAPPENTIME BETWEEN
+               TO_DATE('" + startDate + " 00:00:00', 'YYYY/MM/DD HH24:MI:SS') AND
+               TO_DATE('" + endDate + " 23:59:59', 'YYYY/MM/DD HH24:MI:SS')
+              group by substr(t1.reportunit, 0, 4)) temp2 on substr(temp2.reportunit,
+                                                                    0,
+                                                                    4) =
+                                                             temp1.jgid
+","")}                                                      ]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<WebPageContent>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.ui.impl.Print">
+<WidgetAttr/>
+<Text>
+<![CDATA[打印]]></Text>
+<IconName>
+<![CDATA[print]]></IconName>
+<PrintButtons appletPrint="false" flashPrint="false"/>
+</Widget>
+<Widget class="com.fr.report.web.ui.impl.Export">
+<WidgetAttr/>
+<Text>
+<![CDATA[输出]]></Text>
+<IconName>
+<![CDATA[export]]></IconName>
+<Buttons pdf="true" excelP="false" excelO="true" excelS="false" word="true"/>
+</Widget>
+<IsDefault>
+<![CDATA[false]]></IsDefault>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="0">
+<Image width="41" height="30">
+<![CDATA[mEdp%K0U7RiVO]ABV[*l&/0^moYXi2rbE@j$0G!t*qhg`ER"Yrr(Dmb[$/D5^GlRId-GC&e>i
+69fn32m$q;nq5T+O9#7(hL'f>%*`1LKk^Gcg)>9RLKj=5WdFmI<r/ml4oEAKZVdL#T-i?ZQa
+&3OAe~
+]]></Image>
+</Background>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+<WebPage isPage="false" isShowAsImage="false"/>
+</WebPageContent>
+<WebViewContent>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.ui.CustomToolBarButton">
+<WidgetAttr disabled="true"/>
+<Text>
+<![CDATA[您当前的位置：交通事故统计分析——事故辖区统计分析]]></Text>
+<IconName>
+<![CDATA[edit]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.ui.impl.Export">
+<WidgetAttr/>
+<Text>
+<![CDATA[输出]]></Text>
+<IconName>
+<![CDATA[export]]></IconName>
+<Buttons pdf="true" excelP="false" excelO="true" excelS="false" word="true"/>
+</Widget>
+<IsDefault>
+<![CDATA[false]]></IsDefault>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="0">
+<Image width="41" height="30">
+<![CDATA[mEdp%K0U7RiVO]ABV[*l&/0^moYXi2rbE@j$0G!t*qhg`ER"Yrr(Dmb[$/D5^GlRId-GC&e>i
+69fn32m$q;nq5T+O9#7(hL'f>%*`1LKk^Gcg)>9RLKj=5WdFmI<r/ml4oEAKZVdL#T-i?ZQa
+&3OAe~
+]]></Image>
+</Background>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+</WebViewContent>
+<WebWriteContent>
+<ToolBars/>
+<SelectedColor color="-10033153"/>
+</WebWriteContent>
+<Background name="NullBackground"/>
+<CacheValidateTime>
+<![CDATA[0]]></CacheValidateTime>
+</ReportWebAttr>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<ReportSettings headerHeight="0.0" footerHeight="0.0">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75"/>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+<RowHeight defaultValue="19">
+<![CDATA[20,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,21,19]]></RowHeight>
+<ColumnWidth defaultValue="72">
+<![CDATA[10,31,52,58,58,58,58,58,58,58,58,58,36,38,72]]></ColumnWidth>
+<CellElementList>
+<C c="1" r="0" cs="15" rs="25">
+<O t="CC">
+<LayoutAttr selectedIndex="0" columns="0"/>
+<Chart name="柱状图">
+<Chart class="com.fr.chart.Chart">
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<ChartAttr isJSDraw="false"/>
+<Title>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="广东省各市" + $startDate + "至" + $endDate + "重特大事故统计图"]]></Attributes>
+</O>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="SimSun" style="1" size="22"/>
+</Attr>
+</TextAttr>
+<TitleVisible value="true"/>
+</Title>
+<Plot class="com.fr.chart.plot.Bar3DPlot">
+<Plot>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<Attr hotTooltip="${CATEGORY}，${SERIES}，${VALUE}" isNullValueBreak="true"/>
+<NewSeriesCollection>
+<SeriesAttr class="com.fr.chart.plot.SeriesAttr">
+<SeriesAttr/>
+</SeriesAttr>
+</NewSeriesCollection>
+<Legend>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="1" lineColor="-8355712" isRoundBorder="true"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<Attr position="3" legendNum="10" visible="true" autoAdjustSize="false"/>
+<FRFont name="SimSun" style="0" size="12"/>
+</Legend>
+<CateAttr isStacked="false" bgStagger="false" bgColor="-1"/>
+<CategoryAxis class="com.fr.chart.axis.CategoryAxis">
+<AxisLine style="1" color="-5197648"/>
+<AxisPosition value="3"/>
+<AxisLabelPosition value="3"/>
+<MainGridLine style="1" color="-1184275"/>
+<SecGridLine style="0"/>
+<AxisLabelCount value="-1"/>
+<TickLine type="2" mainStroke="1.0" len="8" secType="1" secStroke="1.0" secLen="0"/>
+<ArrowShow arrowShow="true"/>
+<AxisShow axisShow="true"/>
+<Stagger value="false"/>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<AxisRange/>
+</CategoryAxis>
+<ValueAxis class="com.fr.chart.axis.ValueAxis">
+<Title>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<O>
+<![CDATA[单位：宗]]></O>
+<TextAttr>
+<Attr v_align="1" alignText="1">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<TitleVisible value="true"/>
+</Title>
+<AxisLine style="1" color="-5197648"/>
+<AxisPosition value="2"/>
+<AxisLabelPosition value="3"/>
+<MainGridLine style="1" color="-1184275"/>
+<SecGridLine style="0"/>
+<AxisLabelCount value="-1"/>
+<TickLine type="2" mainStroke="1.0" len="8" secType="1" secStroke="1.0" secLen="0"/>
+<ArrowShow arrowShow="true"/>
+<AxisShow axisShow="true"/>
+<Stagger value="false"/>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<Format class="java.text.DecimalFormat">
+<![CDATA[#0]]></Format>
+<AxisRange/>
+<AxisRangeIncr value="1.0"/>
+</ValueAxis>
+<BarAttr isHorizontal="false" overlap="-0.5" interval="1.0"/>
+<Attr3D horizontalDrawBar="true" isCubic3D="true" isCascade="true" seriesIntervalPercent="0.0"/>
+<Projection mode="2" elevation="15" rotation="20" focus="800"/>
+</Plot>
+</Plot>
+</Chart>
+</Chart>
+<Chart name="折线图">
+<Chart class="com.fr.chart.Chart">
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<ChartAttr isJSDraw="false"/>
+<Title>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="广东省各市" + $startDate + "至" + $endDate + "重特大事故统计图"]]></Attributes>
+</O>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="SimSun" style="1" size="22"/>
+</Attr>
+</TextAttr>
+<TitleVisible value="true"/>
+</Title>
+<Plot class="com.fr.chart.plot.LinePlot">
+<Plot>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<Attr hotTooltip="${CATEGORY}，${SERIES}，${VALUE}" isNullValueBreak="true"/>
+<NewSeriesCollection>
+<SeriesAttr class="com.fr.chart.plot.SeriesAttr">
+<SeriesAttr/>
+</SeriesAttr>
+</NewSeriesCollection>
+<Legend>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="1" lineColor="-8355712" isRoundBorder="true"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<Attr position="3" legendNum="10" visible="true" autoAdjustSize="false"/>
+<FRFont name="SimSun" style="0" size="12"/>
+</Legend>
+<CateAttr isStacked="false" bgStagger="false" bgColor="-1"/>
+<CategoryAxis class="com.fr.chart.axis.CategoryAxis">
+<AxisLine style="1" color="-5197648"/>
+<AxisPosition value="3"/>
+<AxisLabelPosition value="3"/>
+<MainGridLine style="1" color="-1184275"/>
+<SecGridLine style="0"/>
+<AxisLabelCount value="-1"/>
+<TickLine type="2" mainStroke="1.0" len="8" secType="1" secStroke="1.0" secLen="0"/>
+<ArrowShow arrowShow="true"/>
+<AxisShow axisShow="true"/>
+<Stagger value="false"/>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<AxisRange/>
+</CategoryAxis>
+<ValueAxis class="com.fr.chart.axis.ValueAxis">
+<Title>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<O>
+<![CDATA[单位：宗]]></O>
+<TextAttr>
+<Attr alignText="1">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<TitleVisible value="true"/>
+</Title>
+<AxisLine style="1" color="-5197648"/>
+<AxisPosition value="2"/>
+<AxisLabelPosition value="3"/>
+<MainGridLine style="1" color="-1184275"/>
+<SecGridLine style="0"/>
+<AxisLabelCount value="-1"/>
+<TickLine type="2" mainStroke="1.0" len="8" secType="1" secStroke="1.0" secLen="0"/>
+<ArrowShow arrowShow="true"/>
+<AxisShow axisShow="true"/>
+<Stagger value="false"/>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<Format class="java.text.DecimalFormat">
+<![CDATA[#0]]></Format>
+<AxisRange/>
+<AxisRangeIncr value="1.0"/>
+</ValueAxis>
+<Show showMarker="true" showLine="true"/>
+</Plot>
+</Plot>
+</Chart>
+</Chart>
+<OneValueCDDefinition seriesName="COL1" valueName="COL2" function="com.fr.data.util.function.NoneFunction">
+<Top topCate="-1" topValue="-1"/>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[ds1]]></Name>
+</TableData>
+<CategoryName value="JGMC"/>
+</OneValueCDDefinition>
+</O>
+<Expand extendable="3"/>
+</C>
+<C c="1" r="27" cs="4" s="0">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="广东省各市" + $startDate + "至" + $endDate + "重特大事故统计表"]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="1" r="28" cs="3" rs="2" s="1">
+<O t="BiasTextPainter">
+<IsBackSlash value="false"/>
+<![CDATA[      辖区名称|    道路等级]]></O>
+<Expand extendable="3"/>
+</C>
+<C c="4" r="28" rs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="JGMC"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="1"/>
+</C>
+<C c="1" r="30" cs="3" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="COL1"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="4" r="30" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="COL2"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="0" r="31" cs="16">
+<Expand extendable="3" leftParentDefault="false" upParentDefault="false"/>
+</C>
+<C c="16" r="31">
+<Expand/>
+</C>
+</CellElementList>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<ParameterUI class="com.fr.report.parameter.CustomParameterUI">
+<ReportSettings headerHeight="0.0" footerHeight="0.0">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75"/>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+<RowHeight defaultValue="19">
+<![CDATA[10,23,5,19,10,19,5,9,19,19,19]]></RowHeight>
+<ColumnWidth defaultValue="72">
+<![CDATA[10,18,77,38,101,65,83,79,139,123,81,10,72]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" s="3">
+<Expand/>
+</C>
+<C c="1" r="0" s="3">
+<Expand/>
+</C>
+<C c="2" r="0" s="3">
+<O>
+<![CDATA[ ]]></O>
+<Expand/>
+</C>
+<C c="3" r="0" s="3">
+<Expand/>
+</C>
+<C c="4" r="0" cs="3" s="3">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="7" r="0" s="3">
+<Expand/>
+</C>
+<C c="8" r="0" s="3">
+<Expand/>
+</C>
+<C c="9" r="0" s="3">
+<Expand/>
+</C>
+<C c="10" r="0" s="3">
+<Expand/>
+</C>
+<C c="11" r="0" s="3">
+<Expand/>
+</C>
+<C c="12" r="0" s="3">
+<Expand/>
+</C>
+<C c="0" r="1" s="3">
+<Expand/>
+</C>
+<C c="1" r="1" cs="3" s="4">
+<O>
+<![CDATA[分析条件]]></O>
+<Expand/>
+</C>
+<C c="4" r="1" s="3">
+<Expand/>
+</C>
+<C c="5" r="1" s="3">
+<Expand/>
+</C>
+<C c="6" r="1" s="3">
+<Expand/>
+</C>
+<C c="7" r="1" s="3">
+<Expand/>
+</C>
+<C c="8" r="1" s="3">
+<Expand/>
+</C>
+<C c="9" r="1" s="3">
+<Expand/>
+</C>
+<C c="10" r="1" s="3">
+<Expand/>
+</C>
+<C c="11" r="1" s="3">
+<Expand/>
+</C>
+<C c="12" r="1" s="3">
+<Expand/>
+</C>
+<C c="0" r="2" s="3">
+<Expand/>
+</C>
+<C c="1" r="2" s="5">
+<Expand/>
+</C>
+<C c="2" r="2" s="6">
+<Expand/>
+</C>
+<C c="3" r="2" s="6">
+<Expand/>
+</C>
+<C c="4" r="2" s="6">
+<Expand/>
+</C>
+<C c="5" r="2" s="6">
+<Expand/>
+</C>
+<C c="6" r="2" s="6">
+<Expand/>
+</C>
+<C c="7" r="2" s="6">
+<Expand/>
+</C>
+<C c="8" r="2" s="6">
+<Expand/>
+</C>
+<C c="9" r="2" s="6">
+<Expand/>
+</C>
+<C c="10" r="2" s="7">
+<Expand/>
+</C>
+<C c="11" r="2" s="3">
+<Expand/>
+</C>
+<C c="12" r="2" s="3">
+<Expand/>
+</C>
+<C c="0" r="3" s="3">
+<Expand/>
+</C>
+<C c="1" r="3" s="8">
+<Expand/>
+</C>
+<C c="2" r="3" s="9">
+<O>
+<![CDATA[  开始时间：]]></O>
+<Expand/>
+</C>
+<C c="3" r="3" cs="2" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=DATEINMONTH(TODAY(), 1)]]></Attributes>
+</O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.DateEditor">
+<WidgetName name="startDate"/>
+<WidgetAttr/>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<Editable>
+<![CDATA[false]]></Editable>
+<DateAttr start="" end=""/>
+</Widget>
+</C>
+<C c="5" r="3" s="9">
+<Expand/>
+</C>
+<C c="6" r="3" s="9">
+<Expand/>
+</C>
+<C c="7" r="3" s="9">
+<O>
+<![CDATA[结束日期：]]></O>
+<Expand/>
+</C>
+<C c="8" r="3" s="10">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=TODAY()]]></Attributes>
+</O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.DateEditor">
+<WidgetName name="endDate"/>
+<WidgetAttr/>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<Editable>
+<![CDATA[false]]></Editable>
+<DateAttr start="" end=""/>
+</Widget>
+</C>
+<C c="9" r="3" s="11">
+<Expand/>
+</C>
+<C c="10" r="3" s="12">
+<Expand/>
+</C>
+<C c="11" r="3" s="3">
+<Expand/>
+</C>
+<C c="12" r="3" s="3">
+<Expand/>
+</C>
+<C c="0" r="4" s="3">
+<Expand/>
+</C>
+<C c="1" r="4" s="8">
+<Expand/>
+</C>
+<C c="2" r="4" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="3" r="4" s="9">
+<Expand/>
+</C>
+<C c="4" r="4" s="9">
+<Expand/>
+</C>
+<C c="5" r="4" s="9">
+<Expand/>
+</C>
+<C c="6" r="4" s="9">
+<Expand/>
+</C>
+<C c="7" r="4" s="9">
+<Expand/>
+</C>
+<C c="8" r="4" s="9">
+<Expand/>
+</C>
+<C c="9" r="4" s="11">
+<Expand/>
+</C>
+<C c="10" r="4" s="12">
+<Expand/>
+</C>
+<C c="11" r="4" s="3">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="12" r="4" s="3">
+<Expand/>
+</C>
+<C c="0" r="5" s="3">
+<Expand/>
+</C>
+<C c="1" r="5" s="8">
+<Expand/>
+</C>
+<C c="2" r="5" s="9">
+<O>
+<![CDATA[  道路等级：]]></O>
+<Expand/>
+</C>
+<C c="3" r="5" cs="2" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.ComboCheckBox">
+<WidgetName name="roadLevel"/>
+<WidgetAttr/>
+<EMSG>
+<![CDATA[请选择道路等级！]]></EMSG>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<Editable>
+<![CDATA[false]]></Editable>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="高速公路1" value="高速公路"/>
+<Dict key="国道2" value="国道"/>
+<Dict key="省道3" value="省道"/>
+</CustomDictAttr>
+</Dictionary>
+<RAAttr isArray="false" start="&apos;" end="&apos;"/>
+</Widget>
+</C>
+<C c="5" r="5" s="9">
+<Expand/>
+</C>
+<C c="6" r="5" s="9">
+<Expand/>
+</C>
+<C c="7" r="5" s="9">
+<O>
+<![CDATA[管辖区域：]]></O>
+<Expand/>
+</C>
+<C c="8" r="5" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.ComboCheckBox">
+<WidgetName name="unitName"/>
+<WidgetAttr/>
+<EMSG>
+<![CDATA[请选择管辖区域！]]></EMSG>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<Editable>
+<![CDATA[false]]></Editable>
+<Dictionary class="com.fr.data.impl.DynamicSQLDict">
+<FormulaDictAttr ki="0" vi="1"/>
+<Formula>
+<![CDATA[SELECT SUBSTR(JGID, 0, 4) JGID,REPLACE(jGMC,'市公安局交通警察支队','') JGMC
+  FROM T_SYS_DEPARTMENT
+where
+SUBSTR(JGID,5,2)='00'
+AND JGID NOT IN('440000000000','446000000000','446100000000','446200000000','446300000000')
+order by JGID
+]]></Formula>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[EHL_ATMSIC_GD]]></DatabaseName>
+</Connection>
+</Dictionary>
+<RAAttr isArray="false" delimiter="&apos;,&apos;"/>
+</Widget>
+</C>
+<C c="9" r="5" s="11">
+<Expand/>
+</C>
+<C c="10" r="5" s="13">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.impl.form.FormSubmitButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[统  计]]></Text>
+<IconName>
+<![CDATA[preview]]></IconName>
+</Widget>
+</C>
+<C c="11" r="5" s="3">
+<Expand/>
+</C>
+<C c="12" r="5" s="3">
+<Expand/>
+</C>
+<C c="0" r="6" s="3">
+<Expand/>
+</C>
+<C c="1" r="6" s="14">
+<Expand/>
+</C>
+<C c="2" r="6" s="15">
+<Expand/>
+</C>
+<C c="3" r="6" s="15">
+<Expand/>
+</C>
+<C c="4" r="6" s="15">
+<Expand/>
+</C>
+<C c="5" r="6" s="15">
+<Expand/>
+</C>
+<C c="6" r="6" s="15">
+<Expand/>
+</C>
+<C c="7" r="6" s="15">
+<Expand/>
+</C>
+<C c="8" r="6" s="15">
+<Expand/>
+</C>
+<C c="9" r="6" s="15">
+<Expand/>
+</C>
+<C c="10" r="6" s="16">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="11" r="6" s="3">
+<Expand/>
+</C>
+<C c="12" r="6" s="3">
+<Expand/>
+</C>
+<C c="0" r="7" s="3">
+<Expand/>
+</C>
+<C c="1" r="7" cs="10" s="3">
+<Expand/>
+</C>
+<C c="11" r="7" s="3">
+<Expand/>
+</C>
+<C c="12" r="7" s="3">
+<Expand/>
+</C>
+</CellElementList>
+</ParameterUI>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="16"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="14" foreground="-1"/>
+<Background name="ImageBackground" specifiedImageWidth="140.0" specifiedImageHeight="27.0" layout="3">
+<Image width="141" height="27">
+<![CDATA[jdXGS'h&hVrs^n6DSY`Y77f1!N(*sW5):A40ufb0";Vgh5m)k7K#B&A(gipJ"!L?-1+9)O%P
+g.9AmbfP6qopV9ONQI2e%-KRf;TD5(0HBqVHLb\G/tP<IMLV<rM;FVu"\D]A7)X']Am),5r+pR
+8C!MK?\'4_/>mn9X-9oo.P,9erM5k(9_4[YgJ'85lR;7gBh>YR+j!NWDpSR^jPh!e:AgoTa`
+M_DE(V@"j]ApH&5J)5.UET<Yt(O2AHe;incjbL0bmp0s[U%:\'H/RkOoYtMg@U6H9D*.BR03N
+f'n;(30\SR&PIsK^=*p`['hu$[Q%$'H4:nirta8?A.9:jIQf%H+ImJ&=3CqIQ.?aAoaPFok&
+s7kpK$"X="^anhW]A&*l(alBsYE7mE&=blENH)S/*:+W+7X,gla2tU^+Y</#oJ,)L=hC.Q)mR
+u+uDtd?,ce<anfT5pOH\RQU_Xe!8htQ"ED2f1gJ8n!7U#VIeN#DBuk#Rdm/sK6A<ZLe/Y$8d
+;F5JoFOg-,AH;<PVL,?A\d$N6lgJ;Dh4uhYb+5)+O;!QB#*PuGkLN"8Z%ZW!HTmu$jB3Q"]Aj
+l)2O,tXsF%jllGj=Zg,c%T]AI;DJW#4it,N$Mcr.4pQJ'Wd-Z2S\ThV\ZPZFGs;XpaL9&L:4%
+_?%EVP+E/c/Jc[13dNWiO:0TK8iLg:\1N+OBu+#0%*8aqk8nhG0#95m6/M6RV-QY#C9Pj<%4
+=I76&?d]Au!8M2hEA0WLm]A4lp;j>[h31UoB3_/V4LXY<'0&RH[[2jRspH/cJ@Wp6cs-?P5$?a
+_=ZA4_,=<"W`<Ij7]As0/HqY+TI_3$28A[<tn"SIj5bGDq)=PlGOk104`(ks8,#An&8e;:S-%
+<oX!Hmq2E:Pc?j$#b&P32`YWdA+8Wum5;hFVIC[*LbEf]Adq.i^>dG/^@,4euO:?Olccd$T<(
+)*GdH$ss&bmp=:f4FBP'oH3Va-M"X*##J:Qg<^X!8_FKMpEs@G)WdQo$OVU7S$q*P+5%e:oM
+]A$2oZ4?]A"^?Sc`F#o[f>sb7<pP3)=a.Za3f.M-nmIMkp*&!Z=o/Qmq8OM5?\WT?VXn[>BiA:
+V5eaKdl'+0\moN*;`b2i45[N$\IA.jL2_'(@&<@O&]AN<lk^Bc`N]Aghcp>9@#UW<kSWFCRo85
+?r+Q-'CjjeY-gabSC<`qXhmomMCXl0f)rkAo0NZXd>_2q5*Jd$Lmfc='qV:L;d`8!dP=lr5^
+hZ(]AAQ`XKMqT.uA/Cs3(>([iEZ5&SS@g,lYm4ui:7po[Z0m"\7u"=Fmd+YT@8BZ;F;?Lh4me
+PY\>P/EFk0-]A:)6TufAj7f.1O2]A>pcM=`^\:G=^60QLAZU0V^G\-5^)sJB3([3#F+]A]Aqnn+S
+">j?arXS-VRk]ASQ+-rfP@=*IBHHXZF,&*Ue%Kn`(b3$&gk*0qDg72Tu\@e6)[Hl2:c*,]A[A!
+U=mmJ-5^Y0:1X9bl]Ac1Lr_f5>Xp",dkSO.rE>A/AJ3O2t&oilc0QtPuJH$`]Ai>qGjj>K%?V=
+7sU,%/'HNEir1kqB:#a!'Ui,gAt.$`\]ArJT@`dY@4lKiCD#[:,=,?BoEqM;!'lXXld/'lL5q
+o2EojM3)4Ld8]AbD/HV%OQ3GXn%NoKjGj2QH\ALZ1Y*^V?]AnbJ4m1DW3D[7WZ@YV^dSONCI:?
+DMXSN'H2uTT7I^_jc-so7_Ch4i=&l)u*.R*Qr>,o3KI:6@!>p="u_Or+e2ibd$_+]Aq=8n8nL
+%qU&!;W4I5B5lgm/`L6=M'EEU>?;Z',WA$Mg#j&1m;DDq7"^!p`k%@D_3jL4p</8oMZW4HmT
+`#cVDjVX:cak(=Kro'"81$64.%>#D[[P*+!CnR$[+ofB((/N<peeQ<+'%oj5<H;H,q#EX524
+aURim_Z=%+pC+;OPk2R,^3+aAXoK(b79@aZ>,1"YW\cIPiJrG/t!eE*O-a@dtsO2>kJ/;i'e
+B,WEr,R2<KD7Qpijn2H'gm\e-"-lt)Q<T^_N-KQ5CH4!)9oU^_p=KG%(O?PuHXEZ!nd7d+rZ
++S-7bK,r<M]A3\3oK1'mG<*lakV^Y4<ZTEP>'hB=Eq_Tg)ag[2b$kRFaEif1a]AhMel*qt+@9k
+\+1!s;O@h23QF6'u+#-;;TQR"5#QX'&!RRu0RMI5fJD/pkL[YgKiH54XXLQLtBgfuc")XQC#
+S6PM'aUG@9C#_cl8n!4I<T$;#,ND\C91nY4o!+F.ip&Zo"b4pFM"V;2c9@/O:lOE0Z;36E&u
+/pMUO<f]Aer=4;0S\#bNH]Aj@*j0Rg,53_<(\$2Sl?u%-I##qe]ALB0$\KN?%RsAl--@b3`r59L
+8c\Pi8(%I!#abOCr96uNg%`nt1XF,e0@dVW2H`u@O%Ic\rJugA4\;nB3k)0)XHs#iM0_bM&)
+!!dRRkXUJp?1?>5,;?0bf"agEJVgApHa.\$LpWP(+XF,[AR+]A_obP%N^CCs3+K_[.qod#Ib@
+cmapN,n9'aXhR%W%:@=I8YQbQ7W*R),A0Yqscr7bEQ(4lEF3'nX%+YU^iQD*AZWYT^d(\DBm
+*r,T[s$DXX]A'.>GL%3F23qHhfEu\-FDbe+Yp?a9c)7\s(emhm1k'(1`d5-2PI$p_*a+*n\Ls
+M7Tb]AUroO(jLDI#Y''"T~
+]]></Image>
+</Background>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Top style="2" color="-4860186"/>
+<Left style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Top style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Top style="2" color="-4860186"/>
+<Right style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Left style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Right style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Right style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Bottom style="2" color="-4860186"/>
+<Left style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Bottom style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Bottom style="2" color="-4860186"/>
+<Right style="2" color="-4860186"/>
+</Border>
+</Style>
+</StyleList>
+</WorkBook>

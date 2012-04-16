@@ -1,0 +1,13 @@
+table {
+	font-size: 9pt;
+	font-weight: normal;
+	margin-left: 0px;
+}
+
+.td_font {
+	font-size: 13px;
+}
+
+.thead {
+	white-space: nowrap;
+}

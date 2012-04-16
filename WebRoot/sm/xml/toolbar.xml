@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<toolbar name="" width="100%" disableType="image" absolutePosition="auto" toolbarAlign="left">
+    <ImageTextButton src="../../../sm/image/toolbar/iconNewNewsEntry.gif" height="25" width="60" disabled="1" id="0_new" tooltip="添加新数据">新增</ImageTextButton>	
+	
+	<ImageTextButton src="../../../sm/image/toolbar/icon20.gif" height="25" width="60" disabled="1" id="0_edit" tooltip="对选中的单条数据进行修改操作">编辑</ImageTextButton>	
+		
+	<ImageTextButton src="../../../sm/image/toolbar/iconDelete.gif" height="25" width="60" disabled="1" id="0_delete" tooltip="对选中的数据进行删除操作" >删除</ImageTextButton>	
+
+	<ImageTextButton src="../../../sm/image/toolbar/search.gif" height="25" width="60" disabled="1" id="0_info" tooltip="显示选中的单条数据的详细信息">明细</ImageTextButton>	
+			
+	<ImageTextButton src="../../../sm/image/toolbar/iconExcel.gif" height="25" width="90" disabled="1" id="0_excel" tooltip="将列表数据转存为Excel格式文件" >转存Excel</ImageTextButton>	
+
+	<ImageTextButton src="../../../sm/image/toolbar/iconChart.gif" height="25" width="90" disabled="1" id="0_chart" tooltip="将列表数据以统计图表输出">统计图表</ImageTextButton>
+	
+	<ImageTextButton src="../../../sm/image/toolbar/iconRefresh.gif" height="25" width="90" disabled="1" id="0_fresh" tooltip="刷新">刷新</ImageTextButton>
+</toolbar>

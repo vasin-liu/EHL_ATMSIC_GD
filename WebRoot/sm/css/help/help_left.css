@@ -1,0 +1,16 @@
+* { margin:0; padding:0;}
+body { font:"宋体", Helvetica, sans-serif; font-size:12px;}
+.font { font-size:12px; font-weight:bold; line-height:24px; color:#0000ff;}
+
+#preview1,#preview2,#preview3{ float:left; width:200px; margin-top:5px; height:180px;}
+#scrolldoorFrame { background:url(../images/banner_03.gif) repeat-x; width:200px; height:31px;}
+#scrolldoorFrame ul{list-style:none; font-size:12px; background:url(../../image/help/public/help_list.gif) no-repeat; width:200px; height:31px;}
+#scrolldoorFrame ul li{ display:block; width:66px; height:21px; text-align:center; float:left; padding-top:10px;}
+#scrolldoorFrame ul a{ color:#000; text-decoration:none;}
+#scrolldoorFrame ul .q{ border-bottom-style:none; background:url(../images/banner_06.gif) no-repeat;}
+#xla{ width:200px; border:3px solid #ECE9D8; word-wrap:break-word;}
+
+.font { font-size:12px; line-height:24px;}
+.font01 {font-size:13px; line-height:24px;}
+.font02 {font-size:12px; line-height:24px;}
+

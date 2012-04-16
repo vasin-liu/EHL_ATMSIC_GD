@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- I18N资源文件配置,每种语言对应一段配置,当前使用语言的标签必须在Setting.xml中指定 -->
+<i18n>
+  <zh>
+    <filename>Common_zh</filename>
+	<filename>Pcs_zh</filename>	
+  </zh>
+  <en>
+    <filename>Common_en</filename>
+ 	<filename>Pcs_en</filename>	
+  </en>
+</i18n>

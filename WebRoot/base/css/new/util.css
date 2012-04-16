@@ -1,0 +1,79 @@
+/** 机构选择 */
+/** 1.机构选择控件 */
+.deptDivClass {
+	z-index: 10000;
+	position: absolute;
+	display: inline;
+	width: 250;
+	height: 340;
+	font-size: 12px;
+}
+
+.popup {
+	font-size: 12px;
+	z-index: 1000;
+	border-collapse: collapse;
+}
+/** 2.机构输入框 */
+.item td.dept {
+	width: 175px;
+}
+
+.item td.dept input{
+	width: 175px;
+}
+
+/** 时间 */
+/** 1.时间控件 */
+#calendarTableDT tr {
+	height: 12px;
+	line-height: 100%;
+	margin: 0px;
+}
+
+#calendarTableDT td {
+	height: 12px;
+	line-height: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+#calendarTableDT th {
+	height: 12px;
+	line-height: 100%;
+	padding: 5 0 2;
+	margin: 0px;
+}
+
+#calendarTable tr {
+	height: 12px;
+	line-height: 100%;
+	margin: 0px;
+}
+
+#calendarTable td {
+	height: 12px;
+	line-height: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+#calendarTable th {
+	height: 12px;
+	line-height: 100%;
+	padding: 5 0 2;
+	margin: 0px;
+}
+/** 2.时间输入框 */
+.item .value .date,.item .value .datewidth {
+	width: 80px;
+}
+
+.item .value .time,.item .value .timewidth {
+	width: 150px;
+}
+
+/** 隐藏 */
+.hidden {
+	display: none;
+}

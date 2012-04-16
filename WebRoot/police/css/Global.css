@@ -1,0 +1,271 @@
+/* 超链接的样式处理*/
+  .join a {
+	color: #474747;
+	text-decoration: none;
+	padding: 8px 8px 4px 8px;
+	font-size:12px;
+}
+
+  .join a:hover {
+	color:blue;
+	text-decoration: none;
+ }
+ .text{ 
+	overflow: hidden ;
+	border: 1px #7B9EBD solid;
+	font-size: 12px;
+	width: 100%;
+}
+.scrollColTableHeadTr {
+    position: relative; 
+    top: expression
+    (this.parentElement.parentElement.parentElement.scrollTop);
+    z-index:2;
+    overflow: hidden; 
+    height:25px;
+    width:100%
+    text-overflow:ellipsis
+}
+@charset "utf-8";
+/*清除浮动，恢复高度*/
+.clearfix:after { 
+	content: ".";  
+	display: block;  
+	height: 0;  
+	clear: both;  
+	visibility: hidden; 
+} 
+/* Hides from IE-mac \*/ 
+* html .clearfix {
+	height: 1%;
+} 
+/* End hide from IE-mac */ 
+/*综合设置-------------------------------------------------------------------------------------------综合设置*/
+
+* { 
+	word-break: break-all; margin:0; 
+} /*在IE中实行强制换行*/
+.body { 
+	margin: 0; padding: 0; background: #FFF; color: #0247A6; text-align: center;  font-size:13px;font:宋体, Helvetica, sans-serif; 
+}
+ul, li { 
+	list-style:dise; padding:0; margin:0; 
+}
+p, body, div, {
+	line-height:22px; 
+}
+.table2{
+	background:#ffffff;
+	border-top: 1 solid #CCCCCC;
+	border-right: 0 solid #000000;
+	border-bottom: 1 solid #CCCCCC;
+	border-left: 1 solid #CCCCCC;
+	border-collapse:collapse;
+	font-size:11px;
+	text-align: center;
+}
+
+
+.td2{
+	border-top: 0 solid #000000;
+	border-right: 1 solid #CCCCCC;
+	border-bottom: 1 solid #CCCCCC;
+	border-left: 1 solid #CCCCCC;
+	line-height: 16px;
+	color: #000000;
+	border-collapse : separate;
+	empty-cells:show;
+	text-align: center;
+	
+}
+
+.tdtitle{
+	border-top: 0 solid #000000;
+	border-right: 1 solid #CCCCCC;
+	border-bottom: 1 solid #CCCCCC;
+	border-left: 1 solid #CCCCCC;
+	line-height: 16px;
+	color: #000000;
+	border-collapse : separate;
+	empty-cells:show;
+	text-align: right;
+	width:15%;
+	
+}
+
+.tdvalue{
+	border-top: 0 solid #000000;
+	border-right: 1 solid #CCCCCC;
+	border-bottom: 1 solid #CCCCCC;
+	border-left: 1 solid #CCCCCC;
+	line-height: 16px;
+	color: #000000;
+	border-collapse : separate;
+	empty-cells:show;
+	text-align: left;
+	width:17%;
+}
+
+
+.textwidth{
+	width:100%;	
+}	
+.td3{
+	background-color: #9abcff;
+	border-top: 0 solid #000000;
+	border-right: 0 solid #000000;
+	border-bottom: 0 solid #000000;
+	border-left: 0 solid #000000;
+	line-height: 16px;
+	color: #000000;
+	border-collapse : separate;
+	empty-cells:show;
+	align: center	
+}
+
+.bluefont { font-size:14px; color:#2280A6; line-height:22px;}/*表头样式*/
+.grayfont { font-size:12px; color:#747474; line-height:22px;} /*表中间的文字*/
+img { 
+	border: none; 
+}
+a {
+	text-decoration: none;color:#191970;
+}
+
+.divTreeStyle {
+	width: 210;
+	height:400;
+	color: #336699; 
+	background-color:#ffffff; 
+	border: solid 1px #09d; 
+	overflow: auto;
+}
+
+/*左边列表样式*/
+.leftbody{
+	text-align: left;
+	background:transparent;
+	margin-left:0;
+	margin-top:0;
+	color: #0247A6;
+	font-size:13px;
+	font:宋体, Helvetica, sans-serif;
+}
+
+.leftbody a { color: #0F5B90; text-decoration: none;  font-size:12px; }
+.leftbody a:visited { color:#0F5B90; font-size:12px; }
+.leftbody a:hover { text-decoration: none;  color:#ff0000; font-size:12px; }
+.leftbody a:active { text-decoration:none; color:#ff0000; font-size:12px;}
+
+.itemtxt { color:#ff0000;font-size:12px;font-weight:bold;}
+
+
+.back{background-color:#6495ED;}
+.div{
+	font:bold;
+	font-size: 12px;
+	line-height: 24px;
+	color: #626262;
+}
+.dutyshow{
+	font-size:11px;
+
+}
+
+.input{
+	border: 0px;
+}
+
+
+/*右侧样式*/
+#q1,#q2,#q3,#q4,#q5{ float:left; width:400px; margin-left:8px; margin-top:5px; height:180px;}
+#fe ul{list-style:none; font-size:12px; background:url(../images/001.gif) no-repeat; width:400px; height:24px;}
+#fe ul li{ display:block; width:100px; height:20px; text-align:center; float:left; padding-top:4px;}
+#fe ul a{ color:#000000; text-decoration:none;}
+#fe ul .q{ border-bottom-style:none; background:url(../images/002.gif) no-repeat;}
+#fe ul .q a{ color:#000000; text-decoration:none}
+#xla{ width:750px; border-top:1px solid #000000;}
+#xla dl{ text-align:center;}
+#xla dt{ font-size:13px; font-weight:bold; padding-top:13px; padding-bottom:4px;}
+#xla dd{ font-size:12px; line-height:20px;}
+#xla ol{ padding-top:5px; list-style:none; font-size:12px; border-top:1px dashed #CCCCCC; line-height:20px;}
+#xla ol span a{ color:#FF0000;}
+
+td, th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 24px;
+	color: #333333;
+}
+.table_1{
+	background:#E3F3F9;
+	border: 1px solid #5B96AB;
+	border-collapse:collapse;
+}
+.table_01{
+	border-top: 1px solid #000000;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	border-left: 1px solid #000000;
+	border-collapse:collapse;
+    background-color: #EFEFFE;}
+.td_01{
+	border-top: 0 solid #000000;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	border-left: 0 solid #000000;
+	line-height: 16px;
+	color: #000000;
+	border-collapse : separate;
+	empty-cells:show;
+	padding:1px;
+}
+.td1{
+	background-color: #B4C1E2;
+	color: #000000;
+	font-size: 12px;
+	text-decoration: none;}
+.titlebar {
+	font-size: 14px;
+	font-weight: bolder;
+	color: #ffffff;
+	COLOR: #000000;
+}
+
+.Table {
+	border: 1px solid #000000;
+	font-size: 12px;
+	text-decoration: none;}
+
+
+.Table_top {
+	font-size: 12px;
+	text-decoration: none;
+	background-color: #5b96ab;
+	color: #FFFFFF;}
+
+.Tr_1 {
+	font-size: 12px;
+	text-decoration: none;
+	background-color: #B4C1E2;
+	line-height: 20px;
+}
+
+.Tr_2 {
+	font-size: 12px;
+	text-decoration: none;
+	background-color: #EFEFFE;}
+
+.Tr_3 {
+	font-size: 12px;
+	text-decoration: none;
+	background-color: #cde8f1;
+}
+
+.buttom{
+	padding:1px 10px;
+	font-size:12px;
+	border:1px #1E7ACE solid;
+	background:#9abcff;
+}
+

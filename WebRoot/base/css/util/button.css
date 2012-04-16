@@ -1,0 +1,18 @@
+
+
+/*添加、查看、处理界面使用*/
+.btn {
+	BORDER-RIGHT: #000000 1px solid;
+	PADDING-RIGHT: 2px;
+	BORDER-TOP: #000000 1px solid;
+	PADDING-LEFT: 2px;
+	FONT-SIZE: 12px;
+	BORDER-LEFT: #000000 1px solid;
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr =#0c9ad3, EndColorStr=#085887);
+	CURSOR: hand;
+	COLOR: #ffffff;
+	PADDING-TOP: 2px;
+	BORDER-BOTTOM: #000000 1px solid
+}
+
+

@@ -1,0 +1,75 @@
+/**
+操作按钮，包括按钮样式和容器样式 
+应用范围：
+1.明细界面新增、修改、关闭、打印等一般化操作按钮
+2.查询界面查询、新增、导出Excel等一般化操作按钮
+3.查询界面单条数据查看（打开查看界面）、处理（打开处理界面）、删除等数据处理操作一般化按钮
+组织结构：
+1.按钮
+2.按钮容器
+样式：
+1.按钮样式
+2.按钮悬浮样式
+3.按钮容器样式
+4.按钮在按钮容器中的样式
+文件划分：
+
+*/
+/**1.查询一般 化样式 */
+.operate_query,.operate_detail {
+	display: inline;
+	width: 82px;
+	height: 22px;
+	background: url(../../../image/button/btn.png) center;
+	text-decoration: none;
+	text-align: center;
+	line-height: 22px;
+	color: white;
+	overflow: hidden;
+}
+
+.operate_query:hover,.operate_detail:hover {
+	color: #dae76b;
+	filter: glow(color = #ffffff, strength =  1);
+}
+
+
+.operates_query {
+	text-align: right;
+}
+
+.operates_query .operate_query {
+	margin: 0px 5px;
+}
+/**2.明细一般 化样式*/
+/*与查询一般化样式相同 */
+.operate_detail {
+	
+}
+/**与查询一般化样式相同 */
+.operate_detail:hover{
+	
+}
+
+.operates_detail {
+	margin-top: 20px;
+}
+
+.operates_detail .operate_detail {
+	margin: 0px 10px;
+}
+/**3.查询界面数据操作样式 */
+.operate_query_data {
+	
+}
+
+.operates_query_data {
+	width:100%;
+	text-align: right;
+	padding-right: 10px;
+	font-size: 12px;
+}
+
+.operates_query_data .operate_query_data{
+	margin: 0px 3px;
+}

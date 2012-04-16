@@ -1,0 +1,204 @@
+ol li {
+	margin: 8px
+}
+
+#tags {
+	height: 20px;
+	width: 100%;
+	margin: 0px;
+	padding: 0;
+	margin-left: 5px;
+}
+
+#tags li {
+	float: left;;
+	border-top: 1px;
+	margin-right: 0px;
+	background: url("../../images/sysoption/bg.gif") right bottom;;
+	font-size: 10pt;
+	height: 23px;
+}
+
+#tags li a {
+	text-decoration: none;
+	border-top: 1px;;
+	float: center;
+	color: #39f;
+	width: 82px;;
+	height: 24px;
+	padding: 0px 10px;
+	line-height: 23px;
+}
+
+#tags li.selectTag {
+	background-position: left top;
+	position: relative;;
+	background: url("../../images/sysoption/bg2.gif") right bottom;
+	height: 20px;
+	margin-bottom: -2px
+}
+
+#tags li.selectTag a {
+	background-position: right top;
+	color: blue;
+	height: 25px;
+	line-height: 25px;
+}
+
+#tagContent {
+	margin-left: 5px;;
+	padding: 1px;
+	background-color: #fff;
+	border: 1px solid #09d;
+	width: 100
+}
+
+.tagContent {
+	background: url(imgs/bg.gif) repeat-x;
+	padding: 10px;
+	border: 0px;
+	color: #7F9DB9;
+	display: none
+}
+
+.paramtagContent {
+	background: url(imgs/bg.gif) repeat-x;
+	height: 410;
+	padding: 10px;
+	border: 0px;
+	color: #7F9DB9;
+	display: none;
+	overflow-y:scroll
+}
+
+#tagContent div.selectTag {
+	display: block
+}
+#tagsd { 
+	height:20px;
+	 width:100%;position: absolute; 
+	 margin:0px; 
+	 padding:0; 
+	 margin-left:0px;
+}
+
+#tagsd li { 
+	float:left;
+	border-top:1px;
+	 margin-right:0px; 
+	 background:url("../../images/sysoption/bg.gif")  right bottom;
+	 font-size:10pt; 
+	 height:23px;
+}
+			
+#tagsd li a { 
+	text-decoration:none;
+	 border-top:1px;
+	 float:center; 
+	 color:#39f;
+     width:82px;
+     height:24px;
+      padding:0px 10px; 
+      line-height:23px;
+}
+
+#tagsd li.selectTag { 
+	background-position: left top; 
+	position:relative;background:url("../../images/sysoption/bg2.gif")  right bottom; 
+	height:20px; margin-bottom:-2px
+}
+			
+#tagsd li.selectTag a {
+	 background-position: right top;
+	 color:blue; height:25px; 
+	 line-height:25px;
+}
+
+#tagContentd { 
+	padding:1px; background-color:#fff; 
+	border:1px solid #09d; 
+}
+
+.tagContentd { 
+	background:url(imgs/bg.gif) repeat-x; 
+	padding:10px; 
+	border:0px; 
+	color:#474747; 
+	width:530px;
+	display:none
+}
+			
+#tagContentd div.selectTag{ 
+	display:block
+}
+
+div.tableContainer {
+	clear: both;
+	border: 1px solid #99C4F2;
+	height: 360px;
+	overflow: auto;
+	width: 530px;
+}
+
+div.tableContainer table {
+	float: left;
+	width: 100%
+}
+
+
+\html div.tableContainer table/* */ {
+	margin: 0 -16px 0 0
+}
+thead.fixedHeader tr {
+	position: relative;
+	top: expression(document.getElementById("tableContainer").scrollTop);
+}
+
+
+head:first-child+body thead[class].fixedHeader tr {
+	display: block;
+}
+
+/* make the TH elements pretty */
+thead.fixedHeader th {
+	background: #99C4F2;
+	border-left: none;
+	border-right: 1px solid #DDD;
+	border-top: none;
+	font-weight: normal;
+	padding: 4px 3px;
+	text-align: center
+}
+
+/* make the A elements pretty. makes for nice clickable headers                */
+thead.fixedHeader a, thead.fixedHeader a:link, thead.fixedHeader a:visited {
+	color: #FFF;
+	display: block;
+	text-decoration: none;
+	width: 100%
+}
+
+
+thead.fixedHeader a:hover {
+	color: #FFF;
+	display: block;
+	text-decoration: underline;
+	width: 100%
+}
+tbody.scrollContent td, tbody.scrollContent tr.normalRow td {
+	border-bottom: 1px solid #CCC;
+	border-left: none;
+	border-right:1px solid #DDD;
+	border-top: none;
+	padding: 0px 0px 0px 0
+}
+
+tbody.scrollContent tr.alternateRow td {
+	border-bottom: 1px solid #CCC;
+	border-left: none;
+	border-right: 1px solid #CCC;
+	border-top: 1px solid #DDD;
+	padding: 2px 3px 3px 0
+}
+
+

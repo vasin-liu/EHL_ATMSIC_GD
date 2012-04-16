@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/base">
+	<forwards />
+	<exceptions />
+	<controllers>
+		<!--下拉框生成2008-03-18 -->
+		<controller name="fillListBox" clazz="com.ehl.base.util.FillListBox">
+			<action name="createList"></action>
+		</controller>
+
+		<!--统计图表生成2008-03-21 -->
+		<controller name="buildChart" clazz="com.ehl.base.output.BuildChart">
+			<action name="chart"></action>
+		</controller>
+	
+		<!--转存Excel2008-03-23 -->
+		<controller name="saveAsExcel" clazz="com.ehl.base.output.SaveAsExcel">
+			<action name="toExcel"></action>
+			<action name="fieldToExcel"></action>
+		</controller>
+
+		<!--分页控制2008-09-18 -->
+		<controller name="PageCtrl" clazz="com.ehl.base.page.PageCtrl">
+			<action name="getPageUtil"></action>
+		</controller>
+	
+		<!--日志管理2007-09-07-->
+		<controller name="log" clazz="com.ehl.sm.sysmanage.LogManage">
+		    <action name="filter"></action>
+		    <action name="getDataById"></action>
+		</controller>
+		
+		<!--工具条生成 2008-6-5-->
+		<controller name="toolbar" clazz="com.ehl.base.toolbar.ToolbarManager">
+		    <action name="createToolbar"></action>
+		</controller>
+		
+		<!--功能树的加载2007-09-18-->
+		<controller name="treectrl" clazz="com.ehl.base.tree.TreeCtrl">			
+			<action name="load"></action>
+			<action name="loadCustom"></action>
+			<action name="query"></action>			
+			<action name="delete"></action>
+			<action name="filter"></action>			
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+			<action name="getCtrlDataAll"></action>
+		</controller>		
+		
+		<!-- 数据窗口定义2007-09-20 -->
+		<controller name="pageCust" clazz="com.ehl.base.table.PageCustom">
+			<action name="settingReport"></action>
+		</controller>
+		<controller name="pageUtil" clazz="com.ehl.base.table.PageUtil">
+			<action name="getPageUtil"></action>
+		</controller>
+		<controller name="pageTreeTable" clazz="com.ehl.base.table.PageTreeTable">
+			<action name="getPageUtil"></action>
+			<action name="getXML"></action>
+		</controller>
+		<controller name="datatable" clazz="com.ehl.base.table.DataTable">
+			<action name="getData"></action>
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+			<action name="delete"></action>
+			<action name="filter"></action>
+		</controller>
+		<controller name="datafield" clazz="com.ehl.base.table.DataField" >
+			<action name="getData"></action>
+			<action name="getDataById"></action>
+			<action name="getDataByTableId"></action>
+			<action name="updateData"></action>
+			<action name="delete"></action>
+			<action name="filter"></action>
+		</controller>
+		<controller name="datawin" clazz="com.ehl.base.table.DataWin">
+			<action name="getData"></action>
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+			<action name="delete"></action>
+			<action name="filter"></action>
+		</controller>		
+	</controllers>
+</mapping>

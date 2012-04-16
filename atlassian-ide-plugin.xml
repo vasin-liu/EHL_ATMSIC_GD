@@ -1,0 +1,20 @@
+<atlassian-ide-plugin>
+  <project-configuration>
+    <servers>
+      <crucible>
+        <server-id>b1c0c998-b03a-4024-88dc-ecc9565e2b53</server-id>
+        <name>EHL_ATMSIC_GD</name>
+        <url>http://113.108.187.2:8060</url>
+        <shared>false</shared>
+        <isFisheyeInstance>true</isFisheyeInstance>
+      </crucible>
+      <jira>
+        <server-id>bc685af1-e3d9-478b-ac3c-4cc53904c906</server-id>
+        <name>EHL_ATMSIC_GD</name>
+        <url>http://113.108.187.2:8080</url>
+        <shared>false</shared>
+      </jira>
+    </servers>
+    <default-jira-server>bc685af1-e3d9-478b-ac3c-4cc53904c906</default-jira-server>
+  </project-configuration>
+</atlassian-ide-plugin>

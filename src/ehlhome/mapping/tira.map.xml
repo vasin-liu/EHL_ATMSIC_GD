@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名 -->
+<mapping prefix="/tira">
+	<forwards />
+	<exceptions />
+	<controllers>
+
+		<controller name="statistical"
+			clazz="com.ehl.tira.action.StatisticalAction">
+			<action name="getSingleSegFlow"></action>
+			<action name="doShowExcel"></action>
+			<action name="createDropDown"></action>
+			<action name="getMutiSegFlow"></action>
+			<action name="getMutiSegFlowRatio"></action>
+			<action name="getCitySegFlow"></action>
+		</controller>
+
+		<!--用户登录 -->
+		<controller name="userlogin" clazz="com.ehl.sm.login.Login">
+			<action name="login">
+				<forward name="success" redirect="true" path="tira/index.jsp" />
+				<forward name="failure" redirect="true" path="tira/login.jsp" />
+			</action>
+			<action name="logout"></action>
+		</controller>
+
+		<!--数量分析，事故宗数,死亡人数,死亡三人以上的事故宗数，死亡五人以上的事故宗数 -->
+		<controller name="AccountAction" clazz="com.ehl.tira.accident.AccountAction">
+			<action name="analysis"></action>
+		</controller>
+		<!--道路管理质量分析 -->
+		<controller name="RoadManageQualityAction"
+			clazz="com.ehl.tira.road.RoadManageQualityAction">
+			<action name="analysis"></action>
+		</controller>
+
+		<!--信息考核 -->
+		<controller name="patrolmileage"
+			clazz="com.ehl.tira.duty.action.PatrolMileageAction">
+			<action name="analysis"></action>
+			<action name="totalDept"></action>
+			<action name="totalTime"></action>
+			<action name="avgDept"></action>
+			<action name="avgTime"></action>
+		</controller>
+
+		<!--预案方案管理 -->
+		<controller name="schemePlanManage"
+			clazz="com.ehl.tira.action.SchemePlanManageAction">
+			<action name="add"></action>
+			<action name="get"></action>
+			<action name="modify"></action>
+		</controller>
+	</controllers>
+</mapping>

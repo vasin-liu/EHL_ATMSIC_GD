@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+	<datasource name="oracle92" type="JDBC">
+		<driver>oracle.jdbc.driver.OracleDriver</driver>
+ 		<url>jdbc:oracle:thin:@10.40.30.206:1521:atms</url>
+		<user>atms47</user>
+		<password>ehl1234</password>
+		<minActive>30</minActive>
+		<maxActive>80</maxActive>
+		<loginTimeout>0</loginTimeout>
+		<charSet>UTF-8</charSet>
+		<property name="useUnicode" value="true" />
+		<property name="characterEncoding" value="UTF-8" />
+	</datasource>
+	
+	<datasource name="gps" type="JDBC">
+		<driver>oracle.jdbc.driver.OracleDriver</driver>
+		<url>jdbc:oracle:thin:@10.40.30.207:1521:atmsdb</url>
+		<user>gps</user>
+		<password>ehl1234</password>
+		<minActive>5</minActive>
+		<maxActive>10</maxActive>
+		<loginTimeout>0</loginTimeout>
+		<charSet>UTF-8</charSet>
+		<property name="useUnicode" value="true" />
+		<property name="characterEncoding" value="UTF-8" />
+	</datasource>
+	<datasource name="sde" type="JDBC">
+		<driver>oracle.jdbc.driver.OracleDriver</driver>
+		<url>jdbc:oracle:thin:@10.40.30.206:1521:atms</url>
+		<user>sde</user>
+		<password>ehl1234</password>
+		<minActive>5</minActive>
+		<maxActive>10</maxActive>
+		<loginTimeout>0</loginTimeout>
+		<charSet>UTF-8</charSet>
+		<property name="useUnicode" value="true" />
+		<property name="characterEncoding" value="UTF-8" />
+	</datasource>
+</datasources>

@@ -1,0 +1,47 @@
+/*JIA 2009,4month*/
+/*滑动样式----------------------------------------------------------------*/
+#preview1,#preview2,#preview3{ 
+      float:left; 
+	  width:100%; 
+	  height:180px; 
+	  margin-top:5px;
+}
+#scrolldoorFrame { 
+      width:100%; 
+	  height:24px; 
+	  background:url(../../image/cssimg/table/sleek_a.gif) no-repeat; 
+	  background-color:#FFF;
+}
+#scrolldoorFrame ul{
+      list-style:none; 
+	  width:100%; 
+	  height:24px; 
+	  font-size:12px; 
+	  background:url(../../image/cssimg/table/sleek_a.gif) no-repeat;
+}
+#scrolldoorFrame ul li{ 
+      display:block; 
+	  float:left; 
+	  width:87px; 
+	  height:18px; 
+	  padding-top:6px; 
+	  text-align:center;
+}
+#scrolldoorFrame ul a{ 
+      color:#A5D1EC;
+	  /* color:#03515d */ 
+	  filter:glow(color=#000000,strength=1); 
+	  text-decoration:none;
+}
+#scrolldoorFrame ul .q{ 
+      border-bottom-style:none; 
+	  background:url(../../image/cssimg/table/sleek_hover.gif) no-repeat;
+}
+#frame{ 
+      float:left; 
+	  width:99.8%;
+	  padding:2px 0px 2px 0px; 
+	  border-top:1px dashed #A5D1EC; 
+	  border-bottom:1px dashed #A5D1EC; 
+	  word-wrap:break-word; 
+}

@@ -1,0 +1,76 @@
+ 
+ 
+/*JIA 2009,4month*/
+/*所有链接样式----------------------------------------------------------------*/
+A:link {
+	color:#1D1F20;
+	text-decoration:none; }
+ 
+/* unvisited link */
+A:visited {
+	color:#1D1F20;
+	text-decoration:none; }
+ 
+/* visited links */
+A:hover {
+	color:#FF0000;
+	text-decoration:none; }
+ 
+/* hover links */
+/*主界面导航链接样式----------------------------------------------------------------*/
+#navigation a {
+	display:block;
+	float:left;
+	width:81px;
+	height:19px;
+	margin-top:5px;
+	margin-left:0px;
+	padding:1px 2px 1px 2px;
+	background:url(../../image/cssimg/nav.gif) no-repeat;
+	color:#fff;
+	text-decoration:none;
+	line-height:19px; }
+ 
+	#navigation a:hover {
+		float:left;
+		display:block;
+		width:81px;
+		height:19px;
+		padding:1px 2px 1px 2px;
+		color:#fff;
+		text-decoration:none;
+		background:url(../../image/cssimg/nav_hover.gif) no-repeat;
+		line-height:19px; }
+ 
+/* 有用ul li 
+#navigation a:link{ 
+       float:left; 
+	   width:81px; 
+	   height:19px; 
+	   padding:1px 2px 1px 2px; 
+	   color:#2B7DBB; 
+	   text-decoration:none; 
+	   background:url(../../image/cssimg/nav_button.gif) no-repeat; 
+	   line-height:19px;
+}
+#navigation a:visited { 
+       float:left;
+	   width:81px; 
+	   height:19px; 
+	   padding:1px 2px 1px 2px; 
+	   color:#2B7DBB; 
+	   text-decoration:none; 
+	   background:url(../../image/cssimg/nav_button.gif) no-repeat; 
+	   line-height:19px;
+}
+#navigation a:hover { 
+       float:left; 
+	   width:81px; 
+	   height:19px; 
+	   padding:1px 2px 1px 2px; 
+	   color:#2B7DBB; 
+	   text-decoration:none; 
+	   background:url(../../image/cssimg/nav_button_hover.gif) no-repeat; 
+	   line-height:19px;
+}
+*/

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+	<property name="tomcatURL" value="D:\Tomcat 5.5\"></property><!-- tomcat安装路径 -->
+	<property name="DRV_DMLB_XZQH" value="300119"></property><!-- 行政区划 -->
+	<property name="VEH_DMLB_XZQH" value="300119"></property><!-- 行政区划 -->
+	<property name="VIO_DMLB_FXJG" value="300314"></property><!-- 行政区划 -->
+	<property name="ACC_DMLB_XZQH" value="300401"></property><!-- 事故行政区划代码 -->
+	<property name="ACC_TASK_HOUR" value="21"></property><!-- 事故行政区划代码 -->
+</properties>

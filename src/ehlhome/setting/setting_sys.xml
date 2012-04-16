@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+	<!-- 登录人数限制  -->
+	<property name="ddcx" value="20"></property>
+	<property name="ddld" value="10"></property>
+	<property name="ddzb" value="5"></property>
+	<property name="zdcx" value="40"></property>
+	<property name="zdld" value="30"></property>
+	<property name="zdzb" value="5"></property>
+	<property name="zodcx" value="40"></property>
+	<property name="zodld" value="30"></property>
+	<property name="zodzb" value="5"></property>
+	
+	<!-- 系统在2011-08-11上线，在2011-09-01正式使用信息文件模块。
+	信息文件初始化表中录入2011-01-01至2011-08-10的所有数据（不分日期），
+	分日期录入2011-08-11至2011-08-22的数据  -->
+	<!-- 系统上线时间  -->
+	<property name="publish_time" value="2011-08-11"></property>
+	<!-- 信息文件数据使用时间，在2011-08-23正式使用系统数据  -->
+	<property name="newsfile_use_time" value="2011-08-23"></property>
+	<!-- 信息文件初始数据截止时间，起始时间为2011-01-01，当年的一月一日  -->
+	<property name="newsfile_init_end_time" value="2011-09-01"></property>
+	<!-- 系统允许不登录就可以访问的jsp页面，多项之间用顿号分隔  -->
+	<property name="allow_access_nologin" value="logonToGrid2.jsp,loginToGrid3.jsp,1/1.jsp"></property>
+	<!-- 交通拥堵自动录入结束提示的时间 -->
+	<property name="crowd_auto_over" value="2012-2-21 8:07"></property>
+	<!-- 道路施工自动录入结束提示的时间 -->
+	<property name="build_auto_over" value="2012-03-22 08:30"></property>
+	<!-- 交警提示信息数据同步日期，新增了来源、父编号、发布类型、处理状态这些字段，
+		 需要设置初始值，记录初始化日期，以便还原数据 -->
+	<property name="policeremind_syntime" value="2012-03-22 08:30"></property>
+</properties>

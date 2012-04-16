@@ -1,0 +1,105 @@
+/*内容*/
+.content {
+	height: 80%;;
+	margin-left: 2px;
+}
+
+/*固定行头样式*/
+.scrollRowThead
+{
+     position: relative; 
+     left: expression(this.parentElement.parentElement.parentElement.parentElement.scrollLeft);
+     z-index:0;
+}
+ 
+/*固定表头样式*/
+.scrollColThead {
+     position: relative; 
+     top: expression(this.parentElement.parentElement.parentElement.scrollTop);
+     z-index:2;
+     overflow: hidden; 
+     text-overflow:ellipsis
+}
+ 
+/*行列交叉地方*/
+.scrollCR {
+     z-index:3;
+} 
+ 
+/*div外框*/
+.scrollDiv {
+	height: 460px;
+	clear: both; 
+	border: thin;
+	OVERFLOW: auto;
+	width: 100%; 
+}
+
+/*行头居中*/
+.scrollColThead td,.scrollColThead th
+{
+     text-align: center ;
+}
+ 
+/*行头列头背景*/
+.scrollRowThead,.scrollColThead td,.scrollColThead th
+{
+	BACKGROUND: url(../images/title/Img253001754.gif); 
+	LINE-HEIGHT: 25px
+}
+ 
+/*表格线*/
+.scrolltable
+{
+	border-bottom:1px solid #CCCCCC; 
+	border-right:1px solid #CCCCCC; 
+}
+
+/*单元格线*/
+.scrolltable td,.scrollTable th
+{
+     border-left: 1px solid #CCCCCC; 
+     border-top: 1px solid #CCCCCC; 
+     padding: 1px; 
+}
+
+.rowstyle
+{
+	height: 25px;
+	cursor: hand; 
+}
+
+.list_table{
+	border-top: 1 solid  #A0A0A0;
+	border-right: 0 solid  #FFFFFF;
+	border-bottom: 0 solid  #FFFFFF;
+	border-left: 1 solid  #A0A0A0;
+	background-color: #FFFFFF;
+	border-collapse:collapse;
+	font-size:12px;		
+	position: relative;
+	padding: 0px;
+}	
+.list_thead{
+	border-top: 0 solid  #FFFFFF;
+	border-right: 1 solid  #A0A0A0;
+	border-bottom: 1 solid #A0A0A0;
+	border-left: 1 solid  #A0A0A0;
+	background-color: #B4C1E2;
+	line-height: 22px;
+	color: #000000;
+	border-collapse : separate;
+	empty-cells:show;
+	text-align: center;	
+}
+.list_td{
+	border-top: 0 solid  #FFFFFF;
+	border-right: 1 solid  #A0A0A0;
+	border-bottom: 1 solid  #A0A0A0;
+	border-left: 0 solid  #A0A0A0;
+	line-height: 22px;
+	color: #000000;
+	border-collapse : separate;
+	empty-cells:show;
+	text-align: center;	
+}

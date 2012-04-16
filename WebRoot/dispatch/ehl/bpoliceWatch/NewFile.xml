@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="gb2312"?>
+<message System="ATMS" Ver="1.0">
+	<systemtype>SYSTEM</systemtype>
+	<messagetype>NOTICE</messagetype>
+	<sourceIP></sourceIP>
+	<targetIP></targetIP>
+	<user></user>
+	<password></password>
+	<list>
+		<maineventid>20090421105040312</maineventid>
+		<subeventids>
+			<subeventid>20090421114855859</subeventid>
+		</subeventids>
+		<detail>警情合单消息通知</detail>
+	</list>
+</message>

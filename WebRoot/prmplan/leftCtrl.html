@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<script language="javascript">
+	    //控制隐藏左侧面板
+		function changeLeft()
+		{    
+		     imgObj = document.getElementById("imgHide");
+			 if (parent.frmst.cols.split(",")[0] != 0)
+			 {
+				  
+				  parent.frmst.cols="0,5,*";
+				  parent.moduletarget.location.reload();
+				  imgObj.src="image/button/right.gif";
+				  imgObj.alt="显示功能树";
+			 }
+			 else
+			 {
+				  parent.frmst.cols="215,5,*";
+				  parent.moduletarget.location.reload();
+				  imgObj.src="image/button/left.gif";
+				  imgObj.alt="隐藏功能树";
+			 }			
+		}
+	</script>
+
+  </head>
+  
+  <body style="overflow:hidden;margin-top:3px;margin-left:0px;margin-right:0px" >
+	 <table width="5" height="100%" height="100%" border="0" cellspacing="0" cellpadding="0" >
+		  <tr>
+		    <td valign="middle" ><img id='imgHide' src="image/button/left.gif" width="5" height="10" style="cursor:pointer" alt="隐藏功能树" onclick="changeLeft();"/>
+		    </td>
+		  </tr>
+	 </table>
+  </body>
+</html>

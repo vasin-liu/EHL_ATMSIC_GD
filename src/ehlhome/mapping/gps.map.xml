@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping prefix="/gps">
+	<forwards />
+	<exceptions />
+	<controllers>
+		 
+		 <!--用户登录-->  	
+		<controller name="userlogin" clazz="com.ehl.sm.login.Login">
+		    <action name="login">
+       			<forward name="success"  forward="true" path="/index.jsp" />
+		    	<forward name="failure"  redirect="true" path="login.jsp" />
+		    </action>
+		    <action name="logout"></action>
+		    <action name="updatPW"></action>
+	    </controller>
+	    
+		<!-- GPS显示 -->
+		<controller name="GPSMap" clazz="com.ehl.gps.GPSMap">
+			<!-- 从数据库中获取GPS车辆信息 -->
+			<action name="ReadPoints"></action>			
+			<action name="getGPSInfoByPosition"></action>
+			<action name="ReadTracePoints"></action>
+			<action name="QueryGPSCar"></action>
+		</controller>
+				
+		<!-- GPS 树 -->
+		<controller name="GPSTree" clazz="com.ehl.gps.GPSCarTree">
+			<action name="readBranchCarTree"></action>			
+			
+		</controller>
+		
+		<!-- 分页 -->
+		<controller name="paging" clazz="com.ehl.gps.DhtmlPaging">			
+			<action name="dhtmlPaging"></action>
+		</controller>
+		<!-- 车辆分类 -->
+		<controller name="classifyctrl" clazz="com.ehl.gps.ctrl.GPSClassifyCtrl">			
+			<action name="ReadGpsClassify"></action>
+			<action name="DeleteGpsClassify"></action>
+			<action name="ReadGpsClassifyById"></action>
+			<action name="AddOrEditGpsClassify"></action>
+		</controller>
+		<!-- 分区查看树 -->
+		<controller name="classifycountctrl" clazz="com.ehl.gps.ctrl.ClassifyCountCtrl">	
+		    <action name="ReadGpsClassifyCount"></action>
+		    <action name="ReadGpsCarDetail"></action>
+		</controller>	
+		<!-- 分组查看树 -->
+		<controller name="groupcountctrl" clazz="com.ehl.gps.ctrl.GroupCountCtrl">	
+		    <action name="ReadGpsGroupCount"></action>
+		</controller>	
+		<!-- 分组信息 -->
+		<controller name="groupctrl" clazz="com.ehl.gps.ctrl.GPSGroupCtrl">			
+			<action name="ReadGpsGroup"></action>
+			<action name="ReadGpsGroupById"></action>
+			<action name="AddOrEditGpsGroup"></action>
+			<action name="DeleteGpsGroup"></action>
+			<action name="ReadGpsGroupByCondition"></action>
+			<action name="ReadGpsGroupByGroupId"></action>
+			<action name="SaveGpsGroup"></action>
+		</controller>
+		
+		<!-- 分组规则代码信息 -->
+		<controller name="grouprolecodectrl" clazz="com.ehl.gps.ctrl.GPSGroupRoleCodeCtrl">			
+			<action name="ReadGpsGroupRoleCode"></action>
+			<action name="ReadGpsGroupRoleCodeById"></action>
+			<action name="AddOrEditGpsGroupRoleCode"></action>
+			<action name="DeleteGpsGroupRoleCode"></action>
+		</controller>
+		
+		<!-- 分组规则信息 -->
+		<controller name="grouprolectrl" clazz="com.ehl.gps.ctrl.GPSGroupRoleCtrl">			
+			<action name="ReadGpsGroupRole"></action>
+			<action name="ReadGpsGroupRoleById"></action>
+			<action name="AddOrEditGpsGroupRole"></action>
+			<action name="DeleteGpsGroupRole"></action>
+		</controller>
+		
+		<controller name="gpstest" clazz="com.ehl.gps.ctrl.GPSTest">			
+			<action name="TestClassify"></action>
+			 
+		</controller>
+		<!--用户登录atms45  	
+		<controller name="atms45login" clazz="com.ehl.gps.login.Atms45">
+		    <action name="login">
+       			<forward name="success"   forward="true" path="/index.jsp" />
+		    	<forward name="failure"   redirect="true" path="/index.jsp" />
+		    </action>
+		    <action name="logout"></action>
+		</controller>
+		-->
+		<!--路况发布-->
+		<controller name="tfmMap" clazz="com.ehl.tfm.action.TfmMap">
+		    <action name="readRoadFlow"></action>		    
+  		</controller>
+	</controllers>
+</mapping>

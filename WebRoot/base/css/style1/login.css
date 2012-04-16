@@ -1,0 +1,102 @@
+ 
+ 
+/*JIA 2009,4month*/
+/*------------------------------------------------------------------ 
+[Login] 
+1 input / .input 
+2 Login top back / .loginTopBack
+3 Login left back / .loginLeftBack
+4 Login Right back / .loginRightBack
+5 Login user back / .loginUserBack
+6 button / .btnSearch
+ 
+——————————————————————-*/
+/*登录首页界面样式----------------------------------------------------------------*/
+.loginListText {
+	width:125px;
+	height:20px;
+	border:solid 1px #0468a7;
+	background:#32a2e3;
+	color:#ffffff;
+	font-size:12px; }
+ 
+/* 登录样式----------------------------------------------------------------*/
+.loginTopBack {
+	font-family:"黑体";
+	font-size:22px;
+	text-align:center;
+	padding-top:20px;
+	padding-left:10px;
+	font-weight:bold;
+	width:974px;
+	height:331px;
+	background:url(../../image/cssimg/login/login_01.jpg) no-repeat; }
+ 
+.loginLeftBack {
+	width:393px;
+	height:116px;
+	background:url(../../image/cssimg/login/login_05.gif) no-repeat; }
+ 
+.loginUserBack {
+	width:174px;
+	height:81px;
+	background:url(../../image/cssimg/login/login_06.gif) no-repeat; }
+ 
+.loginRightBack {
+	float:left;
+	width:407px;
+	height:116px;
+	background:url(../../image/cssimg/login/login_07.gif) no-repeat; }
+ 
+.loginBottomBack {
+	width:975px;
+	height:160px;
+	background:url(../../image/cssimg/login/login_12.gif) no-repeat; }
+ 
+.loginbar {
+	width:50px;
+	height:35px;
+	background:url(../../image/cssimg/login/login_08.gif) no-repeat; }
+ 
+.loginBtnrBack {
+	width:33px;
+	height:35px;
+	background:url(../../image/cssimg/login/login_11.gif) no-repeat; }
+ 
+/*按钮样式----------------------------------------------------------------*/
+.btnSearch {
+	width:46px;
+	height:35px;
+	background:url(../../image/cssimg/login/login_09.gif) no-repeat;
+	font-size:12px;
+	line-height:35px;
+	text-align:center; }
+ 
+.btnSearch a:link {
+		display:block;
+		height:35px;
+		background:url(../../image/cssimg/login/login_09.gif) center;
+		text-decoration:none;
+		line-height:35px;
+		overflow:hidden; }
+ 
+.btnSearch a:hover {
+		height:35px;
+		background:url(../../image/cssimg/login/login_09_1.gif) center center;
+		line-height:35px; }
+ 
+.btnSearch .lbl {
+		display:block;
+		width:40px;
+		height:35px;
+		margin:0 auto;
+		color:#BCDBEB;
+		filter:glow(color=#1070a3,strength=1);
+		cursor:pointer;
+		letter-spacing:5px;
+		text-align:center; }
+ 
+.btnSearch a:hover .lbl {
+		color:#BCDBEB;
+		filter:glow(color=#1070a3,strength=1); }
+ 

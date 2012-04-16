@@ -1,0 +1,217 @@
+/*JIA 2009,4month*/
+
+/*input 样式*/
+input[type="radio"]{ 
+}
+input[type="checkbox"]{
+}
+input[type="password"]{
+}
+input[type="button"]{
+}
+/*TEXT的高度边框背景行高*/
+input[type="text"] {
+     height:18px; 
+	 border:1px solid #C8C8C6; 
+	 background:url(../../image/cssimg/table/button_back.gif) repeat-x; 
+	 line-height:18px;
+}
+/*高度边框背景颜色背景图片行高*/
+#listText {
+     height:16px; 
+	 border:1px solid #7F9DB9;
+	 background-color:#FFFFFF;
+	 background-image:none; 
+	 line-height:16px;
+}
+
+/*宽度背景颜色边框字体颜色高度*/
+select{ 
+     width:auto;
+	 background-color:#f4f4f4;
+	 border:1px solid #7F9DB9 !important;
+	 color:#1D1F20;
+	 height:19px;
+	 *height:20px !important;
+	 *height:20px;
+}
+/*列表框或下拉框样式*/
+	
+
+/*按钮样式 上一页 下一页----------------------------------------------------*/
+/*浮动宽度高度行高背景不显示超过对象尺寸的内容*/
+.btnSearch{ 
+     float:right; 
+	 width:43px; 
+	 height:15px; 
+	 line-height:15px; 
+	 background:url(../../image/cssimg/table/next.gif) no-repeat; 
+	 overflow:hidden;
+}
+/*块对象的默认值高度背景字体无装饰行高不显示超过对象尺寸的内容*/
+.btnSearch a{
+     display:block; 
+	 height:15px; 
+	 background:url(../../image/cssimg/table/next.gif) center ;
+	 text-decoration:none;
+	 line-height:15px;
+	 overflow:hidden;
+}
+/*高度背景行高*/
+.btnSearch a:hover{ 
+     height:15px; 
+	 background:url(../../image/cssimg/table/next.gif) center center; 
+	 line-height:15px;
+}
+/*块对象的默认宽高外补丁内补丁字体颜色鼠标光标类型字体位置*/
+.btnSearch .lbl{ 
+     display:block; 
+	 width:37px; 
+	 height:15px; 
+	 margin:0 auto; 
+	 padding-left:3px; 
+	 padding-top:0px; 
+	 color:#000; 
+	 cursor:pointer; 
+	 text-align:center;
+}
+/*字体颜色 滤镜效果*/
+.btnSearch a:hover .lbl{ 
+     color:#ACA899; 
+	 filter:glow(color=#ffffff,strength=1);
+}
+
+/*转按钮----------------------------------------------------------------*/
+/*浮动宽高 行高背景 不显示超过对象尺寸的内容*/
+.btnTurn{ 
+     float:right; 
+	 width:37px; 
+	 height:15px; 
+	 line-height:15px; 
+	 background:url(../../image/cssimg/table/go.gif) no-repeat; 
+	 overflow:hidden;
+}
+/*块对象高度的固定背景字体无装饰行高不显示超过对象尺寸的内容*/
+.btnTurn a{ 
+     display:block; 
+	 height:15px; 
+	 background:url(../../image/cssimg/table/go.gif) center; 
+	 text-decoration:none; 
+	 line-height:15px;
+	 overflow:hidden;
+}
+/*高度的固定背景图片行高*/
+.btnTurn a:hover{ 
+     height:15px; 
+	 background:url(../../image/cssimg/table/go.gif) center center; 
+	 line-height:15px;
+}
+/*块对象宽高固定外补丁内补丁字体颜色字体位置鼠标光标类型*/
+.btnTurn .lbl{ 
+     display:block; 
+	 width:24px; 
+	 height:15px; 
+	 margin:0 auto; 
+	 padding-left:13px; 
+	 padding-top:0px; 
+	 color:#000000;
+	 text-align:center; 
+	 cursor:pointer;
+}
+/*字体颜色滤镜效果*/
+.btnTurn a:hover .lbl{ 
+     color:#ACA899;
+	 filter:glow(color=#ffffff,strength=1);
+}
+
+/*所有按钮样式 查询---------------------------------------------------------*/
+/*宽高行高背景不显示超过对象尺寸的内容*/
+.search{
+     width:82px; 
+	 height:22px; 
+	 line-height:22px; 
+	 background:url(../../image/cssimg/table/search.gif) no-repeat; 
+	 overflow:hidden;
+}
+/*块对象高度固定背景字体无装饰行高不显示超过对象尺寸的内容*/
+.search a{ 
+     display:block; 
+	 height:22px; 
+	 background:url(../../image/cssimg/table/search.gif) center; 
+	 text-decoration:none; 
+	 line-height:22px;
+	 overflow:hidden;
+}
+/*高度固定背景行高*/
+.search a:hover{ 
+     height:22px; 
+	 background:url(../../image/cssimg/table/search.gif) center center; 
+	 line-height:22px;
+}
+/*块对象宽高固定外补丁内补丁文字的位置颜色鼠标光标类型*/
+.search .lbl{ 
+     display:block;
+	 width:79px; 
+	 height:15px; 
+	 padding-left:3px; 
+	 padding-top:0px; 
+	 margin:0 auto; 
+	 text-align:center; 
+	 color:#1065AD; 
+	 cursor:pointer;
+}
+/*颜色滤镜效果*/
+.search a:hover .lbl{ 
+     color:#ACA899; 
+	 filter:glow(color=#ffffff,strength=1);
+}
+/*灰色按钮样式---------------------------------------------------------*/
+/*宽高固定行高背景不显示超过对象尺寸的内容*/
+.grayBtn{
+     width:63px; 
+	 height:20px; 
+	 line-height:20px; 
+	 background:url(../../image/cssimg/table/grayBtn.gif) no-repeat; 
+	 overflow:hidden;
+}
+/*块对象高度固定背景字体无装饰行高不显示超过对象尺寸的内容*/
+.grayBtn a{ 
+     display:block; 
+	 height:20px; 
+	 background:url(../../image/cssimg/table/grayBtn.gif) center; 
+	 text-decoration:none; 
+	 line-height:20px;
+	 overflow:hidden;
+}
+/*高度固定背景行高*/
+.grayBtn a:hover{ 
+     height:20px; 
+	 background:url(../../image/cssimg/table/grayBtn.gif) center center; 
+	 line-height:20px;
+}
+/*块对象宽高固定外补丁内补丁文字颜色位置鼠标光标类型*/
+.grayBtn .lbl{ 
+     display:block;
+	 width:60px; 
+	 height:20px; 
+	 padding-left:3px; 
+	 padding-top:0px; 
+	 margin:0 auto; 
+	 text-align:center; 
+	 color:#000000; 
+	 cursor:pointer;
+}
+/*文字颜色滤镜效果*/
+.grayBtn a:hover .lbl{ 
+     color:#ACA899; 
+	 filter:glow(color=#ffffff,strength=1);
+}
+
+/*转到第几页中输入框样式------------------------------------------------*/
+/宽高固定边框/
+#btngo { 
+     width:20px; 
+	 height:12px; 
+	 border:1px solid #999999;
+}
+

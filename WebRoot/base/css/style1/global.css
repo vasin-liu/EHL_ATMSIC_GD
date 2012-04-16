@@ -1,0 +1,54 @@
+
+ 
+/*JIA 2009,4month*/
+/* COLORS 
+　　Body Background: url(../../image/cssimg/back_02.gif) 
+　　Main Text: #1D1F20 
+　　Links: #FF0000 
+　　Border: #A5D1EC 
+　　*/
+/*全局 样式----------------------------------------------------------------*/
+　　
+ 
+ 
+ /*外补丁内补丁为零*/
+html,body,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6,table,td,th,form,fieldset,img,dl,dt,dd {
+	margin:0;
+	padding:0; }
+ /*文字大小颜色*/
+textarea,input,select,body {
+	font-size:12px;
+	color:#1D1F20; }
+ /*文字进行垂直方向的居中*/
+select,input { vertical-align:middle; }
+ /*边框*/
+fieldset,img { border:0; }
+ /**/
+ul,ol { list-style:none; }
+ 
+html {
+	overflow-x:hidden !important;
+	overflow-y:auto !important;
+	*overflow-y:none; /* *overflow-y:auto !important; */ }
+ 
+body {
+	text-align:center;
+	font:12px,"宋体", Helvetica, sans-serif;
+	background:url(../../image/cssimg/back_02.gif) repeat-x top;
+	background-color:#02609C;
+	padding-top:5px;
+	color:#1D1F20;
+	overflow-y:auto;
+	overflow-x:hidden;
+	}
+
+table { 
+      border-collapse: collapse; 
+      border-spacing: 0; 
+} 
+ 
+a,a * { cursor:pointer; }
+ 
+* { word-break: break-all; }
+ 
+/*在IE中实行强制换行*/

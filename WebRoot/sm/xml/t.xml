@@ -1,0 +1,37 @@
+<tree id="0">
+	<item sid="860200" text="施工占道管理" id="cstn/collect/main"
+		im0="book.gif" im1="books_open.gif" im2="book.gif">
+		<item sid="860201" text="施工占道概况"
+			id="cstn/generalinfo/generalCstnInfo" im0="book.gif"
+			im1="books_open.gif" im2="book.gif">
+		</item>
+		<item sid="860202" text="施工占道信息登记" id="cstn/collect/collect"
+			im0="book.gif" im1="books_open.gif" im2="book.gif">
+		</item>
+		<item sid="860203" text="施工占道信息标注" id="cstn/collect/mark"
+			im0="book.gif" im1="books_open.gif" im2="book.gif">
+		</item>
+		<item sid="860204" text="施工占道审批" id="cstn/audit/audit"
+			im0="book.gif" im1="books_open.gif" im2="book.gif">
+		</item>
+		<item sid="860205" text="施工占道查询" id="cstn/queryNmodify/query"
+			im0="book.gif" im1="books_open.gif" im2="book.gif">
+		</item>
+	</item>
+	<item sid="860300" text="交通管制管理" id="tta/generalinfo/main"
+		im0="book.gif" im1="books_open.gif" im2="book.gif">
+		<item sid="860301" text="交通管制概况"
+			id="tta/generalinfo/generalTtaInfo" im0="book.gif"
+			im1="books_open.gif" im2="book.gif">
+		</item>
+		<item sid="860302" text="交通管制信息登记" id="tta/collect/collect"
+			im0="book.gif" im1="books_open.gif" im2="book.gif">
+		</item>
+		<item sid="860303" text="交通管制信息标注" id="tta/collect/mark"
+			im0="book.gif" im1="books_open.gif" im2="book.gif">
+		</item>
+		<item sid="860304" text="交通管制查询" id="tta/queryNmodify/query"
+			im0="book.gif" im1="books_open.gif" im2="book.gif">
+		</item>
+	</item>
+</tree>

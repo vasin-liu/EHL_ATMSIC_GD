@@ -1,0 +1,92 @@
+/* Bubble pop-up */
+.popup {
+	position: absolute;
+	z-index: 1000;
+	border-collapse: collapse;
+}
+
+.popup td.corner {
+	height: 13px;
+	width: 5px;
+}
+
+.popup td#topleft {
+	background-image: url(../../../image/popup/bubble-1.gif);
+}
+
+.popup td.top {
+	height: 25px;
+	background-image: url(../../../image/popup/bubble-2.gif);
+	color: white;
+	font-weight: bold;
+	vertical-align: middle;
+	speak-header: once;
+	speak-numeral: continuous;
+	speak-punctuation: none;
+	speech-rate: slower;
+	richness: 100;
+}
+
+.popup td#topright {
+	background-image: url(../../../image/popup/bubble-3.gif);
+}
+
+.popup td.left {
+	background-image: url(../../../image/popup/bubble-4.gif);
+}
+
+.popup td.right {
+	background-image: url(../../../image/popup/bubble-5.gif);
+}
+
+.popup td#bottomleft {
+	background-image: url(../../../image/popup/bubble-6.gif);
+}
+
+.popup td#title {
+	background-image: url(../../../image/popup/toptitle.gif);
+}
+
+.popup td.bottom {
+	background-image: url(../../../image/popup/bubble-7.gif);
+	text-align: center;
+}
+
+.popup td.bottom img {
+	display: block;
+	margin: 0 auto;
+}
+
+.popup td#bottomright {
+	background-image: url(../../../image/popup/bubble-8.gif);
+}
+
+.popup table.popup-contents {
+	font-size: 12px;
+	line-height: 1.2em;
+	background-color: #DFEAF7;
+	color: #666;
+	font-family: "宋体", "Lucida Sans Unicode", "Lucida Sans", sans-serif;
+}
+
+table.popup-contents th {
+	text-align: right;
+	text-transform: lowercase;
+}
+
+table.popup-contents td {
+	text-align: left;
+}
+
+/*固定表头样式*/
+.scrollColThead {
+    position: relative; 
+    top: expression(this.parentElement.parentElement.parentElement.scrollTop);
+    z-index:2;
+    overflow: hidden; 
+    text-overflow:ellipsis
+}
+
+/*未用*/
+#imgOk {image:expression(this.src="../../../image/popup/ok.gif")}
+#imgCancel {image:expression(this.src="../../../image/popup/cancel.gif")}

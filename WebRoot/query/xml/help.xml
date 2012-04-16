@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tree id="0">
+		<item text="第一章 系统运行环境" id="010100" im0="book.gif" im1="books_open2.gif" im2="books_close2.gif">
+			<item text="数据库服务器" id="dataServer" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="WEB服务器" id="webServer" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="客户端" id="clientServer" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+		</item>
+		<item text="第二章 系统编码设计" id="010200" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+			<item text="代码类别编码说明" id="codeTypeExp" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="参数类别编码说明" id="paramExp" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="功能菜单编码说明" id="funcMenuExp" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="操作类型编码说明" id="operationExp" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="机构编码说明" id="departExp" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			<item text="车辆编码说明" id="carExp" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+		</item>
+		<item text="第三章 系统操作说明" id="010300" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+			<item text="通用操作说明" id="010301" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+				<item text="地图工具条操作说明" id="maptoolbar" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+				<item text="鹰眼操作说明" id="eagle" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			</item>
+	        <item text="特定车辆追踪" id="010400" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+				<item text="特定车辆追踪" id="trace" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			</item>
+		    <item text="过往车辆案件关联查询" id="010500" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+				<item text="过往车辆案件关联查询分析" id="case" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			</item>
+			<item text="行为异常车辆分析" id="010601" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+				<item text="行为异常车辆分析" id="abnorCarAnalyse" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			</item>
+	        <item text="车辆行驶轨迹分析" id="010700" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+				<item text="车辆行驶轨迹分析" id="traceHistory" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			</item>
+		     <item text="套牌嫌疑车辆分析" id="010800" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+				<item text="套牌嫌疑车辆分析" id="plateCarAnalyse" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			</item>
+			<item text="道路旅行时间分析" id="010900" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+				<item text="道路旅行时间分析" id="tripTimeAnalyse" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			</item>
+			<item text="系统信息维护" id="011001" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+				<item text="设备信息标注" id="tgsInfo" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			    <item text="常驻车辆信息维护" id="residentCar" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			    <item text="卡口连线配置维护" id="roadLink" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			</item>
+	        <item text="超速车辆分析" id="011100" im0="book2.gif" im1="books_open2.gif" im2="books_close2.gif">
+				<item text="超速车辆分析" id="overSpeedAnalyse" im0="book2.gif" im1="books_open2.gif" im2="book2.gif"></item>
+			</item>
+		</item>
+</tree>

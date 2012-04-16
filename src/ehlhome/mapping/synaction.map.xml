@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/synaction">
+	<forwards />
+	<exceptions />
+	<controllers>
+		<!--千米桩图层gis转mis表 2008-03-18 -->
+		<controller name="synaction" clazz="com.ehl.markutil.Synaction">
+		</controller>
+	</controllers>
+</mapping>

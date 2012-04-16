@@ -1,0 +1,25 @@
+@charset "utf-8";
+html,body,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6,table,td,th,form,fieldset,img,dl{
+	margin:0;
+	padding:0; }
+	ul,ol {
+	 list-style:none;
+	}
+	img{
+	  border:0}
+/*设置或检索表格的行和单元格的边是合并在一起还是按照标准的HTML样式分开 属性设置相邻单元格的边框间的距离*/
+table { 
+      border-collapse: collapse; 
+      border-spacing: 0;
+	  font-size:12px;
+	  line-height:23px;
+} 
+/*文字居中,大小12PX,字体“"宋体", Helvetica, sans-serif”,字体深灰色,背景以X轴平铺,背景居上*/ 
+body {
+	text-align:center;
+	font:12px,"宋体", Helvetica, sans-serif;
+	background-color:#fff;
+}
+ a{ color:#FF0000; text-decoration:none;}
+ a:hover{ color:#FF0000; text-decoration:underline;}
+

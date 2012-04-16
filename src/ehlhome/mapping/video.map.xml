@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping prefix="/video">
+	<forwards />
+	<exceptions />
+	<controllers>
+		 
+		<!-- 分页 -->
+		<controller name="paging" clazz="com.ehl.video.DhtmlPaging">			
+			<action name="dhtmlPaging"></action>
+		</controller>
+		
+		 <!-- 视频点显示 -->
+		<controller name="videoDevice" clazz="com.ehl.video.VideoPointMap">
+			
+			<!-- 根据所属区域取的视频设备 -->
+			<action name="readCountyVideo"> </action>	
+			<action name="writeVideoPoint"> </action>	
+			<!-- 根据所属区域取得事故点 -->	
+			<action name="readVideoPoints"> </action>			
+			<action name="getVideoDeviceById"> </action>
+			<action name="queryVideoDevice"> </action>
+			<action name="deleteVideoDevice"> </action>
+		</controller>
+	</controllers>
+</mapping>

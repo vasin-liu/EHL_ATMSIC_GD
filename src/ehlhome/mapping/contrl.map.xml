@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/contrl">
+	<forwards />
+	<exceptions />
+	<controllers>
+		<!--道路信息管理2010-1-16 by wkz -->
+		<controller name="contrlmanage" clazz="com.ehl.dispatch.cdispatch.action.ContrlManageAction">			
+			<action name="modifyContrlInfo"></action>
+			<action name="deleteContrlInfo"></action>
+			<action name="getContrlInfo"></action>
+			<action name="showExcel"></action>
+			<action name="getRoadWayInfo"></action>
+		</controller>
+	</controllers>
+</mapping>

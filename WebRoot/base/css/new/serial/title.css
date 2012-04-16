@@ -1,0 +1,36 @@
+/** 
+标题
+应用范围：
+1.界面标题，包括查询界面和明细界面二者相同
+组成结构
+1.容器
+1.1.图片
+1.2.标签
+1.3.值
+
+*/
+
+.title_page {
+	font-size: 12px;
+	text-align: left;
+}
+
+
+.title_page td.image {
+	width: 5%;
+	text-align: center;
+}
+
+.title_page image.image {
+	width: 16px;
+	height: 16px;
+}
+
+
+.title_page .label {
+	font-weight: bold;
+}
+
+.title_page .value {
+	
+}

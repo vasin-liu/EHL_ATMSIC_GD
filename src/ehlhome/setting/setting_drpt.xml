@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+	
+	<!-- tomcat安装路径 -->
+	<property name="tomcatURL" value="D:\Tomcat 5.5\"></property>
+	
+	<!-- 默认省份 -->
+	<property name="deafultArea" value="粤"></property>
+	
+</properties>

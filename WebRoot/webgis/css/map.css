@@ -1,0 +1,114 @@
+v\:* 
+{ 
+	behavior:url(#default#VML); 
+}
+o\:* {
+	BEHAVIOR: url(#default#VML)
+}
+.shape {
+	BEHAVIOR: url(#default#VML)
+}
+
+body {
+	margin: 0;
+	padding: 0;;
+	font-size: 10pt;
+	font-family: "ËÎÌו", Verdana, Lucida, Arial, Helvetica,	sans-serif;
+}
+
+td
+{
+	font-size:10pt;
+}
+
+tr
+{
+	font-size:10pt;
+}
+
+select
+{
+	font-size:10pt;
+}
+
+a 
+{
+	color: #000000;
+}
+a:hover 
+{
+	color: #FF0000;
+	text-decoration:underline;
+}
+
+img 
+{
+	border: 0px;
+}
+
+
+
+
+/*content*/
+.content {
+	height: 80%;;
+	margin-left: 2px;
+}
+
+/*left*/
+.leftPanel 
+{
+	margin-right: 320px;
+	border: 1px solid #7F9DB9;
+}
+
+/*toolsmenu*/
+.toolsmenu 
+{
+	line-height: 20px;;
+	height: 20px; /*text-align:right;*/
+	background: #E5ECF9;
+	overflow: hidden;;
+	text-decoration: none;
+}
+
+/*map*/
+.mapPanel
+{
+	position: absolute; 
+	width: 1000px; 
+	height: 540px; 
+	left: 0px; 
+	top: 0px;
+}
+
+.labelPanel 
+{
+	position: absolute;
+	z-index: 3;
+	width: 150px;
+	height: 24px;
+	visibility: visible;
+	right: 0px;
+	top: 6px;
+}
+
+/*mid*/
+.middlePanel {
+	position: absolute;;
+	right: 0px;;
+	margin-right: 310px;;
+	height: 350px;;
+	width: 10px;
+	top:0px;
+}
+
+.rightPanel {
+	position: absolute;;
+	right: 2px;
+	height: 350px;
+	width: 308px;
+	top: 0px; 
+	background: transparent;
+	z-index:1000;
+}

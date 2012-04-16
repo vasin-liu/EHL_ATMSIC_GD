@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/complaint">
+	<forwards />
+	<exceptions />
+	<controllers>
+		<!--投诉信息管理2010-4-27 by wkz -->
+		<controller name="complaintmanage" clazz="com.ehl.dispatch.cdispatch.action.ComplaintManageAction">			
+			<action name="modifyComplaintInfo"></action>
+			<action name="deleteComplaintInfo"></action>
+			<action name="getComplaintInfo"></action>
+			<action name="showWord"></action>
+			<action name="insertWord"></action>
+			<action name="statInfo"></action>
+		</controller>
+		
+		<controller name="complaintawake" clazz="com.ehl.dispatch.cdispatch.action.ComplaintAwakeCtrl">			
+			<action name="dealAwake"></action>	
+			<action name="dealAwakeList"></action>			
+		</controller>
+		
+		<controller name="noticemanage" clazz="com.ehl.dispatch.notice.action.NoticeAction">			
+			<action name="insert"></action>
+			<action name="modify"></action>
+			<action name="getNoticeInfo"></action>
+			<action name="deleteFile"></action>
+			<action name="receipt"></action>
+			<action name="notary"></action>
+			<action name="getNoticeList"></action>
+			<action name="getNoticeCount"></action>
+			<action name="showInfo"></action>
+			<action name="showExcel"></action>
+			<action name="delete"></action>
+		</controller>
+	</controllers>
+</mapping>

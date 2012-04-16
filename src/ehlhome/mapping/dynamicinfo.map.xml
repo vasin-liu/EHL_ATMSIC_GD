@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/dynamicinfo">
+	<forwards />
+	<exceptions />
+	<controllers>
+   		<!--摄像机标注 -->
+		<controller name="pcs" clazz="com.ehl.dynamicinfo.pcs.action.PcsAction">
+		    <action name="pcsData"></action> 
+  		</controller> 
+  		<!--当日事故信息标注 -->
+		<controller name="accNow" clazz="com.ehl.dynamicinfo.accNow.action.accNowAction">
+		    <action name="getAccNowInfo"></action> 
+		    <action name="getAllAccNowInfo"></action> 
+  		</controller> 
+  		<!--历史事故信息标注 -->
+		<controller name="accaccHistory" clazz="com.ehl.dynamicinfo.accaccHistory.action.accaccHistoryAction">
+		    <action name="getAccHistoryInfo"></action>
+		    <action name="getAccInfo"></action> 
+  		</controller>
+  		<!--卡口信息标注 -->
+		<controller name="tgs" clazz="com.ehl.dynamicinfo.tgs.action.tgsAllAction">
+				<action name="getAllTgsInfo"></action>
+		    <action name="getTgsInfo"></action> 
+  		</controller>
+  		<!--管制点标注 -->
+		<controller name="forbid" clazz="com.ehl.dynamicinfo.forbid.action.ForbidAction">
+		    <action name="getForbidInfo"></action> 
+  		</controller> 
+  		
+  	<!--GPS车辆标注 -->
+		<controller name="gpsCar" clazz="com.ehl.dynamicinfo.gpsCar.action.gpsCarAction">
+		    <action name="getAllgpsCarInfo"></action> 
+		    <action name="getAllgpsCarDepartInfo"></action> 
+		    <action name="getDepartCarLst"></action> 
+		    <action name="getGpscarInfo"></action> 
+  		</controller> 
+  		
+  		<!--交警提示 -->
+		<controller name="bayonetFlow" clazz="com.ehl.dynamicinfo.tgs.action.BayonetFlowAction">
+			 <action name="statisWrongDays"></action>
+			 <action name="statisWrongHours"></action>  
+			 <action name="getFlow"></action>
+			 <action name="watchVideoState"></action>
+			 <action name="getBayonet"></action>
+  		</controller>
+  		
+  			<!--施工占道标注 -->
+		<controller name="roadRepair" clazz="com.ehl.dynamicinfo.roadRepair.action.roadShowAction">
+		    <action name="getroadBuildAllInfo"></action> 
+		    <action name="getroadBuild"></action> 
+  		</controller> 
+  		<!--拥堵信息 -->
+		<controller name="crowd" clazz="com.ehl.dynamicinfo.crowd.action.CrowdAction">
+  		</controller>
+  		<!--交警提示 -->
+		<controller name="policeRemind" clazz="com.ehl.dynamicinfo.policeRemind.action.PoliceRemindAction">
+			 <action name="insertPoliceRemindInfo"></action> 
+			 <action name="getRemindInfo"></action> 
+			 <action name="updateRemindInfo"></action>
+			 <action name="getRemindInfoById"></action>
+			 <action name="insert"></action>
+			 <action name="getById"></action>
+			 <action name="modifyById"></action>
+			 <action name="search"></action>
+			 <action name="getRollInfo"></action>
+			 <action name="getDetailInfo"></action>
+			 <action name="getCorrectInfo"></action>
+			 <action name="publish"></action>
+			 <action name="updatePublishState"></action>
+  		</controller>
+  		<!--Modified by Liuwx 2011-08-24 -->
+  		<!-- 用户默认设置 -->
+		<controller name="userSetting" clazz="com.ehl.dispatch.common.action.UserSettingAction">
+			 <action name="saveUserSetting"></action> 
+			 <action name="updateUserSetting"></action> 
+			 <action name="deleteUserSetting"></action>
+			 <action name="getUserSetting"></action>
+  		</controller>
+  		<!-- Modification finished -->
+	</controllers>
+</mapping>
+<!--2011-08-31更新，刘维新-->

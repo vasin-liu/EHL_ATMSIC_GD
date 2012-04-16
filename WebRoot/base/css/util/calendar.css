@@ -1,0 +1,39 @@
+#calendarTableDT tr {
+	height: 12px;
+	line-height: 100%;
+	margin: 0px;
+}
+
+#calendarTableDT td {
+	height: 12px;
+	line-height: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+#calendarTableDT th {
+	height: 12px;
+	line-height: 100%;
+	padding: 5 0 2;
+	margin: 0px;
+}
+
+#calendarTable tr {
+	height: 12px;
+	line-height: 100%;
+	margin: 0px;
+}
+
+#calendarTable td {
+	height: 12px;
+	line-height: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+#calendarTable th {
+	height: 12px;
+	line-height: 100%;
+	padding: 5 0 2;
+	margin: 0px;
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/gzzd">
+	<forwards />
+	<exceptions />
+	<controllers>
+		 <!--用户登录-->  	
+		<controller name="userlogin" clazz="com.ehl.login.Login">
+		    <action name="login">
+       			<forward name="success"  forward="true" path="/index.jsp" />
+		    	<forward name="failure"  redirect="true" path="login.jsp" />
+		    </action>
+		    <action name="logout"></action>
+		    <action name="updatPW"></action>
+	    </controller>
+	</controllers>
+</mapping>

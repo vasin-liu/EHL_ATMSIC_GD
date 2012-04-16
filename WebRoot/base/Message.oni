@@ -1,0 +1,22 @@
+<%
+//清除页面缓存
+response.setHeader("Pragma","No-cache"); 
+response.setHeader("Cache-Control","no-cache"); 
+response.setDateHeader("Expires", -10);
+
+//校验用户Session有效性
+Object pname = session.getAttribute(com.ehl.base.Constants.PNAME_KEY);
+if(null==pname)
+{
+   String ip = request.getServerName(); 
+   String port = String.valueOf(request.getServerPort());
+   String projName = com.appframe.common.Setting.getString("redirecturl");
+   String url = "http://" + ip + ":" + port + projName;
+%>
+   <script type="text/javascript">
+      top.location.href = "<%=url %>";
+   </script>
+<%
+}
+%>
+

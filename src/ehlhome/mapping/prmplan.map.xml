@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	任何controller和action都不允许重名
+-->
+<mapping prefix="/prmplan">
+	<forwards />
+	<exceptions />
+	<controllers>
+		<!--预案管理-->
+		<controller name="prmplanManage" clazz="com.ehl.prmplan.manage.PrmplanManage">
+			<action name="getPrmplanList"></action>
+			<action name="insertOrUpdate"></action>
+			<action name="getDataById"></action>
+			<action name="delete"></action>
+		</controller>
+		
+		<!--交宣微博素材业务  -->
+		<controller name="blog" clazz="com.ehl.prmplan.action.BlogAction">
+			<action name="insert"></action>
+			<action name="getById"></action>
+			<action name="modifyById"></action>
+			<action name="deleteById"></action>
+			<action name="statis"></action>
+		</controller>
+ 	
+	</controllers>
+</mapping>

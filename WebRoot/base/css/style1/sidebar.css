@@ -1,0 +1,42 @@
+﻿ 
+ 
+/*JIA 2009,4month-5month*/
+/*主页面主体左侧样式----------------------------------------------------------------*/
+.sidebar {
+	float:left;
+	width:168px; }
+ 
+.sidebarContainer {
+	margin:0 auto;
+	width:168px; }
+ 
+/*主页面主体左侧样式  工作导航----------------------------------------------------------------*/
+.work {
+	width:168px;
+	height:23px;
+	filter:glow(Color=red, Strength=1);
+	background:url(../../image/cssimg/barwork.gif) no-repeat;
+	color:#C7EAF7;
+	line-height:23px; }
+ 
+/*主页面主体左侧样式    栏目（例如：勤务管理）----------------------------------------------*/
+.column {
+	width:168px;
+	height:25px;
+	color:#C7EAF7;
+	line-height:25px;
+	background:url(../../image/cssimg/bar.gif) no-repeat; }
+ 
+/*主页面主体左侧样式     版本号-----------------------------------------------------------*/
+.version {
+	width:168px;
+	height:23px;
+	color:#C7EAF7;
+	line-height:23px;
+	background:url(../../image/cssimg/barversion.gif) no-repeat; }
+ 
+/*主界面左侧导航样式----------------------------------------------------------------*/
+.tree {
+	width:168px;
+	height:460px;
+	background-color:#E5F4FD; }

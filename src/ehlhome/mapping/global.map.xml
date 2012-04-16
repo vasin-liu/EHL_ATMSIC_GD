@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+	<units>
+	<!-- 加载appframe.map.xml -->
+	  <unit name="login"/>
+		<unit name="wujh"/>
+		<unit name="common" /> 
+		<unit name="webgis" />
+		<unit name="pcs" />
+		<unit name="gzzd"/>
+		<unit name="gps" />
+		<unit name="tfm" />
+		<unit name="dispatch" />
+		<unit name="cctv"/>
+		<unit name="base"/>
+		<unit name="drpt"/>
+		<unit name="tira"/>
+		<unit name="tmkr"/>
+		<unit name="crowd" />
+		<unit name="contrl" />
+		<unit name="road" />
+		<unit name="roadbuild" />
+		<unit name="complaint" />
+		<unit name="dynamicinfo" />
+		<unit name="prmplan" />
+		<unit name="alarmInfo" />
+		<unit name="synaction" />
+		<unit name="policeWork" />
+		<unit name="general" />
+		<unit name="help" />
+	</units>
+	
+	<!-- 默认forward转向路径 -->
+	<forwards>
+		<forward name="no-forward" path="/ehl/viewService.noForward.d" />
+	</forwards>
+	
+	<!-- 默认异常处理 -->
+	<exceptions>
+		<exception path="/base/exception.jsp" contextRelative="false" />
+	</exceptions>
+	
+	<controllers>
+		<controller name="console">
+			<action><forward name="success" path="/ehl/console.d"/></action>
+		</controller>
+	</controllers>
+</mapping>

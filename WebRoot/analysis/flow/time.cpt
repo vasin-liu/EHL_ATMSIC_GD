@@ -1,0 +1,1363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20100901">
+<TableDataMap>
+<TableData name="ds1" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="tgs_name"/>
+<O>
+<![CDATA[G207高州南塘省际卡口]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="by_month_e"/>
+<O>
+<![CDATA[2011-10]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="by_day_e"/>
+<O>
+<![CDATA[2011-10-01]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="by_month_s"/>
+<O>
+<![CDATA[2011-9]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="by_day_s"/>
+<O>
+<![CDATA[2011-08-01]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="by_hour_s"/>
+<O>
+<![CDATA[2011-9-1]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="type"/>
+<O>
+<![CDATA[hour]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[EHL_ATMSIC_GD]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select t.datetime, sum(t.flow) flow, decode(grouping(t.flow_type),1,'总流量',t.flow_type) flow_type
+  from (select distinct ${if(type='hour',"to_char(c.datetime, 'hh24')||'时' datetime,","")}
+			   ${if(type='day',"to_char(c.datetime, 'yyyy')||'年'||to_char(c.datetime, 'mm')||'月'||to_char(c.datetime, 'dd')||'日' datetime,","")}
+			   ${if(type='month',"to_char(c.datetime, 'yyyy')||'年'||to_char(c.datetime, 'mm')||'月' datetime,","")}
+               c.volume flow,
+               decode(instr(b.bianma, 1, 1), '1','入省流量','2','出省流量') flow_type
+          from t_road_seginfo a, t_tfm_driveway b,t_tfm_driveway_1h_flow c
+          where a.roadsegid = b.roadsegid
+           and b.id = c.id
+           and a.roadsegname like '%'||'${tgs_name}'||'%'
+           and instr(b.bianma, 1, 1) in ('1', '2')
+           and (
+		       ${if(type='hour',"--按小时统计","")}
+			   ${if(type='hour',"(c.datetime between to_date('"+by_hour_s+" 00:30:00','yyyy-mm-dd hh24:mi:ss') and
+               (to_date('"+by_hour_s+" 00:30:00','yyyy-mm-dd hh24:mi:ss')+1))","")}
+			   
+			   ${if(type='day',"--按天统计","")}
+			   ${if(type='day',"(c.datetime between to_date('"+by_day_s+" 00:30:00','yyyy-mm-dd hh24:mi:ss') and
+               (to_date('"+by_day_e+" 00:30:00','yyyy-mm-dd hh24:mi:ss')+1))","")}
+			   
+			   ${if(type='month',"--按月统计","")}
+			   ${if(type='month',"(c.datetime between (trunc(to_date('"+by_month_s+"-01','yyyy-mm-dd'),'mm')+1/48) and
+               (trunc(add_months(to_date('"+by_month_e+"-01','yyyy-mm-dd'),1))+1/48))","")}			   
+			   )
+			   union all
+			   select * from 
+			   ${if(type='hour',"--按小时统计","")}
+			   ${if(type='hour',"(select to_char(hours.everyHour,'hh24')||'时' everyHour from (
+               select to_date('"+by_hour_s+" 00:00:00','yyyy-mm-dd hh24:mi:ss') + (level - 1)/24 as everyHour from dual
+               connect by level <= 24) hours),","")}
+			   
+			   ${if(type='day',"--按天统计","")}
+			   ${if(type='day',"(select to_char(days.everyDay, 'yyyy')||'年'||to_char(days.everyDay, 'mm')||'月'||to_char(days.everyDay, 'dd')||'日' everyDay from (
+               select to_date('"+by_day_s+"','yyyy-mm-dd') + level - 1 as everyDay from dual
+               connect by level <= 
+               (to_date('"+by_day_e+"','yyyy-mm-dd') - to_date('"+by_day_s+"','yyyy-mm-dd') +1)) days),","")}
+			   
+			   ${if(type='month',"--按月统计","")}
+			   ${if(type='month',"(select to_char(months.everyMonth, 'yyyy')||'年'||to_char(months.everyMonth, 'mm')||'月' datetime from (
+			   select add_months(to_date('"+by_month_s+"-01','yyyy-mm-dd') , level - 1) as everyMonth from dual
+               connect by level <= 
+               (ceil(months_between(to_date('"+by_month_e+"-01','yyyy-mm-dd'),to_date('"+by_month_s+"-01','yyyy-mm-dd'))))+1) months),","")}
+			   (select 0 as flow,decode(level,'1','入省流量','2','出省流量') as flow_type from dual connect by level <=2)
+			   ) t
+ group by t.datetime,rollup(t.flow_type)
+ order by t.datetime asc]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<WebPageContent>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.ui.impl.Print">
+<WidgetAttr/>
+<Text>
+<![CDATA[打印]]></Text>
+<IconName>
+<![CDATA[print]]></IconName>
+<PrintButtons appletPrint="false" flashPrint="false"/>
+</Widget>
+<Widget class="com.fr.report.web.ui.impl.Export">
+<WidgetAttr/>
+<Text>
+<![CDATA[输出]]></Text>
+<IconName>
+<![CDATA[export]]></IconName>
+<Buttons pdf="true" excelP="false" excelO="true" excelS="false" word="true"/>
+</Widget>
+<IsDefault>
+<![CDATA[false]]></IsDefault>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="0">
+<Image width="41" height="30">
+<![CDATA[mEdp%K0U7RiVO]ABV[*l&/0^moYXi2rbE@j$0G!t*qhg`ER"Yrr(Dmb[$/D5^GlRId-GC&e>i
+69fn32m$q;nq5T+O9#7(hL'f>%*`1LKk^Gcg)>9RLKj=5WdFmI<r/ml4oEAKZVdL#T-i?ZQa
+&3OAe~
+]]></Image>
+</Background>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+<WebPage isPage="false" isShowAsImage="false"/>
+</WebPageContent>
+<WebViewContent>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.ui.CustomToolBarButton">
+<WidgetAttr disabled="true"/>
+<Text>
+<![CDATA[您当前的位置：流量统计分析——省际卡口单点流量统计]]></Text>
+<IconName>
+<![CDATA[tb]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.ui.impl.Export">
+<WidgetAttr/>
+<Text>
+<![CDATA[输出]]></Text>
+<IconName>
+<![CDATA[export]]></IconName>
+<Buttons pdf="true" excelP="false" excelO="true" excelS="false" word="true"/>
+</Widget>
+<IsDefault>
+<![CDATA[false]]></IsDefault>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="0">
+<Image width="41" height="30">
+<![CDATA[mEdp%K0U7RiVO]ABV[*l&/0^moYXi2rbE@j$0G!t*qhg`ER"Yrr(Dmb[$/D5^GlRId-GC&e>i
+69fn32m$q;nq5T+O9#7(hL'f>%*`1LKk^Gcg)>9RLKj=5WdFmI<r/ml4oEAKZVdL#T-i?ZQa
+&3OAe~
+]]></Image>
+</Background>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+</WebViewContent>
+<WebWriteContent>
+<ToolBars/>
+<SelectedColor color="-10033153"/>
+</WebWriteContent>
+<Background name="NullBackground"/>
+<CacheValidateTime>
+<![CDATA[0]]></CacheValidateTime>
+</ReportWebAttr>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<ReportSettings headerHeight="0.0" footerHeight="0.0">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75"/>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+<RowHeight defaultValue="19">
+<![CDATA[20,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,21,19]]></RowHeight>
+<ColumnWidth defaultValue="72">
+<![CDATA[10,31,52,58,58,58,58,58,58,58,58,58,36,38,72]]></ColumnWidth>
+<CellElementList>
+<C c="1" r="0" cs="15" rs="25">
+<O t="CC">
+<LayoutAttr selectedIndex="0" columns="0"/>
+<Chart name="组合图">
+<Chart class="com.fr.chart.Chart">
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<ChartAttr isJSDraw="false"/>
+<Title>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if($type='hour',$by_hour_s +" 24小时内 "+$tgs_name+" 流量统计表",if($type='day',$by_day_s +" 至 " +$by_day_e+ " "+$tgs_name+" 流量统计表",if($type='month',$by_month_s +" 至 " +$by_month_e+" "+$tgs_name+" 流量统计表","")))]]></Attributes>
+</O>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="SimSun" style="1" size="18"/>
+</Attr>
+</TextAttr>
+<TitleVisible value="true"/>
+</Title>
+<Plot class="com.fr.chart.plot.CustomPlot">
+<Plot>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<Attr hotTooltip="${CATEGORY}，${SERIES}，${VALUE}" isNullValueBreak="true"/>
+<NewSeriesCollection>
+<SeriesAttr class="com.fr.chart.plot.CustomAttr">
+<CustomAttr>
+<SeriesAttr/>
+<customattr renderer="2" axisPosition="LEFT"/>
+</CustomAttr>
+</SeriesAttr>
+<SeriesAttrMap>
+<Entry index="0">
+<SeriesAttr class="com.fr.chart.plot.CustomAttr">
+<CustomAttr>
+<SeriesAttr>
+<ConditionList>
+<Condition class="com.fr.chart.axis.SeriesAttrBackground">
+<SeriesAttrBackground>
+<Background name="ColorBackground" color="-16711936"/>
+</SeriesAttrBackground>
+</Condition>
+</ConditionList>
+</SeriesAttr>
+<customattr renderer="1" axisPosition="LEFT"/>
+</CustomAttr>
+</SeriesAttr>
+</Entry>
+<Entry index="1">
+<SeriesAttr class="com.fr.chart.plot.CustomAttr">
+<CustomAttr>
+<SeriesAttr>
+<ConditionList>
+<Condition class="com.fr.chart.axis.SeriesAttrBackground">
+<SeriesAttrBackground>
+<Background name="ColorBackground" color="-256"/>
+</SeriesAttrBackground>
+</Condition>
+</ConditionList>
+</SeriesAttr>
+<customattr renderer="1" axisPosition="LEFT"/>
+</CustomAttr>
+</SeriesAttr>
+</Entry>
+</SeriesAttrMap>
+</NewSeriesCollection>
+<Legend>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="1" lineColor="-8355712" isRoundBorder="true"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<Attr position="4" legendNum="10" visible="true" autoAdjustSize="false"/>
+<FRFont name="SimSun" style="0" size="12"/>
+</Legend>
+<CateAttr isStacked="false" bgStagger="false" bgColor="-1"/>
+<CategoryAxis class="com.fr.chart.axis.CategoryAxis">
+<AxisLine style="1" color="-5197648"/>
+<AxisPosition value="3"/>
+<AxisLabelPosition value="3"/>
+<MainGridLine style="1" color="-1184275"/>
+<SecGridLine style="0"/>
+<AxisLabelCount value="-1"/>
+<TickLine type="2" mainStroke="1.0" len="8" secType="1" secStroke="1.0" secLen="0"/>
+<ArrowShow arrowShow="false"/>
+<AxisShow axisShow="true"/>
+<Stagger value="false"/>
+<TextAttr>
+<Attr rotation="45" alignText="0">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<AxisRange/>
+</CategoryAxis>
+<ValueAxis class="com.fr.chart.axis.ValueAxis">
+<Title>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if($type='hour',"单位：辆/时",if($type='day',"单位：辆/日",if($type='month',"单位：辆/月","")))]]></Attributes>
+</O>
+<TextAttr>
+<Attr alignText="1">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<TitleVisible value="true"/>
+</Title>
+<AxisLine style="1" color="-5197648"/>
+<AxisPosition value="2"/>
+<AxisLabelPosition value="3"/>
+<MainGridLine style="1" color="-1184275"/>
+<SecGridLine style="0"/>
+<AxisLabelCount value="-1"/>
+<TickLine type="2" mainStroke="1.0" len="8" secType="1" secStroke="1.0" secLen="0"/>
+<ArrowShow arrowShow="false"/>
+<AxisShow axisShow="true"/>
+<Stagger value="false"/>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<Format class="java.text.DecimalFormat">
+<![CDATA[#0]]></Format>
+<AxisRange/>
+</ValueAxis>
+<Attr value="false" isShowLine="true" isShowMarker="true" isLineNullValueBreak="true" isAreaNullValueBreak="true" seriesOverlapPercent="-0.15" categoryIntervalPercent="1.0" isSimulation3D="true"/>
+<SecondValueAxis class="com.fr.chart.axis.ValueAxis">
+<AxisLine style="1" color="-5197648"/>
+<AxisPosition value="4"/>
+<AxisLabelPosition value="3"/>
+<MainGridLine style="1" color="-1184275"/>
+<SecGridLine style="0"/>
+<AxisLabelCount value="-1"/>
+<TickLine type="2" mainStroke="1.0" len="8" secType="1" secStroke="1.0" secLen="0"/>
+<ArrowShow arrowShow="false"/>
+<AxisShow axisShow="true"/>
+<Stagger value="false"/>
+<TextAttr>
+<Attr alignText="0"/>
+</TextAttr>
+<AxisRange/>
+</SecondValueAxis>
+</Plot>
+</Plot>
+</Chart>
+</Chart>
+<OneValueCDDefinition seriesName="FLOW_TYPE" valueName="FLOW" function="com.fr.data.util.function.NoneFunction">
+<Top topCate="-1" topValue="-1"/>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[ds1]]></Name>
+</TableData>
+<CategoryName value="DATETIME"/>
+</OneValueCDDefinition>
+</O>
+<Expand extendable="3" upParentDefault="false"/>
+</C>
+<C c="1" r="25" cs="4" s="0">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if($type='hour',$by_hour_s +" 24小时内 "+$tgs_name+" 流量统计表",if($type='day',$by_day_s +" 至 " +$by_day_e+ " "+$tgs_name+" 流量统计表",if($type='month',$by_month_s +" 至 " +$by_month_e+" "+$tgs_name+" 流量统计表","")))]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="1" r="26" cs="3" rs="3" s="0">
+<O t="BiasTextPainter">
+<IsBackSlash value="false"/>
+<![CDATA[${if(type='hour',"             时间",if(type='day',"             日期",if(type='month',"             月份","")))}|                 信息类型]]></O>
+<Expand/>
+</C>
+<C c="4" r="26" rs="3" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="DATETIME"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="1"/>
+</C>
+<C c="1" r="29" cs="3" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="FLOW_TYPE"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0" extendable="3"/>
+</C>
+<C c="4" r="29" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="FLOW"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="0" r="30" cs="16">
+<Expand extendable="3" upParentDefault="false"/>
+</C>
+</CellElementList>
+<WorkSheetAttr/>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<ParameterUI class="com.fr.report.parameter.CustomParameterUI">
+<ReportSettings headerHeight="0.0" footerHeight="0.0">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75"/>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+<RowHeight defaultValue="19">
+<![CDATA[10,23,5,19,10,19,19,19,5,10,19]]></RowHeight>
+<ColumnWidth defaultValue="72">
+<![CDATA[10,18,77,38,80,20,77,120,52,86,85,30,50,67,10,72]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" s="1">
+<Expand/>
+</C>
+<C c="1" r="0" s="1">
+<Expand/>
+</C>
+<C c="2" r="0" s="1">
+<O>
+<![CDATA[ ]]></O>
+<Expand/>
+</C>
+<C c="3" r="0" s="1">
+<Expand/>
+</C>
+<C c="4" r="0" cs="3" s="1">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="7" r="0" s="1">
+<Expand/>
+</C>
+<C c="8" r="0" s="1">
+<Expand/>
+</C>
+<C c="9" r="0" s="1">
+<Expand/>
+</C>
+<C c="10" r="0" s="1">
+<Expand/>
+</C>
+<C c="11" r="0" s="1">
+<Expand/>
+</C>
+<C c="12" r="0" s="1">
+<Expand/>
+</C>
+<C c="13" r="0" s="1">
+<Expand/>
+</C>
+<C c="14" r="0" s="1">
+<Expand/>
+</C>
+<C c="0" r="1" s="1">
+<Expand/>
+</C>
+<C c="1" r="1" cs="3" s="2">
+<O>
+<![CDATA[分析条件]]></O>
+<Expand/>
+</C>
+<C c="4" r="1" s="1">
+<Expand/>
+</C>
+<C c="5" r="1" s="1">
+<Expand/>
+</C>
+<C c="6" r="1" s="1">
+<Expand/>
+</C>
+<C c="7" r="1" s="1">
+<Expand/>
+</C>
+<C c="8" r="1" s="1">
+<Expand/>
+</C>
+<C c="9" r="1" s="1">
+<Expand/>
+</C>
+<C c="10" r="1" s="1">
+<Expand/>
+</C>
+<C c="11" r="1" s="1">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="12" r="1" s="1">
+<Expand/>
+</C>
+<C c="13" r="1" s="1">
+<Expand/>
+</C>
+<C c="14" r="1" s="1">
+<Expand/>
+</C>
+<C c="0" r="2" s="1">
+<Expand/>
+</C>
+<C c="1" r="2" s="3">
+<Expand/>
+</C>
+<C c="2" r="2" s="4">
+<Expand/>
+</C>
+<C c="3" r="2" s="4">
+<Expand/>
+</C>
+<C c="4" r="2" s="4">
+<Expand/>
+</C>
+<C c="5" r="2" s="4">
+<Expand/>
+</C>
+<C c="6" r="2" s="4">
+<Expand/>
+</C>
+<C c="7" r="2" s="4">
+<Expand/>
+</C>
+<C c="8" r="2" s="4">
+<Expand/>
+</C>
+<C c="9" r="2" s="4">
+<Expand/>
+</C>
+<C c="10" r="2" s="4">
+<Expand/>
+</C>
+<C c="11" r="2" s="4">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="12" r="2" s="4">
+<Expand/>
+</C>
+<C c="13" r="2" s="5">
+<Expand/>
+</C>
+<C c="14" r="2" s="1">
+<Expand/>
+</C>
+<C c="0" r="3" s="1">
+<Expand/>
+</C>
+<C c="1" r="3" s="6">
+<Expand/>
+</C>
+<C c="2" r="3" s="7">
+<O>
+<![CDATA[统计方式：]]></O>
+<Expand/>
+</C>
+<C c="3" r="3" cs="2" s="8">
+<O>
+<![CDATA[按时统计]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.ComboBox">
+<WidgetName name="type"/>
+<WidgetAttr/>
+<Listener event="afteredit">
+<JavaScript class="com.fr.report.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[var form = this.options.form;
+var value = this.getValue();
+var hour_row = $("#r-5-0"); 
+var day_row = $("#r-6-0"); 
+var month_row = $("#r-7-0"); 
+if(value == "hour"){
+  hour_row.show();
+  day_row.hide();
+  month_row.hide();
+}else if(value == "day"){
+  hour_row.hide();
+  day_row.show();
+  month_row.hide();
+}else if(value == "month"){
+  hour_row.hide();
+  day_row.hide();
+  month_row.show();
+}else{
+  hour_row.hide();
+  day_row.hide();
+  month_row.hide();
+}]]></Content>
+</JavaScript>
+</Listener>
+<Listener event="afterinit">
+<JavaScript class="com.fr.report.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[var form = this.options.form;
+var value = this.getValue();
+var hour_row = $("#r-5-0"); 
+var day_row = $("#r-6-0"); 
+var month_row = $("#r-7-0"); 
+if(value == "hour"){
+  hour_row.show();
+  day_row.hide();
+  month_row.hide();
+}else if(value == "day"){
+  hour_row.hide();
+  day_row.show();
+  month_row.hide();
+}else if(value == "month"){
+  hour_row.hide();
+  day_row.hide();
+  month_row.show();
+}else{
+  hour_row.hide();
+  day_row.hide();
+  month_row.hide();
+}]]></Content>
+</JavaScript>
+</Listener>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<Editable>
+<![CDATA[false]]></Editable>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="hour" value="按时统计"/>
+<Dict key="day" value="按天统计"/>
+<Dict key="month" value="按月统计"/>
+</CustomDictAttr>
+</Dictionary>
+</Widget>
+</C>
+<C c="5" r="3" s="9">
+<Expand/>
+</C>
+<C c="6" r="3" s="7">
+<O>
+<![CDATA[卡口名称：]]></O>
+<Expand/>
+</C>
+<C c="7" r="3" cs="2" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.ComboBox">
+<WidgetName name="tgs_name"/>
+<WidgetAttr/>
+<EMSG>
+<![CDATA[卡口名称不能为空！]]></EMSG>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<Editable>
+<![CDATA[false]]></Editable>
+<Dictionary class="com.fr.data.impl.DynamicSQLDict">
+<FormulaDictAttr ki="0" vi="0"/>
+<Formula>
+<![CDATA[SELECT CPMC
+  FROM ATMS_EQUIPMENT_ZB
+ WHERE SSXT = 'TGS'
+   AND LONGITUDE != 0
+   AND LATITUDE != 0
+ ORDER BY SID ASC]]></Formula>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[EHL_ATMSIC_GD]]></DatabaseName>
+</Connection>
+</Dictionary>
+</Widget>
+</C>
+<C c="9" r="3" s="9">
+<Expand/>
+</C>
+<C c="10" r="3" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="11" r="3" s="10">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="12" r="3" s="10">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="13" r="3" s="11">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.impl.form.FormSubmitButton">
+<WidgetAttr/>
+<Listener event="click">
+<JavaScript class="com.fr.report.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[var type = this.options.form.getWidgetByName("type").getValue();
+var tgs_name = this.options.form.getWidgetByName("tgs_name").getValue();
+
+if(!type){
+  alert("统计方式不能为空！");
+  return false;
+}
+
+if(type == "hour"){
+  var by_hour_s = this.options.form.getWidgetByName("by_hour_s").getValue();
+  if(!by_hour_s){
+    alert("日期不能为空！");
+    return false;
+  }
+}
+
+if( type == "day"){
+  var by_day_s = this.options.form.getWidgetByName("by_day_s").getValue();
+  var by_day_e = this.options.form.getWidgetByName("by_day_e").getValue();
+  if(!by_day_s){
+    alert("开始日期不能为空！");
+    return false;
+  }
+  if(!by_day_e){
+    alert("结束日期不能为空！");
+    return false;
+  }
+  //相差天数
+  var day_s = new Date(by_day_s.replace(/-/g, "/")); 
+  var day_e = new Date(by_day_e.replace(/-/g, "/")); 
+  var days = parseInt((day_e.getTime()-day_s.getTime()) / (1000 * 60 * 60 * 24));
+  if(by_day_e<by_day_s){
+     alert("结束时间不能早于开始时间！");
+     return false;   
+  }
+  if(days>40){
+     alert("日期间隔不能超过40天！");
+     return false;   
+  }
+};
+if( type == "month"){
+  var by_month_s = this.options.form.getWidgetByName("by_month_s").getValue();
+  var by_month_e = this.options.form.getWidgetByName("by_month_e").getValue();
+  if(!by_month_s){
+    alert("开始月份不能为空！");
+    return false;
+  }
+  if(!by_month_e){
+    alert("结束月份不能为空！");
+    return false;
+  }
+  //相差月份
+  var month_s = new Date((by_month_s+"-01").replace(/-/g,"/"));
+  var month_e = new Date((by_month_e+"-01").replace(/-/g,"/"));
+  var months=(month_e.getFullYear()-month_s.getFullYear())*12+(month_e.getMonth()-month_s.getMonth());
+  if(by_month_e<by_month_s){
+     alert("结束时间不能早于开始时间！");
+     return false;   
+  }
+  if(months>30){
+     alert("月份间隔不能超过30个月！");
+     return false;  
+  }
+};]]></Content>
+</JavaScript>
+</Listener>
+<Text>
+<![CDATA[统  计]]></Text>
+<IconName>
+<![CDATA[preview]]></IconName>
+</Widget>
+</C>
+<C c="14" r="3" s="1">
+<Expand/>
+</C>
+<C c="0" r="4" s="1">
+<Expand/>
+</C>
+<C c="1" r="4" s="6">
+<Expand/>
+</C>
+<C c="2" r="4" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="3" r="4" s="9">
+<Expand/>
+</C>
+<C c="4" r="4" s="9">
+<Expand/>
+</C>
+<C c="5" r="4" s="9">
+<Expand/>
+</C>
+<C c="6" r="4" s="9">
+<Expand/>
+</C>
+<C c="7" r="4" s="10">
+<Expand/>
+</C>
+<C c="8" r="4" s="9">
+<Expand/>
+</C>
+<C c="9" r="4" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="10" r="4" s="9">
+<Expand/>
+</C>
+<C c="11" r="4" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="12" r="4" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="13" r="4" s="11">
+<Expand/>
+</C>
+<C c="14" r="4" s="1">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="5" s="1">
+<Expand/>
+</C>
+<C c="1" r="5" s="6">
+<Expand/>
+</C>
+<C c="2" r="5" s="7">
+<O>
+<![CDATA[统计时间：]]></O>
+<Expand/>
+</C>
+<C c="3" r="5" cs="2" s="8">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.DateEditor">
+<WidgetName name="by_hour_s"/>
+<WidgetAttr/>
+<DateAttr start="" end=""/>
+</Widget>
+</C>
+<C c="5" r="5" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="6" r="5" s="10">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="7" r="5" s="10">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="8" r="5" s="10">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="9" r="5" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="10" r="5" s="9">
+<Expand/>
+</C>
+<C c="11" r="5" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="12" r="5" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="13" r="5" s="11">
+<Expand/>
+</C>
+<C c="14" r="5" s="1">
+<Expand/>
+</C>
+<C c="0" r="6" s="1">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="1" r="6" s="9">
+<Expand/>
+</C>
+<C c="2" r="6" s="7">
+<O>
+<![CDATA[开始日期：]]></O>
+<Expand/>
+</C>
+<C c="3" r="6" cs="2" s="8">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.DateEditor">
+<WidgetName name="by_day_s"/>
+<WidgetAttr/>
+<DateAttr start="" end=""/>
+</Widget>
+</C>
+<C c="5" r="6" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="6" r="6" s="7">
+<O>
+<![CDATA[结束日期：]]></O>
+<Expand/>
+</C>
+<C c="7" r="6" s="12">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.DateEditor">
+<WidgetName name="by_day_e"/>
+<WidgetAttr/>
+<DateAttr start="" end=""/>
+</Widget>
+</C>
+<C c="8" r="6" s="10">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="9" r="6" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="10" r="6" s="9">
+<Expand/>
+</C>
+<C c="11" r="6" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="12" r="6" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="13" r="6" s="9">
+<Expand/>
+</C>
+<C c="14" r="6" s="1">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="7" s="1">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="1" r="7" s="9">
+<Expand/>
+</C>
+<C c="2" r="7" s="7">
+<O>
+<![CDATA[开始月份：]]></O>
+<Expand/>
+</C>
+<C c="3" r="7" cs="2" s="13">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.DateEditor">
+<WidgetName name="by_month_s"/>
+<WidgetAttr/>
+<DateAttr format="yyyy-MM" start="" end=""/>
+</Widget>
+</C>
+<C c="5" r="7" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="6" r="7" s="7">
+<O>
+<![CDATA[结束月份：]]></O>
+<Expand/>
+</C>
+<C c="7" r="7" s="14">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.DateEditor">
+<WidgetName name="by_month_e"/>
+<WidgetAttr/>
+<DateAttr format="yyyy-MM" start="" end=""/>
+</Widget>
+</C>
+<C c="8" r="7" s="10">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="9" r="7" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="10" r="7" s="9">
+<Expand/>
+</C>
+<C c="11" r="7" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="12" r="7" s="9">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="13" r="7" s="9">
+<Expand/>
+</C>
+<C c="14" r="7" s="1">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="8" s="1">
+<Expand/>
+</C>
+<C c="1" r="8" s="15">
+<Expand/>
+</C>
+<C c="2" r="8" s="16">
+<Expand/>
+</C>
+<C c="3" r="8" s="16">
+<Expand/>
+</C>
+<C c="4" r="8" s="16">
+<Expand/>
+</C>
+<C c="5" r="8" s="16">
+<Expand/>
+</C>
+<C c="6" r="8" s="16">
+<Expand/>
+</C>
+<C c="7" r="8" s="16">
+<Expand/>
+</C>
+<C c="8" r="8" s="16">
+<Expand/>
+</C>
+<C c="9" r="8" s="16">
+<Expand/>
+</C>
+<C c="10" r="8" s="16">
+<Expand/>
+</C>
+<C c="11" r="8" s="16">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="12" r="8" s="16">
+<Expand/>
+</C>
+<C c="13" r="8" s="17">
+<Expand/>
+</C>
+<C c="14" r="8" s="1">
+<Expand/>
+</C>
+<C c="0" r="9" s="1">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="1" r="9" s="1">
+<Expand/>
+</C>
+<C c="2" r="9" s="1">
+<Expand/>
+</C>
+<C c="3" r="9" s="1">
+<Expand/>
+</C>
+<C c="4" r="9" s="1">
+<Expand/>
+</C>
+<C c="5" r="9" s="1">
+<Expand/>
+</C>
+<C c="6" r="9" s="1">
+<Expand/>
+</C>
+<C c="7" r="9" s="1">
+<Expand/>
+</C>
+<C c="8" r="9" s="1">
+<Expand/>
+</C>
+<C c="9" r="9" s="1">
+<Expand/>
+</C>
+<C c="10" r="9" s="1">
+<Expand/>
+</C>
+<C c="11" r="9" s="1">
+<Expand/>
+</C>
+<C c="12" r="9" s="1">
+<Expand/>
+</C>
+<C c="13" r="9" s="1">
+<Expand/>
+</C>
+<C c="14" r="9" s="1">
+<Expand/>
+</C>
+</CellElementList>
+</ParameterUI>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="14" foreground="-1"/>
+<Background name="ImageBackground" specifiedImageWidth="140.0" specifiedImageHeight="27.0" layout="3">
+<Image width="141" height="27">
+<![CDATA[jdXGS'h&hVrs^n6DSY`Y77f1!N(*sW5):A40ufb0";Vgh5m)k7K#B&A(gipJ"!L?-1+9)O%P
+g.9AmbfP6qopV9ONQI2e%-KRf;TD5(0HBqVHLb\G/tP<IMLV<rM;FVu"\D]A7)X']Am),5r+pR
+8C!MK?\'4_/>mn9X-9oo.P,9erM5k(9_4[YgJ'85lR;7gBh>YR+j!NWDpSR^jPh!e:AgoTa`
+M_DE(V@"j]ApH&5J)5.UET<Yt(O2AHe;incjbL0bmp0s[U%:\'H/RkOoYtMg@U6H9D*.BR03N
+f'n;(30\SR&PIsK^=*p`['hu$[Q%$'H4:nirta8?A.9:jIQf%H+ImJ&=3CqIQ.?aAoaPFok&
+s7kpK$"X="^anhW]A&*l(alBsYE7mE&=blENH)S/*:+W+7X,gla2tU^+Y</#oJ,)L=hC.Q)mR
+u+uDtd?,ce<anfT5pOH\RQU_Xe!8htQ"ED2f1gJ8n!7U#VIeN#DBuk#Rdm/sK6A<ZLe/Y$8d
+;F5JoFOg-,AH;<PVL,?A\d$N6lgJ;Dh4uhYb+5)+O;!QB#*PuGkLN"8Z%ZW!HTmu$jB3Q"]Aj
+l)2O,tXsF%jllGj=Zg,c%T]AI;DJW#4it,N$Mcr.4pQJ'Wd-Z2S\ThV\ZPZFGs;XpaL9&L:4%
+_?%EVP+E/c/Jc[13dNWiO:0TK8iLg:\1N+OBu+#0%*8aqk8nhG0#95m6/M6RV-QY#C9Pj<%4
+=I76&?d]Au!8M2hEA0WLm]A4lp;j>[h31UoB3_/V4LXY<'0&RH[[2jRspH/cJ@Wp6cs-?P5$?a
+_=ZA4_,=<"W`<Ij7]As0/HqY+TI_3$28A[<tn"SIj5bGDq)=PlGOk104`(ks8,#An&8e;:S-%
+<oX!Hmq2E:Pc?j$#b&P32`YWdA+8Wum5;hFVIC[*LbEf]Adq.i^>dG/^@,4euO:?Olccd$T<(
+)*GdH$ss&bmp=:f4FBP'oH3Va-M"X*##J:Qg<^X!8_FKMpEs@G)WdQo$OVU7S$q*P+5%e:oM
+]A$2oZ4?]A"^?Sc`F#o[f>sb7<pP3)=a.Za3f.M-nmIMkp*&!Z=o/Qmq8OM5?\WT?VXn[>BiA:
+V5eaKdl'+0\moN*;`b2i45[N$\IA.jL2_'(@&<@O&]AN<lk^Bc`N]Aghcp>9@#UW<kSWFCRo85
+?r+Q-'CjjeY-gabSC<`qXhmomMCXl0f)rkAo0NZXd>_2q5*Jd$Lmfc='qV:L;d`8!dP=lr5^
+hZ(]AAQ`XKMqT.uA/Cs3(>([iEZ5&SS@g,lYm4ui:7po[Z0m"\7u"=Fmd+YT@8BZ;F;?Lh4me
+PY\>P/EFk0-]A:)6TufAj7f.1O2]A>pcM=`^\:G=^60QLAZU0V^G\-5^)sJB3([3#F+]A]Aqnn+S
+">j?arXS-VRk]ASQ+-rfP@=*IBHHXZF,&*Ue%Kn`(b3$&gk*0qDg72Tu\@e6)[Hl2:c*,]A[A!
+U=mmJ-5^Y0:1X9bl]Ac1Lr_f5>Xp",dkSO.rE>A/AJ3O2t&oilc0QtPuJH$`]Ai>qGjj>K%?V=
+7sU,%/'HNEir1kqB:#a!'Ui,gAt.$`\]ArJT@`dY@4lKiCD#[:,=,?BoEqM;!'lXXld/'lL5q
+o2EojM3)4Ld8]AbD/HV%OQ3GXn%NoKjGj2QH\ALZ1Y*^V?]AnbJ4m1DW3D[7WZ@YV^dSONCI:?
+DMXSN'H2uTT7I^_jc-so7_Ch4i=&l)u*.R*Qr>,o3KI:6@!>p="u_Or+e2ibd$_+]Aq=8n8nL
+%qU&!;W4I5B5lgm/`L6=M'EEU>?;Z',WA$Mg#j&1m;DDq7"^!p`k%@D_3jL4p</8oMZW4HmT
+`#cVDjVX:cak(=Kro'"81$64.%>#D[[P*+!CnR$[+ofB((/N<peeQ<+'%oj5<H;H,q#EX524
+aURim_Z=%+pC+;OPk2R,^3+aAXoK(b79@aZ>,1"YW\cIPiJrG/t!eE*O-a@dtsO2>kJ/;i'e
+B,WEr,R2<KD7Qpijn2H'gm\e-"-lt)Q<T^_N-KQ5CH4!)9oU^_p=KG%(O?PuHXEZ!nd7d+rZ
++S-7bK,r<M]A3\3oK1'mG<*lakV^Y4<ZTEP>'hB=Eq_Tg)ag[2b$kRFaEif1a]AhMel*qt+@9k
+\+1!s;O@h23QF6'u+#-;;TQR"5#QX'&!RRu0RMI5fJD/pkL[YgKiH54XXLQLtBgfuc")XQC#
+S6PM'aUG@9C#_cl8n!4I<T$;#,ND\C91nY4o!+F.ip&Zo"b4pFM"V;2c9@/O:lOE0Z;36E&u
+/pMUO<f]Aer=4;0S\#bNH]Aj@*j0Rg,53_<(\$2Sl?u%-I##qe]ALB0$\KN?%RsAl--@b3`r59L
+8c\Pi8(%I!#abOCr96uNg%`nt1XF,e0@dVW2H`u@O%Ic\rJugA4\;nB3k)0)XHs#iM0_bM&)
+!!dRRkXUJp?1?>5,;?0bf"agEJVgApHa.\$LpWP(+XF,[AR+]A_obP%N^CCs3+K_[.qod#Ib@
+cmapN,n9'aXhR%W%:@=I8YQbQ7W*R),A0Yqscr7bEQ(4lEF3'nX%+YU^iQD*AZWYT^d(\DBm
+*r,T[s$DXX]A'.>GL%3F23qHhfEu\-FDbe+Yp?a9c)7\s(emhm1k'(1`d5-2PI$p_*a+*n\Ls
+M7Tb]AUroO(jLDI#Y''"T~
+]]></Image>
+</Background>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Top style="2" color="-4860186"/>
+<Left style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Top style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Top style="2" color="-4860186"/>
+<Right style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Left style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border/>
+</Style>
+<Style>
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Right style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border/>
+</Style>
+<Style>
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM]]></Format>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM]]></Format>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Bottom style="2" color="-4860186"/>
+<Left style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Bottom style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Bottom style="2" color="-4860186"/>
+<Right style="2" color="-4860186"/>
+</Border>
+</Style>
+</StyleList>
+</WorkBook>

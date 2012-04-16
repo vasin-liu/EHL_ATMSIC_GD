@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>require JS异步加载器</title>
+<link rel="stylesheet" type="text/css" href="require%20JS%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%99%A8_files/t1.css">
+<script type="text/javascript" src="require%20JS%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%99%A8_files/require.js"></script>
+<script src="require%20JS%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%99%A8_files/codeStyle.js" type="text/javascript"></script><script src="require%20JS%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%99%A8_files/a.js" type="text/javascript"></script><script src="require%20JS%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%99%A8_files/b.js" type="text/javascript"></script><script src="require%20JS%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%99%A8_files/c.js" type="text/javascript"></script><script src="require%20JS%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%99%A8_files/d.js" type="text/javascript"></script><script src="require%20JS%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%99%A8_files/e.js" type="text/javascript"></script><script src="require%20JS%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%99%A8_files/f.js" type="text/javascript"></script><script src="require%20JS%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%99%A8_files/g.js" type="text/javascript"></script></head>
+<body style="">
+<div class="PxCon">
+	<div class="h">
+		<strong>require </strong>
+	</div>
+	<div class="c">
+		<p>下载独立版 <a href="http://puijs.sinaapp.com/sub/require/require.js" hidefocus="true">require.js</a></p>
+		<p>
+			1.大家可以用firebug查看加载瀑布图 -_- <br>
+			2.实现了按照序列化加载，防止加载多个脚本 因为顺序不同而脚本执行<br>
+			3.被加载的脚本可以是任意脚本(js)<br>
+			4.被加载的js进行缓存处理，防止重复加载<br>
+			5.require完全自动处理被加载js中使用的require
+		</p>
+		<div class="division">
+			<a class="cos">实例require加载顺序 log 以及异步打包执行程序require.bale的log</a>
+		</div>
+		<p>
+			<textarea id="textarea" rows="23" style="width: 80%;">[17:24.365]=====================================require Log============
+[17:24.365]a.js b.js c.js d.js require OK
+[17:24.370]a.js Load OK
+[17:24.578]e.js f.js require OK
+[17:24.578]b.js Load OK
+[17:24.579]c.js Load OK
+[17:24.781]d.js Load OK
+[17:24.986]g.js require OK
+[17:24.986]e.js Load OK
+[17:24.987]f.js Load OK
+[17:25.191]g.js Load OK
+[17:25.392]g.js callBack OK
+[17:25.392]e.js f.js callBack OK
+[17:25.392]a.js b.js c.js d.js callBack OK
+[17:25.392]=====================================bale Log============
+[17:25.393]Start=&gt;t1:1493==t2:232==t3:739
+[17:25.625]t2:End
+[17:26.253]t3:End
+[17:26.886]t1:End
+[17:26.887]AllEnd
+[17:26.887]argument=&gt;$1:1==$2:2==$3:3
+[17:26.887]this=&gt;$1:1493==$2:232==$3:739
+</textarea><br>
+			序列加载 a.js [b.js c.js] d.js<br>
+			其中 b.js 中使用require 加载e.js f.js (e f为无须加载)<br>
+			e.js 中使用require 加载g.js<br>
+			<input id="execBtn" value="执行代(可以用firebug查看加载瀑布图)" style="margin-top: 10px; display: none;" type="button">
+		</p>
+	</div>
+</div>
+
+<div class="PxCon">
+	<div class="h">
+		<strong>使用说明</strong>
+	</div>
+	<div class="c">
+		<div class="division">
+			<a name="require" class="cos">require(src,callBack,charset)</a>
+		</div>
+		<p>
+			序列化加载脚本，对依次压入的脚本序列化加载，等全部加载完毕后，序列化执行回调函数<br>
+			如果被加载的js中也使用require，则 这个js要执行完毕require的回调函数后，则表示加载OK<br>
+			src:js路径 可以为数组(数组中的元素为无序加载)<br>
+			callBack:全部js加载成功后 的回调<br>
+			charset:编码，默认和当前文档相同
+		</p>
+		<div class="code">
+<pre><span class="note">//加载 test.js</span>
+require("test.js",funciton(){...});
+<span class="note">//加载 test.js test2.js 加载完毕test.js 后才加载test2.js 然后回调</span>
+require("test.js","test2.js",funciton(){...});
+<span class="note">//同时加载 test.js test2.js 全部加载完毕后执行回调</span>
+require(["test.js","test2.js"],funciton(){...});
+<span class="note">//先加载 test0.js 再同时加载 test.js test2.js 然后回调</span>
+require("test0.js",["test.js","test2.js"],funciton(){...});
+<span class="note">//先加载 test4.js ./表示require.js所在目录 即test4.js和require.js在同一个目录</span>
+<span class="note">//这个用于写库文件是使用</span>
+require("./test0.js",funciton(){...});
+</pre>
+		</div>
+		
+		<div class="division">
+		<a name="bale" class="cos">require.bale(fn1,fn1,...callBack)</a>
+	</div>
+	<p>
+		这个是为多个异步操作结束后 统一的有一个回调函数<br>
+		不保证内部异步操作按照顺序执行完毕<br>
+		最后一个参数是回调函数,其他的异步执行函数<br>
+	</p>
+	<div class="code">
+<pre><span class="note">//Ajax加载数据以及加载插件Kite 两个全部好了之后，再执行回调函数</span>
+require.bale(
+	function(fn,ex){
+		return ex.data = Ajax.get("jiffy.txt",fn);
+	},
+	function(fn,ex){
+		return Script.require("#UI/Kite",function(){
+			ex.kite = window.Kite;
+			fn();
+		});
+	},
+	function($1,$2){
+		<span class="note">/此时  this==ex $1==this.data.responseText $2==Script </span>
+		alert($1.responseText);
+		alert($2==Script);
+		
+		alert(Object.json(this.kite));
+		alert(this.data.responseText);
+	}
+);
+</pre>
+	</div>
+	</div>
+</div>
+
+<div class="PxCon">
+	<div class="h">
+		<strong>本页使用源码</strong>
+	</div>
+	<div class="c">
+		<pre class="preh" id="jsCode"><ol><li><span> <span class="comments">//要打印 require.js 需要加载到脚本着色器(js) 和&nbsp;&nbsp;require.js的文本数据（ajax）</span></span></li><li><span><span class="comments">//第三个函数 就是两个异步完成后才回调的</span></span></li><li><span>require.bale(<em>function</em>(end){</span></li><li><span>&nbsp;&nbsp;<span class="comments">//异步加载着色脚本</span></span></li><li><span>&nbsp;&nbsp;require(<q>"/res/js/codeStyle.js"</q>,<em>function</em>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<var class="method_property">document</var>.getElementById(<q>"jsCode"</q>).<var class="method_property">innerHTML</var> = ScriptStyle.str2styled(<var class="method_property">document</var>.getElementById(<q>"codejs"</q>).<var class="method_property">innerHTML</var>.<var class="method_property">replace</var>(/<span class="regexp">^\s+|\s+$</span>/,<q>""</q>));</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;end();</span></li><li><span>&nbsp;&nbsp;});</span></li><li><span>},<em>function</em>(end,ex){</span></li><li><span>&nbsp;&nbsp;<span class="comments">//ajax获取require.js 文本数据</span></span></li><li><span>&nbsp;&nbsp;<em>var</em> xhr = <em>new</em> (<var class="method_property">window</var>.XMLHttpRequest || <var class="method_property">ActiveXObject</var>)(<q>"Microsoft.XMLHTTP"</q>);</span></li><li><span>&nbsp;&nbsp;xhr.<var class="method_property">open</var>(<q>"GET"</q>, <q>"require.js"</q>, true);</span></li><li><span>&nbsp;&nbsp;xhr.onreadystatechange = <em>function</em>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>if</em>(xhr.<var class="method_property">readyState</var>==4){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>if</em>(xhr.<var class="method_property">status</var> &gt;= 200 &amp;&amp; xhr.<var class="method_property">status</var> &lt; 300 || xhr.<var class="method_property">status</var> === 304 || xhr.<var class="method_property">status</var> === 1223){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ex.<var class="method_property">text</var> = xhr.responseText;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end();</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;};</span></li><li><span>&nbsp;&nbsp;xhr.send(null);</span></li><li><span>},<em>function</em>(){</span></li><li><span>&nbsp;&nbsp;<em>if</em>(<em>this</em>.<var class="method_property">text</var>){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<var class="method_property">document</var>.getElementById(<q>"requireCode"</q>).<var class="method_property">innerHTML</var> = ScriptStyle.str2styled(<em>this</em>.<var class="method_property">text</var>.<var class="method_property">replace</var>(/<span class="regexp">^\s+|\s+$</span>/,<q>""</q>));</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<var class="method_property">document</var>.getElementById(<q>"requireCodeCot"</q>).<var class="method_property">style</var>.display = <q>"block"</q>;</span></li><li><span>&nbsp;&nbsp;}</span></li><li><span>});</span></li><li><span></span></li><li><span><span class="comments">//打印Script实例的log函数</span></span></li><li><span><em>function</em> requireLog(str){</span></li><li><span>&nbsp;&nbsp;<em>var</em> d = <em>new</em> <var class="object">Date</var>();</span></li><li><span>&nbsp;&nbsp;<var class="method_property">document</var>.getElementById(<q>"textarea"</q>).<var class="method_property">value</var> += <q>"["</q> + d.<var class="method_property">getMinutes</var>() + <q>":"</q> + d.<var class="method_property">getSeconds</var>() + <q>"."</q> + d.<var class="method_property">getMilliseconds</var>() + <q>"]"</q> + str + <q>"\n"</q>;</span></li><li><span>}</span></li><li><span></span></li><li><span><var class="method_property">window</var>.<var class="method_property">onload</var> = <em>function</em>(){</span></li><li><span>&nbsp;&nbsp;<span class="comments">//清空textarea的残渣</span></span></li><li><span>&nbsp;&nbsp;<var class="method_property">document</var>.getElementById(<q>"textarea"</q>).<var class="method_property">value</var> = <q>""</q>;</span></li><li><span>};</span></li><li><span></span></li><li><span><span class="comments">//异步加载脚本会自动加入到 按钮事件，请点击按钮</span></span></li><li><span><var class="method_property">document</var>.getElementById(<q>"execBtn"</q>).<var class="method_property">onclick</var> = <em>function</em>(){</span></li><li><span>&nbsp;&nbsp;<em>this</em>.<var class="method_property">style</var>.display = <q>"none"</q>;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comments">//序列加载 a.js [b.js c.js] d.js</span></span></li><li><span>&nbsp;&nbsp;<span class="comments">//其中 b.js 中使用require 加载e.js f.js (e f为无须加载)</span></span></li><li><span>&nbsp;&nbsp;<span class="comments">//e.js 中使用require 加载g.js</span></span></li><li><span>&nbsp;&nbsp;requireLog(<q>"=====================================require Log============"</q>);</span></li><li><span>&nbsp;&nbsp;requireLog(<q>"a.js b.js c.js d.js require OK"</q>);</span></li><li><span>&nbsp;&nbsp;require(<q>"testjs/a.js"</q>,[<q>"testjs/b.js"</q>,<q>"testjs/c.js"</q>],<q>"testjs/d.js"</q>,<em>function</em>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;requireLog(<q>"a.js b.js c.js d.js callBack OK"</q>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comments">//华丽分割线 3个随机异步，全部完成后统一回调</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;requireLog(<q>"=====================================bale Log============"</q>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>var</em> t1 = <var class="object">Math</var>.<var class="method_property">round</var>(<var class="object">Math</var>.<var class="method_property">random</var>()*5000), t2 = <var class="object">Math</var>.<var class="method_property">round</var>(<var class="object">Math</var>.<var class="method_property">random</var>()*5000), t3 = <var class="object">Math</var>.<var class="method_property">round</var>(<var class="object">Math</var>.<var class="method_property">random</var>()*5000);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;requireLog(<q>"Start=&gt;t1:"</q> + t1 + <q>"==t2:"</q> + t2 + <q>"==t3:"</q> + t3);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;require.bale(</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comments">//第一个异步</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>function</em>(fn,ex){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var class="method_property">setTimeout</var>(<em>function</em>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comments">//设置cakkBack的this指向的object中的值</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ex.$1 = t1;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comments">//告诉函数，我的异步执行完毕 可以把这个fn直接设置为异步的回调函数</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fn();</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requireLog(<q>"t1:End"</q>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},t1);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>return</em> 1;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comments">//第二个异步</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>function</em>(fn,ex){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var class="method_property">setTimeout</var>(<em>function</em>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ex.$2 = t2;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fn();</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requireLog(<q>"t2:End"</q>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},t2);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>return</em> 2;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comments">//第三个异步</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>function</em>(fn,ex){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var class="method_property">setTimeout</var>(<em>function</em>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ex.$3 = t3;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fn();</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requireLog(<q>"t3:End"</q>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},t3);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>return</em> 3;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comments">//最后一个为执行完所有的异步的回调</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>function</em>($1,$2,$3){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requireLog(<q>"AllEnd"</q>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requireLog(<q>"argument=&gt;$1:"</q> + $1 + <q>"==$2:"</q> + $2 + <q>"==$3:"</q> + $3);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requireLog(<q>"this=&gt;$1:"</q> + <em>this</em>.$1 + <q>"==$2:"</q> + <em>this</em>.$2 + <q>"==$3:"</q> + <em>this</em>.$3);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;);</span></li><li><span>&nbsp;&nbsp;});</span></li><li><span>};</span></li></ol></pre>
+	</div>
+</div>
+
+<div class="PxCon" id="requireCodeCot" style="display: block;">
+	<div class="h">
+		<strong>require源码</strong>
+	</div>
+	<div class="c">
+		<pre class="preh" id="requireCode"><ol><li><span> <span class="comments">/**</span></span></li><li><span><span class="comments"> * require 1.0.0</span></span></li><li><span><span class="comments"> * 动态js加载器</span></span></li><li><span><span class="comments"> * QQ：45259374 罂粟果</span></span></li><li><span><span class="comments"> */</span></span></li><li><span><var class="method_property">window</var>.require = <em>function</em>(){</span></li><li><span>&nbsp;&nbsp;<em>var</em> doc = <var class="method_property">document</var>,head = doc.getElementsByTagName(<q>"head"</q>)[0];</span></li><li><span>&nbsp;&nbsp;<span class="comments">//当前脚本的script节点、require.js所在网站目录</span></span></li><li><span>&nbsp;&nbsp;<em>var</em> jsNode = doc.getElementsByTagName(<q>"script"</q>),path = jsNode[jsNode.<var class="method_property">length</var>-1].<var class="method_property">src</var>.<var class="method_property">split</var>(/<span class="regexp">\?</span>/)[0].<var class="method_property">replace</var>(/<span class="regexp">[^\/]*$</span>/,<q>""</q>);</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comments">//========================= 异步加载脚本 =============================</span></span></li><li><span>&nbsp;&nbsp;<span class="comments">//堆栈是否执行过</span></span></li><li><span>&nbsp;&nbsp;<em>var</em> stackFlag = 1;</span></li><li><span>&nbsp;&nbsp;<span class="comments">//按需加载堆栈(url)</span></span></li><li><span>&nbsp;&nbsp;<em>var</em> stackJSs = [];</span></li><li><span>&nbsp;&nbsp;<span class="comments">//按需加载堆栈(回调)</span></span></li><li><span>&nbsp;&nbsp;<em>var</em> stackBacks = [];</span></li><li><span>&nbsp;&nbsp;<span class="comments">//已经加载完毕的js</span></span></li><li><span>&nbsp;&nbsp;<em>var</em> jsLoaded = {};</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comments">//进栈</span></span></li><li><span>&nbsp;&nbsp;<em>function</em> stackPush(urls,callBack,<var class="method_property">charset</var>){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;callBack &amp;&amp; stackBacks.<var class="method_property">push</var>(callBack);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>if</em>(<em>typeof</em> urls == <q>"string"</q>){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stackJSs.<var class="method_property">push</var>([urls,stackShift,<var class="method_property">charset</var>]);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>else</em>{</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>for</em>(<em>var</em> i=0;i&lt;urls.<var class="method_property">length</var>;i+=1){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stackJSs.<var class="method_property">push</var>([urls[i],stackShift,<var class="method_property">charset</var>]);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>if</em>(stackFlag==0){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stackFlag = 1;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stackShift();</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comments">//出栈</span></span></li><li><span>&nbsp;&nbsp;<em>function</em> stackShift(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>if</em>(stackJSs.<var class="method_property">length</var>){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disorderJS.<var class="method_property">apply</var>(null,stackJSs.<var class="method_property">shift</var>());</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>else</em> <em>if</em>(stackBacks.<var class="method_property">length</var>){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stackBacks.<var class="method_property">pop</var>()();</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stackShift();</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>else</em>{</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stackFlag = 0;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comments">//加载script脚本</span></span></li><li><span>&nbsp;&nbsp;<em>function</em> loadJS(<var class="method_property">src</var>,callBack,<var class="method_property">charset</var>){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>var</em> url = <var class="method_property">src</var>.<var class="method_property">replace</var>(/<span class="regexp">^\.\/</span>/,path);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>if</em>(jsLoaded[url]){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var class="method_property">setTimeout</var>(<em>function</em>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callBack &amp;&amp; callBack();</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>return</em> ;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>var</em> t = doc.createElement(<q>"script"</q>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;t.<var class="method_property">setAttribute</var>(<q>"type"</q>,<q>"text/javascript"</q>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<var class="method_property">charset</var> &amp;&amp; t.<var class="method_property">setAttribute</var>(<q>"charset"</q>,<var class="method_property">charset</var>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;t.onreadystatechange = t.<var class="method_property">onload</var> = t.<var class="method_property">onerror</var> = <em>function</em>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>if</em>(!t.<var class="method_property">readyState</var> || t.<var class="method_property">readyState</var> == <q>'loaded'</q> || t.<var class="method_property">readyState</var> == <q>'complete'</q>){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.onreadystatechange = t.<var class="method_property">onload</var> = t.<var class="method_property">onerror</var> = null;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t = null;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jsLoaded[url] = true;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var class="method_property">setTimeout</var>(<em>function</em>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callBack(<var class="method_property">src</var>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},200);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;};</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;t.<var class="method_property">src</var> = url;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;head.appendChild(t);</span></li><li><span>&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comments">//无序下载</span></span></li><li><span>&nbsp;&nbsp;<em>function</em> disorderJS(urls,callBack,<var class="method_property">charset</var>){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>if</em>(<em>typeof</em> urls == <q>"string"</q>){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loadJS(urls,<em>function</em>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callBack &amp;&amp; callBack();</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<var class="method_property">charset</var>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>return</em> require;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>var</em> led = {};</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>function</em> loadBack(<var class="method_property">src</var>){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>delete</em> led[<var class="method_property">src</var>];</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>for</em>(<em>var</em> n <em>in</em> led){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>return</em> ;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callBack &amp;&amp; callBack();</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>for</em>(<em>var</em> i=0;i&lt;urls.<var class="method_property">length</var>;i+=1){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;led[urls[i]] = true;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loadJS(urls[i],loadBack,<var class="method_property">charset</var>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>return</em> require;</span></li><li><span>&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comments">//domReady</span></span></li><li><span>&nbsp;&nbsp;<em>function</em> ready(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comments">//设置可以进行异步加载了</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;stackFlag = 0;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comments">//出栈操作</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;stackShift();</span></li><li><span>&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;<em>function</em> readyExe(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<var class="object">Array</var>.<var class="method_property">prototype</var>.<var class="method_property">shift</var>.<var class="method_property">call</var>(<var class="method_property">arguments</var>).<var class="method_property">apply</var>(<var class="method_property">window</var>,<var class="method_property">arguments</var>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>return</em> require;</span></li><li><span>&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comments">//加入DOMContentLoaded事件</span></span></li><li><span>&nbsp;&nbsp;<em>if</em>(doc.attachEvent){<span class="comments">//IE</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;doc.attachEvent(<q>"onreadystatechange"</q>,<em>function</em>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>if</em>(doc.<var class="method_property">readyState</var> == <q>"complete"</q> || doc.<var class="method_property">readyState</var> == <q>"loaded"</q>){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ready();</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;});</span></li><li><span>&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;<em>else</em>{</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;doc.addEventListener(<q>"DOMContentLoaded"</q>, ready, false);</span></li><li><span>&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<em>function</em> require(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>var</em> l = <var class="method_property">arguments</var>.<var class="method_property">length</var>;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>if</em>(l==1){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stackPush(<var class="method_property">arguments</var>[0]);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>return</em> ;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;l -= 1;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>if</em>(<em>typeof</em> <var class="method_property">arguments</var>[l] == <q>"function"</q>){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stackPush(<var class="object">Array</var>.<var class="method_property">prototype</var>.<var class="method_property">slice</var>.<var class="method_property">call</var>(<var class="method_property">arguments</var>,0,l),<var class="method_property">arguments</var>[l]);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>return</em> ;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;l -= 1;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>if</em>(<var class="method_property">arguments</var>[l]==null || <em>typeof</em> <var class="method_property">arguments</var>[l]){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stackPush(<var class="method_property">slice</var>.<var class="method_property">call</var>(<var class="method_property">arguments</var>,0,l),<var class="method_property">arguments</var>[l],<var class="method_property">arguments</var>[l+1]);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>return</em> require;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;stackPush(<var class="method_property">slice</var>.<var class="method_property">call</var>(<var class="method_property">arguments</var>));</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>return</em> ;</span></li><li><span>&nbsp;&nbsp;};</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;require.version = <q>"1.0.0"</q>;</span></li><li><span>&nbsp;&nbsp;<span class="comments">//对异步执行的函数 实现统一回调</span></span></li><li><span>&nbsp;&nbsp;<span class="comments">//不保证内部加载完毕顺序</span></span></li><li><span>&nbsp;&nbsp;require.bale = <em>function</em>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>var</em> callBack = <var class="object">Array</var>.<var class="method_property">prototype</var>.<var class="method_property">pop</var>.<var class="method_property">call</var>(<var class="method_property">arguments</var>);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comments">//每个异步的回调</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>function</em> <var class="method_property">back</var>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;len -= 1;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;len==0 &amp;&amp; <var class="method_property">setTimeout</var>(<em>function</em>(){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callBack.<var class="method_property">apply</var>(ex,bs);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comments">//异步的长度、回调this指向、异步体的返回值</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>var</em> len = <var class="method_property">arguments</var>.<var class="method_property">length</var>,ex = {},bs = [];</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>for</em>(<em>var</em> i=0;i&lt;<var class="method_property">arguments</var>.<var class="method_property">length</var>;i+=1){</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bs[i] = <var class="method_property">arguments</var>[i](<var class="method_property">back</var>,ex);</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<em>return</em> require;</span></li><li><span>&nbsp;&nbsp;};</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<em>return</em> require;</span></li><li><span>}();</span></li></ol></pre>
+	</div>
+</div>
+<script type="text/javascript" id="codejs">
+//要打印 require.js 需要加载到脚本着色器(js) 和  require.js的文本数据（ajax）
+//第三个函数 就是两个异步完成后才回调的
+require.bale(function(end){
+	//异步加载着色脚本
+	require("/res/js/codeStyle.js",function(){
+		document.getElementById("jsCode").innerHTML = ScriptStyle.str2styled(document.getElementById("codejs").innerHTML.replace(/^\s+|\s+$/,""));
+		end();
+	});
+},function(end,ex){
+	//ajax获取require.js 文本数据
+	var xhr = new (window.XMLHttpRequest || ActiveXObject)("Microsoft.XMLHTTP");
+	xhr.open("GET", "require.js", true);
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState==4){
+			if(xhr.status >= 200 && xhr.status < 300 || xhr.status === 304 || xhr.status === 1223){
+				ex.text = xhr.responseText;
+			}
+			end();
+		}
+	};
+	xhr.send(null);
+},function(){
+	if(this.text){
+		document.getElementById("requireCode").innerHTML = ScriptStyle.str2styled(this.text.replace(/^\s+|\s+$/,""));
+		document.getElementById("requireCodeCot").style.display = "block";
+	}
+});
+
+//打印Script实例的log函数
+function requireLog(str){
+	var d = new Date();
+	document.getElementById("textarea").value += "[" + d.getMinutes() + ":" + d.getSeconds() + "." + d.getMilliseconds() + "]" + str + "\n";
+}
+
+window.onload = function(){
+	//清空textarea的残渣
+	document.getElementById("textarea").value = "";
+};
+
+//异步加载脚本会自动加入到 按钮事件，请点击按钮
+document.getElementById("execBtn").onclick = function(){
+	this.style.display = "none";
+	
+	//序列加载 a.js [b.js c.js] d.js
+	//其中 b.js 中使用require 加载e.js f.js (e f为无须加载)
+	//e.js 中使用require 加载g.js
+	requireLog("=====================================require Log============");
+	requireLog("a.js b.js c.js d.js require OK");
+	require("testjs/a.js",["testjs/b.js","testjs/c.js"],"testjs/d.js",function(){
+		requireLog("a.js b.js c.js d.js callBack OK");
+		//华丽分割线 3个随机异步，全部完成后统一回调
+		requireLog("=====================================bale Log============");
+		var t1 = Math.round(Math.random()*5000), t2 = Math.round(Math.random()*5000), t3 = Math.round(Math.random()*5000);
+		requireLog("Start=>t1:" + t1 + "==t2:" + t2 + "==t3:" + t3);
+		require.bale(
+			//第一个异步
+			function(fn,ex){
+				setTimeout(function(){
+					//设置cakkBack的this指向的object中的值
+					ex.$1 = t1;
+					//告诉函数，我的异步执行完毕 可以把这个fn直接设置为异步的回调函数
+					fn();
+					requireLog("t1:End");
+				},t1);
+				return 1;
+			},
+			//第二个异步
+			function(fn,ex){
+				setTimeout(function(){
+					ex.$2 = t2;
+					fn();
+					requireLog("t2:End");
+				},t2);
+				return 2;
+			},
+			//第三个异步
+			function(fn,ex){
+				setTimeout(function(){
+					ex.$3 = t3;
+					fn();
+					requireLog("t3:End");
+				},t3);
+				return 3;
+			},
+			//最后一个为执行完所有的异步的回调
+			function($1,$2,$3){
+				requireLog("AllEnd");
+				requireLog("argument=>$1:" + $1 + "==$2:" + $2 + "==$3:" + $3);
+				requireLog("this=>$1:" + this.$1 + "==$2:" + this.$2 + "==$3:" + this.$3);
+			}
+		);
+	});
+};
+</script>
+
+</body></html>

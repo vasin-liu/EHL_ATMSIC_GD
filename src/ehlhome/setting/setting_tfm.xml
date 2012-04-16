@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+	  <!-- 流量发布模式配置 -->
+	<property name="tfmModel" value="4"></property>
+	<!--  "2"为广东模式（里程碑） "3"为为菏泽模式（城市道路网）改进型 "5"广东LCB_PT-->
+	
+</properties>

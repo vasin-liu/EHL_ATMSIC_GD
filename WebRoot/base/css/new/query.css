@@ -1,0 +1,191 @@
+/*
+查询界面样式
+1.查询条件
+2.查询结果
+table->container
+	tr
+		td
+			table ->conditioncontainer
+				tr->title
+				tr->content
+	tr
+		td->conditioncontainer
+			div->title
+			talbe->content
+*/
+/*查询条件BEGIN----------------------------------------------------------*/
+
+.container {
+	
+}
+
+.conditioncontainer {
+	
+}
+
+.conditioncontainer .title {
+	width: 141px;
+	color: #ffffff;
+	font-size: 14px;
+	font-weight: bold;
+	text-indent: 30px;
+	text-align: left;
+	background:
+		url(../../image/cssimg/table/table_title_03.gif)
+		no-repeat;
+	line-height: 24px;
+}
+
+.conditioncontainer .content {
+	border: 1px solid #b5d6e6;
+	background-color: #E8F6FD;
+	font-size: 12px;
+}
+
+tr.height {
+	height: 10px;
+}
+tr.height_low{
+	height: 2px;
+}
+tr.item {
+	vertical-align: middle;
+}
+
+td.item {
+	
+}
+
+.item .label {
+	text-align: right;
+	white-space: nowrap;
+}
+
+.item .value {
+	text-align: left;
+}
+.item .value input,.item .value select{
+	width: 175px;
+}
+/*查询条件END----------------------------------------------------------*/
+/*查询结果BEGIN----------------------------------------------------------*/
+/*
+td->datacontainer
+	div->title
+	table->content
+		tr->[head|common][odd|even]
+			td->head|common
+*/
+.datacontainer {
+	font-size: 12px;
+	width: 100%;
+	height: 100%;
+}
+
+.datacontainer .title {
+	width: 100%;
+	line-height: 22px;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.datacontainer .content {
+	border-top: 1px solid #A5D1EC;
+	border-left: 1px solid #A5D1EC;
+	width: 100%;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 12px;
+}
+
+.datacontainer .content tr {
+	height: 22px;
+	line-height: 22px;
+}
+
+.datacontainer .content tr.odd {
+	
+}
+
+.datacontainer .content tr.even { /*background-color: #9999CC;*/
+	
+}
+
+.datacontainer .content td {
+	border-bottom: 1px solid #b5d6e6;
+	border-right: 1px solid #b5d6e6;
+}
+
+.datacontainer .content tr.head {
+	background: url(../../image/cssimg/table/bg.gif) repeat-x;
+}
+
+.datacontainer .content td.head {
+	white-space: nowrap;
+}
+
+.datacontainer .content tr.common {
+	
+}
+
+.datacontainer .content td.common {
+	
+}
+
+.datacontainer .content tr.empty {
+	background: url(../../image/cssimg/table/bg.gif) repeat-x;
+}
+
+.datacontainer .content td.empty {
+	
+}
+
+
+/**3.查询界面样式 */
+/**3.1.按钮样式，与一般样式相同 */
+.operate_query {
+	
+}
+/**3.1.按钮悬浮样式，与一般样式相同 */
+.operate_query:hover{
+	
+}
+/**3.2.按钮容器样式 */
+.operates_query {
+	text-align: right;
+}
+/**3.3.按钮位于按钮容器中样式 */
+.operates_query .operate_query {
+	margin: 0px 5px;
+}
+/**4.查询界面全数据样式 */
+/**4.1.按钮样式，与一般样式相同 */
+.operate_query_fulldata {
+	
+}
+/**4.2.按钮容器样式 */
+.operates_query_fulldata {
+	width:100%;
+	text-align: right;
+	padding-right: 10px;
+	font-size: 12px;
+}
+.operates_query_fulldata .operate_query_fulldata{
+	margin: 0px 3px;
+}
+/** 2.查询界面 */
+.data_query_full{
+	
+}
+/** 2.1.数据项 */
+.data_query_full .item{
+	margin: 0px 0px 5px;
+}
+
+.datas_query_full{
+	font-size:12px;
+}
+.datas_query_full .data_query_full{
+	
+}

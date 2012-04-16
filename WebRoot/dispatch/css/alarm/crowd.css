@@ -1,0 +1,17 @@
+ul.line {
+	margin: 5 0;
+}
+
+ul.line li {
+	margin-left: 20px;
+	display: inline;
+}
+
+ul.line li input.txt{
+	border: none;
+	border-bottom: 1px solid black;	
+}
+
+ul.line li.first {
+	margin-left: 0px;
+}

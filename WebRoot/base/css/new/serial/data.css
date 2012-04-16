@@ -1,0 +1,91 @@
+/** 
+数据
+应用范围
+1.明细界面数据录入或者展示
+组织结构
+1.容器
+1.1.数据项
+1.1.1.标签
+1.1.2.值
+2.查询界面数据展示
+组织结构
+1.容器
+1.1.单条记录+操作容器
+1.1.1.单条记录容器
+1.1.1.1.数据项
+1.1.2.操作容器
+1.1.2.1.操作
+分类
+1.简洁模式
+实现结构
+1.容器-table
+1.1.标题-tr
+1.1.1.列-td
+1.2.单条记录+操作容器-tr
+1.2.1.数据项-td
+1.2.2.操作-td
+2.详细模式
+实现结构
+1.容器-div
+1.1.单条记录+操作容器-div
+1.1.1.单条记录容器-div
+1.1.1.1.数据项-p
+1.1.2.操作容器-div
+1.1.2.1.操作-a
+
+*/
+/** 1.明细界面 */
+.data_detail{
+	border-left: 1px solid #a5d1ec;
+	border-top: 1px solid #a5d1ec;
+	vertical-align: middle;
+	font-size: 12px;
+}
+/** 1.1.数据项 */
+.data_detail tr.item{
+	height: 30px;
+}
+.data_detail td.item{
+	border-right: 1px solid #a5d1ec;
+	border-bottom: 1px solid #a5d1ec;
+}
+/** 1.2.标签 */
+.data_detail .item .label{
+	width: 125px;
+	background-color: #F0FFFF;
+	text-align: center;
+	white-space: nowrap;
+}
+/** 1.2.值 */
+.data_detail .item .value{
+	width: 250px;
+	text-align: left;
+}
+.data_detail .item .value input,select{
+	width: 200px;
+}
+.data_detail .item .value textarea{
+	height: 150px;
+}
+.data_detail .item .value .colspan3 {
+	width: 603px;
+}
+
+/** 2.查询界面 */
+.data_query_simple{
+	width: 100%;
+	height: 100%;
+	font-size: 12px;
+}
+/** 2.1.数据项 */
+.data_query_full .item{
+	margin: 0px 0px 5px 0px;
+}
+
+.datas_query_full{
+	font-size:12px;
+}
+
+.datas_query_full .data_query_full{
+	margin: 2px 0px;
+}

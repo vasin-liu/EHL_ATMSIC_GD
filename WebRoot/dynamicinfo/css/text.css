@@ -1,0 +1,14 @@
+.copy_text {
+	width: 100%;
+	height: auto;
+	overflow: visible;
+	border: none;
+	background-color: transparent;
+	margin: 0px;
+	word-break: break-all;
+}
+
+.copy_text_indent {
+	text-indent: 2em;
+	display: block;
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/roadbuild">
+	<forwards />
+	<exceptions />
+	<controllers>
+		<!--道路信息管理2010-1-16 by wkz -->
+		<controller name="roadbuildmanage" clazz="com.ehl.dispatch.cdispatch.action.RoadBuildAction">			
+			<action name="modifyRoadBuildInfo"></action>
+			<action name="deleteRoadBuildInfo"></action>
+			<action name="updateRoadBuildInfo"></action>
+			<action name="getRoadBuildInfo"></action>
+			<action name="getAddName"></action>
+			<action name="showExcel"></action>
+			<action name="searchRoadBuild"></action>
+			<action name="searchCounts"></action>
+			<action name="updateZodbz"></action>
+		</controller>
+	</controllers>
+</mapping>

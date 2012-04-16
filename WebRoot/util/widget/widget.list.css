@@ -1,0 +1,23 @@
+ul.ehl_list_line,ul.ehl_list_column {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	display: block;
+/* 	border:1px solid black; */
+}
+
+.ehl_list_line li {
+	display: inline;
+	margin-left: 1em;
+}
+
+.ehl_list_line li.ehl_list_line_1{
+	margin-left: 0em;
+}
+
+ul.ehl_list_column li.ehl_list_column_title{
+	
+}
+ul.ehl_list_column li{
+	/* border:1px solid red; */
+}

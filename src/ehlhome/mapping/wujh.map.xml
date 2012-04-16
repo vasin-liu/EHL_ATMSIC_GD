@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/wujh">
+	<forwards />
+	<exceptions />
+	<controllers>
+   		<!--字典列表 -->
+		<controller name="dict" clazz="com.ehl.WujhTest">
+		    <action name="getDictList"></action>
+		     <action name="test"></action>
+    
+  		</controller> 
+	</controllers>
+</mapping>

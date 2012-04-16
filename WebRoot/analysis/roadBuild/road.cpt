@@ -1,0 +1,1110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20100901">
+<TableDataMap>
+<TableData name="ds1" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="sd_road"/>
+<O>
+<![CDATA[2011-08-01]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="rn_road"/>
+<O>
+<![CDATA[\'沈海高速\',\'京港澳高速\']]></O>
+</Parameter>
+<Parameter>
+<Attributes name="rb_type_road"/>
+<O>
+<![CDATA[rb_length]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="ed_road"/>
+<O>
+<![CDATA[2011-09-01]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[EHL_ATMSIC_GD]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT COL1,SUM(COL2) COL2,COL3 FROM (
+--选择单条道路且结果集为空时，补齐为空的道路
+${if(FIND(",",rn_road,1)=0,if(SQL("EHL_ATMSIC_GD","SELECT COUNT(*) FROM (SELECT T.ALARMID,T.CASEHAPPENTIME,(CASE WHEN T.CASEENDTIME IS NOT NULL THEN T.CASEENDTIME ELSE SYSDATE END) CASEENDTIME 
+      FROM T_ATTEMPER_ALARM T WHERE T.EVENTTYPE='001023' AND T.ROADID IN("+rn_road+")) TAA
+      WHERE (
+      (TAA.CASEHAPPENTIME BETWEEN TO_DATE ('"+sd_road+" 00:00:00','YYYY/MM/DD HH24:MI:SS') AND TO_DATE ('"+ed_road+" 23:59:59','YYYY/MM/DD HH24:MI:SS'))
+      OR
+      (TAA.CASEENDTIME BETWEEN TO_DATE ('"+sd_road+" 00:00:00','YYYY/MM/DD HH24:MI:SS') AND TO_DATE ('"+ed_road+" 23:59:59','YYYY/MM/DD HH24:MI:SS'))
+      OR 
+      (TAA.CASEHAPPENTIME <= TO_DATE ('"+sd_road+" 00:00:00','YYYY/MM/DD HH24:MI:SS') AND TAA.CASEENDTIME >= TO_DATE ('"+ed_road+" 23:59:59','YYYY/MM/DD HH24:MI:SS'))
+      )",1,1)=0,"SELECT TOD.DLMC COL1,0 COL2,'施工占道' COL3 FROM T_OA_DICTDLFX TOD WHERE TOD.DLMC IN("+rn_road+") UNION ","SELECT TORC.XZQHMC COL1, 0 COL2, TORC.DLMC COL3
+      FROM T_OA_ROADMANAGE_CODE TORC
+      WHERE TORC.XZQH <> '4400' AND TORC.DLMC = "+rn_road+" UNION "),"")}
+
+--选择多条道路时，补齐为空的道路
+${if(AND(FIND(",",rn_road,1)>0),"SELECT TOD.DLMC COL1,0 COL2,'施工占道' COL3 FROM T_OA_DICTDLFX TOD WHERE TOD.DLMC IN("+rn_road+") UNION ","")}
+
+--获取统计数值，以次数显示或者以里程总数显示
+SELECT ${if(FIND(",",rn_road,1)>0,"TAA.ROADID","TAA.REPORTUNIT")} COL1,
+       ${if(rb_type_road='rb_times'," COUNT(TAA.ALARMID)",
+       " SUM(ABS((TO_NUMBER(TAA.ENDKMVALUE)-TO_NUMBER(TAA.KMVALUE))+(TO_NUMBER(TAA.ENDMVALUE)-TO_NUMBER(TAA.MVALUE))/1000))")} COL2,  
+       ${if(FIND(",",rn_road,1)>0,"'施工占道'","TAA.ROADID")} COL3 
+  FROM (SELECT T.ALARMID,(SELECT TSD.JGMC FROM T_SYS_DEPARTMENT TSD WHERE TSD.JGID=T.REPORTUNIT) REPORTUNIT,T.ROADID,T.ENDKMVALUE,T.KMVALUE,T.ENDMVALUE,
+               T.MVALUE,T.CASEHAPPENTIME,(CASE WHEN T.CASEENDTIME IS NOT NULL THEN T.CASEENDTIME ELSE SYSDATE END) CASEENDTIME
+       FROM T_ATTEMPER_ALARM T
+       WHERE T.EVENTTYPE = '001023' AND T.REPORTUNIT <> '440000000000') TAA
+  WHERE TAA.ROADID IN(${rn_road})
+  AND (
+      (TAA.CASEHAPPENTIME BETWEEN TO_DATE ('${sd_road} 00:00:00','YYYY/MM/DD HH24:MI:SS') AND TO_DATE ('${ed_road} 23:59:59','YYYY/MM/DD HH24:MI:SS'))
+      OR
+      (TAA.CASEENDTIME BETWEEN TO_DATE ('${sd_road} 00:00:00','YYYY/MM/DD HH24:MI:SS') AND TO_DATE ('${ed_road} 23:59:59','YYYY/MM/DD HH24:MI:SS'))
+      OR 
+      (TAA.CASEHAPPENTIME <= TO_DATE ('${sd_road} 00:00:00','YYYY/MM/DD HH24:MI:SS') AND TAA.CASEENDTIME >= TO_DATE ('${ed_road} 23:59:59','YYYY/MM/DD HH24:MI:SS'))
+      )
+ GROUP BY ${if(FIND(",",rn_road,1)>0,"TAA.ROADID","TAA.REPORTUNIT")} 
+          ${if(FIND(",",rn_road,1)>0,",'施工占道'",",TAA.ROADID")}  
+ ORDER BY 1
+)
+GROUP BY COL1,COL3
+ORDER BY 1]]></Query>
+</TableData>
+</TableDataMap>
+<ReportWebAttr>
+<WebPageContent>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.ui.impl.Print">
+<WidgetAttr/>
+<Text>
+<![CDATA[打印]]></Text>
+<IconName>
+<![CDATA[print]]></IconName>
+<PrintButtons appletPrint="false" flashPrint="false"/>
+</Widget>
+<Widget class="com.fr.report.web.ui.impl.Export">
+<WidgetAttr/>
+<Text>
+<![CDATA[输出]]></Text>
+<IconName>
+<![CDATA[export]]></IconName>
+<Buttons pdf="true" excelP="false" excelO="true" excelS="false" word="true"/>
+</Widget>
+<IsDefault>
+<![CDATA[false]]></IsDefault>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="0">
+<Image width="41" height="30">
+<![CDATA[mEdp%K0U7RiVO]ABV[*l&/0^moYXi2rbE@j$0G!t*qhg`ER"Yrr(Dmb[$/D5^GlRId-GC&e>i
+69fn32m$q;nq5T+O9#7(hL'f>%*`1LKk^Gcg)>9RLKj=5WdFmI<r/ml4oEAKZVdL#T-i?ZQa
+&3OAe~
+]]></Image>
+</Background>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+<WebPage isPage="false" isShowAsImage="false"/>
+</WebPageContent>
+<WebViewContent>
+<ToolBars>
+<ToolBarManager>
+<Location>
+<Embed position="1"/>
+</Location>
+<ToolBar>
+<Widget class="com.fr.report.web.ui.CustomToolBarButton">
+<WidgetAttr disabled="true"/>
+<Text>
+<![CDATA[您当前的位置：施工占道分析——施工道路统计]]></Text>
+<IconName>
+<![CDATA[edit]]></IconName>
+</Widget>
+<Widget class="com.fr.report.web.ui.impl.Export">
+<WidgetAttr/>
+<Text>
+<![CDATA[输出]]></Text>
+<IconName>
+<![CDATA[export]]></IconName>
+<Buttons pdf="true" excelP="false" excelO="true" excelS="false" word="true"/>
+</Widget>
+<IsDefault>
+<![CDATA[false]]></IsDefault>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="0">
+<Image width="41" height="30">
+<![CDATA[mEdp%K0U7RiVO]ABV[*l&/0^moYXi2rbE@j$0G!t*qhg`ER"Yrr(Dmb[$/D5^GlRId-GC&e>i
+69fn32m$q;nq5T+O9#7(hL'f>%*`1LKk^Gcg)>9RLKj=5WdFmI<r/ml4oEAKZVdL#T-i?ZQa
+&3OAe~
+]]></Image>
+</Background>
+</ToolBar>
+</ToolBarManager>
+</ToolBars>
+</WebViewContent>
+<WebWriteContent>
+<ToolBars/>
+<SelectedColor color="-10033153"/>
+</WebWriteContent>
+<Background name="NullBackground"/>
+<CacheValidateTime>
+<![CDATA[0]]></CacheValidateTime>
+</ReportWebAttr>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<ReportSettings headerHeight="0.0" footerHeight="0.0">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75"/>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+<RowHeight defaultValue="19">
+<![CDATA[20,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,21,19]]></RowHeight>
+<ColumnWidth defaultValue="72">
+<![CDATA[10,31,52,58,58,58,58,58,58,58,58,58,36,38,72]]></ColumnWidth>
+<CellElementList>
+<C c="1" r="0" cs="15" rs="25">
+<O t="CC">
+<LayoutAttr selectedIndex="0" columns="0"/>
+<Chart name="柱状图">
+<Chart class="com.fr.chart.Chart">
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<ChartAttr isJSDraw="false"/>
+<Title>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="广东省内各道路 " + $sd_road + " 至 " + $ed_road + " 施工占道统计图"]]></Attributes>
+</O>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="SimSun" style="1" size="22"/>
+</Attr>
+</TextAttr>
+<TitleVisible value="true"/>
+</Title>
+<Plot class="com.fr.chart.plot.Bar3DPlot">
+<Plot>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<Attr hotTooltip="${CATEGORY}，${SERIES}，${VALUE}" isNullValueBreak="true"/>
+<NewSeriesCollection>
+<SeriesAttr class="com.fr.chart.plot.SeriesAttr">
+<SeriesAttr>
+<ConditionList>
+<Condition class="com.fr.chart.axis.SeriesAttrBackground">
+<SeriesAttrBackground>
+<Background name="ColorBackground" color="-256"/>
+</SeriesAttrBackground>
+</Condition>
+</ConditionList>
+</SeriesAttr>
+</SeriesAttr>
+</NewSeriesCollection>
+<Legend>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="1" lineColor="-8355712" isRoundBorder="true"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<Attr position="4" legendNum="100" visible="true" autoAdjustSize="false"/>
+<FRFont name="SimSun" style="0" size="12"/>
+</Legend>
+<CateAttr isStacked="false" bgStagger="false" bgColor="-1"/>
+<CategoryAxis class="com.fr.chart.axis.CategoryAxis">
+<AxisLine style="1" color="-5197648"/>
+<AxisPosition value="3"/>
+<AxisLabelPosition value="3"/>
+<MainGridLine style="1" color="-1184275"/>
+<SecGridLine style="0"/>
+<AxisLabelCount value="-1"/>
+<TickLine type="2" mainStroke="1.0" len="8" secType="1" secStroke="1.0" secLen="0"/>
+<ArrowShow arrowShow="true"/>
+<AxisShow axisShow="true"/>
+<Stagger value="false"/>
+<TextAttr>
+<Attr alignText="1">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<AxisRange/>
+</CategoryAxis>
+<ValueAxis class="com.fr.chart.axis.ValueAxis">
+<Title>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if($rb_type_road='rb_times',"单位：宗","单位：千米")]]></Attributes>
+</O>
+<TextAttr>
+<Attr alignText="1">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<TitleVisible value="true"/>
+</Title>
+<AxisLine style="1" color="-5197648"/>
+<AxisPosition value="2"/>
+<AxisLabelPosition value="3"/>
+<MainGridLine style="1" color="-1184275"/>
+<SecGridLine style="0"/>
+<AxisLabelCount value="-1"/>
+<TickLine type="2" mainStroke="1.0" len="8" secType="1" secStroke="1.0" secLen="0"/>
+<ArrowShow arrowShow="true"/>
+<AxisShow axisShow="true"/>
+<Stagger value="false"/>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<Format class="java.text.DecimalFormat">
+<![CDATA[#0]]></Format>
+<AxisRange/>
+</ValueAxis>
+<BarAttr isHorizontal="false" overlap="-0.5" interval="1.0"/>
+<Attr3D horizontalDrawBar="true" isCubic3D="true" isCascade="true" seriesIntervalPercent="0.0"/>
+<Projection mode="2" elevation="15" rotation="20" focus="800"/>
+</Plot>
+</Plot>
+</Chart>
+</Chart>
+<Chart name="折线图">
+<Chart class="com.fr.chart.Chart">
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<ChartAttr isJSDraw="false"/>
+<Title>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="广东省内各道路 " + $sd_road + " 至 " + $ed_road + " 施工占道统计图"]]></Attributes>
+</O>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="SimSun" style="1" size="22"/>
+</Attr>
+</TextAttr>
+<TitleVisible value="true"/>
+</Title>
+<Plot class="com.fr.chart.plot.LinePlot">
+<Plot>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<Attr hotTooltip="${CATEGORY}，${SERIES}，${VALUE}" isNullValueBreak="true"/>
+<NewSeriesCollection>
+<SeriesAttr class="com.fr.chart.plot.SeriesAttr">
+<SeriesAttr/>
+</SeriesAttr>
+</NewSeriesCollection>
+<Legend>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="1" lineColor="-8355712" isRoundBorder="true"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<Attr position="3" legendNum="100" visible="true" autoAdjustSize="false"/>
+<FRFont name="SimSun" style="0" size="12"/>
+</Legend>
+<CateAttr isStacked="false" bgStagger="false" bgColor="-1"/>
+<CategoryAxis class="com.fr.chart.axis.CategoryAxis">
+<AxisLine style="1" color="-5197648"/>
+<AxisPosition value="3"/>
+<AxisLabelPosition value="3"/>
+<MainGridLine style="1" color="-1184275"/>
+<SecGridLine style="0"/>
+<AxisLabelCount value="-1"/>
+<TickLine type="2" mainStroke="1.0" len="8" secType="1" secStroke="1.0" secLen="0"/>
+<ArrowShow arrowShow="true"/>
+<AxisShow axisShow="true"/>
+<Stagger value="false"/>
+<TextAttr>
+<Attr alignText="1">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<AxisRange/>
+</CategoryAxis>
+<ValueAxis class="com.fr.chart.axis.ValueAxis">
+<Title>
+<GI>
+<SeriesAttrBackground/>
+<SeriesAttrBorder>
+<Attr lineStyle="0" lineColor="-16777216" isRoundBorder="false"/>
+</SeriesAttrBorder>
+<SeriesAttrAlpha>
+<Attr alpha="1.0"/>
+</SeriesAttrAlpha>
+</GI>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=if($rb_type_road='rb_times',"单位：宗","单位：千米")]]></Attributes>
+</O>
+<TextAttr>
+<Attr alignText="1">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<TitleVisible value="true"/>
+</Title>
+<AxisLine style="1" color="-5197648"/>
+<AxisPosition value="2"/>
+<AxisLabelPosition value="3"/>
+<MainGridLine style="1" color="-1184275"/>
+<SecGridLine style="0"/>
+<AxisLabelCount value="-1"/>
+<TickLine type="2" mainStroke="1.0" len="8" secType="1" secStroke="1.0" secLen="0"/>
+<ArrowShow arrowShow="true"/>
+<AxisShow axisShow="true"/>
+<Stagger value="false"/>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="SimSun" style="0" size="12"/>
+</Attr>
+</TextAttr>
+<Format class="java.text.DecimalFormat">
+<![CDATA[#0]]></Format>
+<AxisRange/>
+</ValueAxis>
+<Show showMarker="true" showLine="true"/>
+</Plot>
+</Plot>
+</Chart>
+</Chart>
+<OneValueCDDefinition seriesName="COL3" valueName="COL2" function="com.fr.data.util.function.NoneFunction">
+<Top topCate="-1" topValue="-1"/>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[ds1]]></Name>
+</TableData>
+<CategoryName value="COL1"/>
+</OneValueCDDefinition>
+</O>
+<Expand extendable="3"/>
+</C>
+<C c="1" r="25" cs="4" s="0">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[="广东省内各道路 " + $sd_road + " 至 " + $ed_road + " 施工占道统计表"]]></Attributes>
+</O>
+<Expand/>
+</C>
+<C c="1" r="26" cs="3" rs="3" s="0">
+<O t="BiasTextPainter">
+<IsBackSlash value="false"/>
+<![CDATA[${if(FIND(",",rn_road,1)>0,"         道路名称",if(AND(FIND(",",rn_road,1)=0,SQL("EHL_ATMSIC_GD","SELECT COUNT(*) FROM (SELECT T.ALARMID,T.CASEHAPPENTIME,(CASE WHEN T.CASEENDTIME IS NOT NULL THEN T.CASEENDTIME ELSE SYSDATE END) CASEENDTIME 
+      FROM T_ATTEMPER_ALARM T WHERE T.EVENTTYPE='001023' AND T.ROADID IN("+rn_road+")) TAA
+      WHERE (
+      (TAA.CASEHAPPENTIME BETWEEN TO_DATE ('"+sd_road+" 00:00:00','YYYY/MM/DD HH24:MI:SS') AND TO_DATE ('"+ed_road+" 23:59:59','YYYY/MM/DD HH24:MI:SS'))
+      OR
+      (TAA.CASEENDTIME BETWEEN TO_DATE ('"+sd_road+" 00:00:00','YYYY/MM/DD HH24:MI:SS') AND TO_DATE ('"+ed_road+" 23:59:59','YYYY/MM/DD HH24:MI:SS'))
+      OR 
+      (TAA.CASEHAPPENTIME <= TO_DATE ('"+sd_road+" 00:00:00','YYYY/MM/DD HH24:MI:SS') AND TAA.CASEENDTIME >= TO_DATE ('"+ed_road+" 23:59:59','YYYY/MM/DD HH24:MI:SS'))
+      )",1,1)=0),"         道路名称","         管辖机构"))}|${if(FIND(",",rn_road,1)=0,if(SQL("EHL_ATMSIC_GD","SELECT COUNT(*) FROM (SELECT T.ALARMID,T.CASEHAPPENTIME,(CASE WHEN T.CASEENDTIME IS NOT NULL THEN T.CASEENDTIME ELSE SYSDATE END) CASEENDTIME 
+      FROM T_ATTEMPER_ALARM T WHERE T.EVENTTYPE='001023' AND T.ROADID IN("+rn_road+")) TAA
+      WHERE (
+      (TAA.CASEHAPPENTIME BETWEEN TO_DATE ('"+sd_road+" 00:00:00','YYYY/MM/DD HH24:MI:SS') AND TO_DATE ('"+ed_road+" 23:59:59','YYYY/MM/DD HH24:MI:SS'))
+      OR
+      (TAA.CASEENDTIME BETWEEN TO_DATE ('"+sd_road+" 00:00:00','YYYY/MM/DD HH24:MI:SS') AND TO_DATE ('"+ed_road+" 23:59:59','YYYY/MM/DD HH24:MI:SS'))
+      OR 
+      (TAA.CASEHAPPENTIME <= TO_DATE ('"+sd_road+" 00:00:00','YYYY/MM/DD HH24:MI:SS') AND TAA.CASEENDTIME >= TO_DATE ('"+ed_road+" 23:59:59','YYYY/MM/DD HH24:MI:SS'))
+      )",1,1)=0,"                 信息类型","                 道路名称"),"                 信息类型")}]]></O>
+<Expand/>
+</C>
+<C c="4" r="26" rs="3" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="COL1"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="1"/>
+</C>
+<C c="1" r="29" cs="3" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="COL3"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="4" r="29" s="0">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="COL2"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="0" r="30" cs="16">
+<Expand extendable="3" upParentDefault="false"/>
+</C>
+</CellElementList>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<ParameterUI class="com.fr.report.parameter.CustomParameterUI">
+<ReportSettings headerHeight="0.0" footerHeight="0.0">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75"/>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+<RowHeight defaultValue="19">
+<![CDATA[10,23,5,19,10,20,5,10,19,19,19]]></RowHeight>
+<ColumnWidth defaultValue="72">
+<![CDATA[10,18,78,38,112,47,75,150,47,75,130,30,10,72]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" s="1">
+<Expand/>
+</C>
+<C c="1" r="0" s="1">
+<Expand/>
+</C>
+<C c="2" r="0" s="1">
+<O>
+<![CDATA[ ]]></O>
+<Expand/>
+</C>
+<C c="3" r="0" s="1">
+<Expand/>
+</C>
+<C c="4" r="0" cs="3" s="1">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="7" r="0" s="1">
+<Expand/>
+</C>
+<C c="8" r="0" s="1">
+<Expand/>
+</C>
+<C c="9" r="0" s="1">
+<Expand/>
+</C>
+<C c="10" r="0" s="1">
+<Expand/>
+</C>
+<C c="11" r="0" s="1">
+<Expand/>
+</C>
+<C c="12" r="0" s="1">
+<Expand/>
+</C>
+<C c="0" r="1" s="1">
+<Expand/>
+</C>
+<C c="1" r="1" cs="3" s="2">
+<O>
+<![CDATA[分析条件]]></O>
+<Expand/>
+</C>
+<C c="4" r="1" s="1">
+<Expand/>
+</C>
+<C c="5" r="1" s="1">
+<Expand/>
+</C>
+<C c="6" r="1" s="1">
+<Expand/>
+</C>
+<C c="7" r="1" s="1">
+<Expand/>
+</C>
+<C c="8" r="1" s="1">
+<Expand/>
+</C>
+<C c="9" r="1" s="1">
+<Expand/>
+</C>
+<C c="10" r="1" s="1">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="11" r="1" s="1">
+<Expand/>
+</C>
+<C c="12" r="1" s="1">
+<Expand/>
+</C>
+<C c="13" r="1">
+<Expand/>
+</C>
+<C c="0" r="2" s="1">
+<Expand/>
+</C>
+<C c="1" r="2" s="3">
+<Expand/>
+</C>
+<C c="2" r="2" s="4">
+<Expand/>
+</C>
+<C c="3" r="2" s="4">
+<Expand/>
+</C>
+<C c="4" r="2" s="4">
+<Expand/>
+</C>
+<C c="5" r="2" s="4">
+<Expand/>
+</C>
+<C c="6" r="2" s="4">
+<Expand/>
+</C>
+<C c="7" r="2" s="4">
+<Expand/>
+</C>
+<C c="8" r="2" s="4">
+<Expand/>
+</C>
+<C c="9" r="2" s="4">
+<Expand/>
+</C>
+<C c="10" r="2" s="4">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="11" r="2" s="5">
+<Expand/>
+</C>
+<C c="12" r="2" s="1">
+<Expand/>
+</C>
+<C c="0" r="3" s="1">
+<Expand/>
+</C>
+<C c="1" r="3" s="6">
+<Expand/>
+</C>
+<C c="2" r="3" s="7">
+<O>
+<![CDATA[  开始时间：]]></O>
+<Expand/>
+</C>
+<C c="3" r="3" cs="2" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=DATEINMONTH(TODAY(), 1)]]></Attributes>
+</O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.DateEditor">
+<WidgetName name="sd_road"/>
+<WidgetAttr/>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<Editable>
+<![CDATA[false]]></Editable>
+<DateAttr start="" end=""/>
+</Widget>
+</C>
+<C c="5" r="3" s="7">
+<Expand/>
+</C>
+<C c="6" r="3" s="9">
+<O>
+<![CDATA[结束日期：]]></O>
+<Expand/>
+</C>
+<C c="7" r="3" s="8">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=TODAY()]]></Attributes>
+</O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.DateEditor">
+<WidgetName name="ed_road"/>
+<WidgetAttr/>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<Editable>
+<![CDATA[false]]></Editable>
+<DateAttr start="" end=""/>
+</Widget>
+</C>
+<C c="8" r="3" s="7">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="9" r="3" s="9">
+<O>
+<![CDATA[统计方式：]]></O>
+<Expand/>
+</C>
+<C c="10" r="3" s="7">
+<O>
+<![CDATA[按施工占道发生次数]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.ComboBox">
+<WidgetName name="rb_type_road"/>
+<WidgetAttr/>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<Editable>
+<![CDATA[false]]></Editable>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="rb_times" value="按施工占道发生次数"/>
+<Dict key="rb_length" value="按施工占道里程长度"/>
+</CustomDictAttr>
+</Dictionary>
+</Widget>
+</C>
+<C c="11" r="3" s="10">
+<Expand/>
+</C>
+<C c="12" r="3" s="1">
+<Expand/>
+</C>
+<C c="0" r="4" s="1">
+<Expand/>
+</C>
+<C c="1" r="4" s="6">
+<Expand/>
+</C>
+<C c="2" r="4" s="7">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="3" r="4" s="7">
+<Expand/>
+</C>
+<C c="4" r="4" s="7">
+<Expand/>
+</C>
+<C c="5" r="4" s="7">
+<Expand/>
+</C>
+<C c="6" r="4" s="7">
+<Expand/>
+</C>
+<C c="7" r="4" s="9">
+<Expand/>
+</C>
+<C c="8" r="4" s="7">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="9" r="4" s="7">
+<Expand/>
+</C>
+<C c="10" r="4" s="7">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="11" r="4" s="10">
+<Expand/>
+</C>
+<C c="12" r="4" s="1">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="5" s="1">
+<Expand/>
+</C>
+<C c="1" r="5" s="6">
+<Expand/>
+</C>
+<C c="2" r="5" s="7">
+<O>
+<![CDATA[  道路等级：]]></O>
+<Expand/>
+</C>
+<C c="3" r="5" cs="2" s="7">
+<O>
+<![CDATA[高速]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.ComboBox">
+<WidgetName name="rl_road"/>
+<WidgetAttr/>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<Editable>
+<![CDATA[false]]></Editable>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="1" value="高速"/>
+<Dict key="2" value="国道"/>
+<Dict key="3" value="省道"/>
+</CustomDictAttr>
+</Dictionary>
+</Widget>
+</C>
+<C c="5" r="5" s="7">
+<Expand/>
+</C>
+<C c="6" r="5" s="9">
+<O>
+<![CDATA[道路名称：]]></O>
+<Expand/>
+</C>
+<C c="7" r="5" s="7">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.ComboCheckBox">
+<WidgetName name="rn_road"/>
+<WidgetAttr/>
+<Listener event="afteredit">
+<JavaScript class="com.fr.report.js.JavaScriptImpl">
+<Parameters/>
+<Content>
+<![CDATA[var itemValue = this.getValue();
+var itemValues = new Array();
+itemValue = itemValue.substring(1,itemValue.length - 1);
+itemValues = itemValue.split("','");
+
+var result = "";
+for(var i = 0; i < itemValues.length; i++) {
+	result += itemValues[i]A;
+	if( i >= 19) {
+		break;
+	} else {
+		if(i < itemValues.length - 1) {
+			result += ",";
+		}	
+	}
+}
+
+if(result != ',') {
+	this.setValue(result);
+}
+]]></Content>
+</JavaScript>
+</Listener>
+<EMSG>
+<![CDATA[道路名称不能为空！]]></EMSG>
+<allowBlank>
+<![CDATA[false]]></allowBlank>
+<Editable>
+<![CDATA[false]]></Editable>
+<Dictionary class="com.fr.data.impl.DynamicSQLDict">
+<FormulaDictAttr ki="0" vi="0"/>
+<Formula>
+<![CDATA[SELECT DLMC FROM T_OA_DICTDLFX WHERE GBDM <> 'z_old' AND ROADLEVEL = '${rl_road}'
+ORDER BY 1]]></Formula>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[EHL_ATMSIC_GD]]></DatabaseName>
+</Connection>
+</Dictionary>
+<RAAttr isArray="false" delimiter="&apos;,&apos;" start="&apos;" end="&apos;"/>
+</Widget>
+</C>
+<C c="8" r="5" s="7">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="9" r="5" s="7">
+<Expand/>
+</C>
+<C c="10" r="5" s="7">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+<Widget class="com.fr.report.web.ui.impl.form.FormSubmitButton">
+<WidgetAttr/>
+<Text>
+<![CDATA[统  计]]></Text>
+<IconName>
+<![CDATA[preview]]></IconName>
+</Widget>
+</C>
+<C c="11" r="5" s="10">
+<Expand/>
+</C>
+<C c="12" r="5" s="1">
+<Expand/>
+</C>
+<C c="0" r="6" s="1">
+<Expand/>
+</C>
+<C c="1" r="6" s="11">
+<Expand/>
+</C>
+<C c="2" r="6" s="12">
+<Expand/>
+</C>
+<C c="3" r="6" s="12">
+<Expand/>
+</C>
+<C c="4" r="6" s="12">
+<Expand/>
+</C>
+<C c="5" r="6" s="12">
+<Expand/>
+</C>
+<C c="6" r="6" s="12">
+<Expand/>
+</C>
+<C c="7" r="6" s="12">
+<Expand/>
+</C>
+<C c="8" r="6" s="12">
+<Expand/>
+</C>
+<C c="9" r="6" s="12">
+<Expand/>
+</C>
+<C c="10" r="6" s="12">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="11" r="6" s="13">
+<Expand/>
+</C>
+<C c="12" r="6" s="1">
+<Expand/>
+</C>
+<C c="0" r="7" s="1">
+<Expand/>
+</C>
+<C c="1" r="7" cs="12" s="1">
+<Expand/>
+</C>
+</CellElementList>
+</ParameterUI>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="14" foreground="-1"/>
+<Background name="ImageBackground" specifiedImageWidth="140.0" specifiedImageHeight="27.0" layout="3">
+<Image width="141" height="27">
+<![CDATA[jdXGS'h&hVrs^n6DSY`Y77f1!N(*sW5):A40ufb0";Vgh5m)k7K#B&A(gipJ"!L?-1+9)O%P
+g.9AmbfP6qopV9ONQI2e%-KRf;TD5(0HBqVHLb\G/tP<IMLV<rM;FVu"\D]A7)X']Am),5r+pR
+8C!MK?\'4_/>mn9X-9oo.P,9erM5k(9_4[YgJ'85lR;7gBh>YR+j!NWDpSR^jPh!e:AgoTa`
+M_DE(V@"j]ApH&5J)5.UET<Yt(O2AHe;incjbL0bmp0s[U%:\'H/RkOoYtMg@U6H9D*.BR03N
+f'n;(30\SR&PIsK^=*p`['hu$[Q%$'H4:nirta8?A.9:jIQf%H+ImJ&=3CqIQ.?aAoaPFok&
+s7kpK$"X="^anhW]A&*l(alBsYE7mE&=blENH)S/*:+W+7X,gla2tU^+Y</#oJ,)L=hC.Q)mR
+u+uDtd?,ce<anfT5pOH\RQU_Xe!8htQ"ED2f1gJ8n!7U#VIeN#DBuk#Rdm/sK6A<ZLe/Y$8d
+;F5JoFOg-,AH;<PVL,?A\d$N6lgJ;Dh4uhYb+5)+O;!QB#*PuGkLN"8Z%ZW!HTmu$jB3Q"]Aj
+l)2O,tXsF%jllGj=Zg,c%T]AI;DJW#4it,N$Mcr.4pQJ'Wd-Z2S\ThV\ZPZFGs;XpaL9&L:4%
+_?%EVP+E/c/Jc[13dNWiO:0TK8iLg:\1N+OBu+#0%*8aqk8nhG0#95m6/M6RV-QY#C9Pj<%4
+=I76&?d]Au!8M2hEA0WLm]A4lp;j>[h31UoB3_/V4LXY<'0&RH[[2jRspH/cJ@Wp6cs-?P5$?a
+_=ZA4_,=<"W`<Ij7]As0/HqY+TI_3$28A[<tn"SIj5bGDq)=PlGOk104`(ks8,#An&8e;:S-%
+<oX!Hmq2E:Pc?j$#b&P32`YWdA+8Wum5;hFVIC[*LbEf]Adq.i^>dG/^@,4euO:?Olccd$T<(
+)*GdH$ss&bmp=:f4FBP'oH3Va-M"X*##J:Qg<^X!8_FKMpEs@G)WdQo$OVU7S$q*P+5%e:oM
+]A$2oZ4?]A"^?Sc`F#o[f>sb7<pP3)=a.Za3f.M-nmIMkp*&!Z=o/Qmq8OM5?\WT?VXn[>BiA:
+V5eaKdl'+0\moN*;`b2i45[N$\IA.jL2_'(@&<@O&]AN<lk^Bc`N]Aghcp>9@#UW<kSWFCRo85
+?r+Q-'CjjeY-gabSC<`qXhmomMCXl0f)rkAo0NZXd>_2q5*Jd$Lmfc='qV:L;d`8!dP=lr5^
+hZ(]AAQ`XKMqT.uA/Cs3(>([iEZ5&SS@g,lYm4ui:7po[Z0m"\7u"=Fmd+YT@8BZ;F;?Lh4me
+PY\>P/EFk0-]A:)6TufAj7f.1O2]A>pcM=`^\:G=^60QLAZU0V^G\-5^)sJB3([3#F+]A]Aqnn+S
+">j?arXS-VRk]ASQ+-rfP@=*IBHHXZF,&*Ue%Kn`(b3$&gk*0qDg72Tu\@e6)[Hl2:c*,]A[A!
+U=mmJ-5^Y0:1X9bl]Ac1Lr_f5>Xp",dkSO.rE>A/AJ3O2t&oilc0QtPuJH$`]Ai>qGjj>K%?V=
+7sU,%/'HNEir1kqB:#a!'Ui,gAt.$`\]ArJT@`dY@4lKiCD#[:,=,?BoEqM;!'lXXld/'lL5q
+o2EojM3)4Ld8]AbD/HV%OQ3GXn%NoKjGj2QH\ALZ1Y*^V?]AnbJ4m1DW3D[7WZ@YV^dSONCI:?
+DMXSN'H2uTT7I^_jc-so7_Ch4i=&l)u*.R*Qr>,o3KI:6@!>p="u_Or+e2ibd$_+]Aq=8n8nL
+%qU&!;W4I5B5lgm/`L6=M'EEU>?;Z',WA$Mg#j&1m;DDq7"^!p`k%@D_3jL4p</8oMZW4HmT
+`#cVDjVX:cak(=Kro'"81$64.%>#D[[P*+!CnR$[+ofB((/N<peeQ<+'%oj5<H;H,q#EX524
+aURim_Z=%+pC+;OPk2R,^3+aAXoK(b79@aZ>,1"YW\cIPiJrG/t!eE*O-a@dtsO2>kJ/;i'e
+B,WEr,R2<KD7Qpijn2H'gm\e-"-lt)Q<T^_N-KQ5CH4!)9oU^_p=KG%(O?PuHXEZ!nd7d+rZ
++S-7bK,r<M]A3\3oK1'mG<*lakV^Y4<ZTEP>'hB=Eq_Tg)ag[2b$kRFaEif1a]AhMel*qt+@9k
+\+1!s;O@h23QF6'u+#-;;TQR"5#QX'&!RRu0RMI5fJD/pkL[YgKiH54XXLQLtBgfuc")XQC#
+S6PM'aUG@9C#_cl8n!4I<T$;#,ND\C91nY4o!+F.ip&Zo"b4pFM"V;2c9@/O:lOE0Z;36E&u
+/pMUO<f]Aer=4;0S\#bNH]Aj@*j0Rg,53_<(\$2Sl?u%-I##qe]ALB0$\KN?%RsAl--@b3`r59L
+8c\Pi8(%I!#abOCr96uNg%`nt1XF,e0@dVW2H`u@O%Ic\rJugA4\;nB3k)0)XHs#iM0_bM&)
+!!dRRkXUJp?1?>5,;?0bf"agEJVgApHa.\$LpWP(+XF,[AR+]A_obP%N^CCs3+K_[.qod#Ib@
+cmapN,n9'aXhR%W%:@=I8YQbQ7W*R),A0Yqscr7bEQ(4lEF3'nX%+YU^iQD*AZWYT^d(\DBm
+*r,T[s$DXX]A'.>GL%3F23qHhfEu\-FDbe+Yp?a9c)7\s(emhm1k'(1`d5-2PI$p_*a+*n\Ls
+M7Tb]AUroO(jLDI#Y''"T~
+]]></Image>
+</Background>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Top style="2" color="-4860186"/>
+<Left style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Top style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Top style="2" color="-4860186"/>
+<Right style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Left style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border/>
+</Style>
+<Style>
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Right style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Bottom style="2" color="-4860186"/>
+<Left style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Bottom style="2" color="-4860186"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12"/>
+<Background name="ColorBackground" color="-1509635"/>
+<Border>
+<Bottom style="2" color="-4860186"/>
+<Right style="2" color="-4860186"/>
+</Border>
+</Style>
+</StyleList>
+</WorkBook>

@@ -1,0 +1,588 @@
+<HTML>
+<HEAD>
+<title>春运日报表统计</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="../../../base/css/style1/tab.css" rel="stylesheet"  type="text/css" />
+<link href="../../../base/css/style1/form.css" rel="stylesheet" type="text/css" />
+<link href="../../../base/css/style1/font.css" rel="stylesheet" type="text/css" />
+<link href="../../../base/css/style1/link.css" rel="stylesheet"	type="text/css" />
+<style type="text/css">
+<!--
+table {
+	font-size:11px;
+}
+.tableInput {
+	border:1px solid #b5d6e6;
+}
+.td_r_b1 {
+	border-bottom:1px solid #b5d6e6;
+	border-right:1px solid #b5d6e6;
+}
+.STYLE2 {
+	color: #FF0000;
+}
+.input1 {
+	border:0;
+	width:40px;
+}
+.input2 {
+	border:0;
+	width:40px;
+	border-bottom:1px solid #b5d6e6;
+}
+.input3 {
+	border:0;
+	width:100px;
+}
+* {
+	margin:0;
+	pading:0;
+}
+-->
+</style>
+</HEAD>
+<body>
+<table width="800" align="center" class="tableInput" id="dataTable" cellpadding="0" cellspacing="0">
+  <tr>
+    <th style=" width:150;" class="td_r_b">序号</th>
+    <th style=" width:200;" class="td_r_b">项目</th>
+    <th style=" width:50;" class="td_r_b">数量</th>
+    <th colspan="2" class="td_r_b">序号</th>
+    <th colspan="2" class="td_r_b">项目</th>
+    <th style=" width:50;" class="td_b">数量</th>
+  </tr>
+  <tr>
+    <td class="td_r_b">1</td>
+    <td class="td_r_b1">投入警力（人次）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text1" readonly/></td>
+    <td colspan="2" class="td_r_b">25</td>
+    <td colspan="2" class="td_r_b1">卸客转运乘客（人次）</td>
+    <td class="td_b"><input type="text"  class="input1" value="200" id="text24" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">2</td>
+    <td class="td_r_b1">出动警车（辆次）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text2" readonly/></td>
+    <td colspan="2" class="td_r_b">26</td>
+    <td colspan="2" class="td_r_b1">通报异地超速50%以上、客车超员20%以上交通违法行为（起）</td>
+    <td class="td_b"><input    type="text"  class="input1" value="200" id="text25" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">3</td>
+    <td class="td_r_b1">投入测速设备（台）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text3" readonly/></td>
+    <td colspan="2" class="td_r_b">27</td>
+    <td colspan="2" class="td_r_b1">排除安全隐患客车（辆）<span style="color:red;font-size:11px;">※</span></td>
+    <td class="td_b"><input   type="text"  class="input1" value="200" id="text26" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">4</td>
+    <td class="td_r_b1">设置固定测速点（个）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text4" readonly/></td>
+    <td colspan="2" class="td_r_b">28</td>
+    <td colspan="2" class="td_r_b1">建议调整客车驾驶人（人次）</td>
+    <td class="td_b"><input type="text"  class="input1" value="200" id="text27" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">5</td>
+    <td class="td_r_b1">设置流动测速点（个）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text5" readonly/></td>
+    <td colspan="2" class="td_r_b">29</td>
+    <td colspan="2" class="td_r_b1">强制疲劳驾驶人休息（人次）</td>
+    <td class="td_b"><input   type="text"  class="input1" value="200" id="text28" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">6</td>
+    <td class="td_r_b1">设置春运执勤服务点（个）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text6" readonly/></td>
+    <td colspan="2" class="td_r_b">30</td>
+    <td colspan="2" class="td_r_b1">抓获车匪路霸（人）</td>
+    <td class="td_b"><input  type="text"  class="input1" value="200" id="text29" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">7</td>
+    <td class="td_r_b1">查处交通违法行为合计（起）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text7" readonly/></td>
+    <td style=" width:75;" rowspan="10" class="td_r_b">31</td>
+    <td rowspan="10" style="width:75;" class="td_r_b1">交通安全宣传情况</td>
+    <td colspan="2" class="td_r_b1">举行宣传活动（场次）</td>
+    <td class="td_b"><input   type="text"  class="input1" value="200" id="text30" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">8</td>
+    <td class="td_r_b1">查处超速行驶（起）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text8" readonly/></td>
+    <td colspan="2" class="td_r_b1">播放宣传光盘（场次）</td>
+    <td class="td_b"><input   type="text"  class="input1" value="200" id="text31" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">9</td>
+    <td class="td_r_b1">查处客车超员（起）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text9" readonly/></td>
+    <td colspan="2" class="td_r_b1">设固定宣传栏（处）</td>
+    <td class="td_b"><input name="text32"  type="text"  class="input1" value="200" id="text32" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">10</td>
+    <td class="td_r_b1">查处疲劳驾驶（起）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text10" readonly/></td>
+    <td colspan="2" class="td_r_b1">张贴宣传画（张）</td>
+    <td class="td_b"><input name="text33"  type="text"  class="input1" value="200" id="text33" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">11</td>
+    <td class="td_r_b1">查处酒后驾驶（起）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text11" readonly/></td>
+    <td colspan="2" class="td_r_b1">发放宣传资料（份）</td>
+    <td class="td_b"><input name="text34"  type="text"  class="input1" value="200" id="text34" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">12</td>
+    <td class="td_r_b1">查处无证驾驶（起）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text12" readonly/></td>
+    <td colspan="2" class="td_r_b1">受教育（人次）</td>
+    <td class="td_b"><input  class="input1" value="200" type="text"  id="text35" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">13</td>
+    <td class="td_r_b1">查处农用车违法载客（起）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text13" readonly/></td>
+    <td class="td_r_b1" width="50" rowspan="4">媒体宣传</td>
+    <td width="150" class="td_r_b1">电视宣传（条）</td>
+    <td class="td_b"><input  class="input1" value="200"   type="text" id="text36" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">14</td>
+    <td class="td_r_b1">吊销机动车驾驶证（本）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text14" readonly/></td>
+    <td class="td_r_b1">电台宣传（条）</td>
+    <td class="td_b"><input  class="input1" value="200"  type="text" id="text37" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">15</td>
+    <td class="td_r_b1">暂扣交通违法车辆（辆次）</td>
+    <td class="td_r_b"><input  class="input1" value="200" type="text" id="text15" readonly/></td>
+    <td class="td_r_b1">报纸宣传（条）</td>
+    <td class="td_b"><input   type="text"  class="input1" value="200" id="text38" readonly/></td>
+  </tr>
+  <tr>
+    <td rowspan="1" class="td_r_b">16</td>
+    <td rowspan="1" class="td_r_b1">拘留交通违法驾驶人（人次）</td>
+    <td rowspan="1" class="td_r_b"><input type="text"  class="input1" value="200" id="text16" readonly/></td>
+    <td class="td_r_b1">网络宣传（条）</td>
+    <td class="td_b"><input  type="text"  class="input1" value="200" id="text39" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">17</td>
+    <td class="td_r_b1">检查客运车辆（辆）<font color="red">※</font></td>
+    <td class="td_r_b"><input type="text"  class="input1" value="200" id="text17" readonly/></td>
+    <td colspan="2" class="td_r_b">32</td>
+    <td colspan="2" class="td_r_b1">为群众做好事（件）</td>
+    <td class="td_b"><input  type="text"  class="input1" value="200" id="text40" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">18</td>
+    <td class="td_r_b1">清理驾驶人记分（人）<font color="red">※</font></td>
+    <td class="td_r_b"><input type="text"  class="input1" value="200" id="text18" readonly/></td>
+    <td rowspan="6" class="td_r_b">33</td>
+    <td colspan="2" rowspan="3" class="td_r_b1" align="center">交通事故情况</td>
+    <td class="td_r_b1">交通事故宗数（起）</td>
+    <td class="td_b"><input  type="text"  class="input1" value="200" id="text41" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">19</td>
+    <td class="td_r_b1">深入专业运输企业（个）<font color="red">※</font></td>
+    <td class="td_r_b"><input type="text"  class="input1" value="200" id="text19" readonly/></td>
+    <td class="td_r_b1">死亡人数（人次）</td>
+    <td class="td_b"><input   type="text"  class="input1" value="200" id="text42" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">20</td>
+    <td class="td_r_b1">教育运输企业驾驶人（人次）<font color="red">※</font></td>
+    <td class="td_r_b"><input  type="text"  class="input1" value="200" id="text20" readonly/></td>
+    <td class="td_r_b1">受伤人数（人次）</td>
+    <td class="td_b"><input  type="text"   class="input1" value="200"  id="text43" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">21</td>
+    <td class="td_r_b1">启动恶劣天气应急预案（次）<font color="red">※</font></td>
+    <td class="td_r_b"><input  type="text"   class="input1" value="200"  id="text21" readonly/></td>
+    <td colspan="2" rowspan="3" class="td_r_b1" align="center">其中</td>
+    <td class="td_r_b1">特大事故宗数（起）</td>
+    <td class="td_b"><input  type="text"   class="input1" value="200"  id="text44" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">22</td>
+    <td class="td_r_b1">应急疏导、分流车辆（辆）<font color="red">※</font></td>
+    <td class="td_r_b"><input type="text"   class="input1" value="200"  id="text22" readonly/></td>
+    <td class="td_r_b1">死亡人数（人次）</td>
+    <td class="td_b"><input type="text"   class="input1" value="200"  id="text45" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">23</td>
+    <td class="td_r_b1">整治危险路段（处）<font color="red">※</font></td>
+    <td class="td_r_b"><input type="text"  class="input1" value="200"  id="text23" readonly/></td>
+    <td class="td_r_b1">受伤人数（人次）</td>
+    <td class="td_b"><input type="text"  class="input1" value="200"  id="text46" readonly/></td>
+  </tr>
+  <tr>
+    <td class="td_r_b">24</td>
+    <td class="td_r_b1">设置临时执勤点（个）<font color="red">※</font></td>
+    <td class="td_r_b"><input  type="text"  class="input1" value="200" id="text47" readonly/></td>
+    <td class="td_r_b" ></td>
+    <td class="td_r_b" colspan='4'></td>
+  </tr>
+  <tr>
+    <td colspan='8' id="tfm"><!-- 在js里面拼此表格，所以注释掉。
+									
+									
+													<table width="100%" align="center" class="tableInput" id="tfmTable">
+														  <tr><td colspan="5" class="td_r_b" align="center">辖区日车流量最大的路段：</td></tr>
+													      <tr>
+													             	<td width="28%" class="td_r_b">道路名称</td>
+															<td width="27%" class="td_r_b">路段名称</td>
+															<td width="15%" class="td_r_b">交通流量（车次）</td>
+															<td width="15%" class="td_r_b">客车（车次）</td>
+															<td width="15%" class="td_r_b">自驾车（车次）</td>	
+													             </tr>
+													</table>
+												--></td>
+  </tr>
+</table>
+<br>
+<br>
+<br>
+<input type="button" onClick="javascript:exportExcel1(this);" value="导出页面指定区域内容到Excel">
+<SCRIPT LANGUAGE="javascript">
+//指定页面区域内容导入Excel
+
+function input2test()
+{
+	
+	inputs = document.getElementsByTagName("input");
+	var tmpInputs = new Array();
+	var count = 0;
+	//debugger;
+
+	for(i=0;i<inputs.length;i++)
+	{
+		if(inputs[i].className == "input1" )
+		{
+			tmpInputs[count]=inputs[i];
+			count++;
+		}
+	}
+	//count = 0;
+	
+	for(i=(tmpInputs.length-1);i>=0;i--)
+	{
+		tmpInputs[i].parentNode.innerText=tmpInputs[i].value;
+	}
+	
+
+}
+
+
+
+
+function AllAreaExcel() 
+{
+
+
+input2test();
+
+var oXL = new ActiveXObject("Excel.Application"); 
+var oWB = oXL.Workbooks.Add(); 
+var oSheet = oWB.ActiveSheet; 
+var sel=document.body.createTextRange();
+sel.moveToElementText(dataTable);
+sel.select();
+sel.execCommand("Copy");
+oSheet.Paste();
+oXL.Visible = true;
+}
+//指定页面区域“单元格”内容导入Excel
+function CellAreaExcel() 
+{
+var oXL = new ActiveXObject("Excel.Application"); 
+var oWB = oXL.Workbooks.Add(); 
+var oSheet = oWB.ActiveSheet; 
+var Lenr = PrintA.rows.length;
+for (i=0;i<Lenr;i++) 
+{ 
+   var Lenc = PrintA.rows(i).cells.length; 
+   for (j=0;j<Lenc;j++) 
+   {
+    oSheet.Cells(i+1,j+1).value = PrintA.rows(i).cells(j).innerText; 
+   } 
+} 
+oXL.Visible = true; 
+}
+
+//指定页面区域内容导入Word
+function AllAreaWord()
+{
+var oWD = new ActiveXObject("Word.Application");
+var oDC = oWD.Documents.Add("",0,1);
+var oRange =oDC.Range(0,1);
+var sel = document.body.createTextRange();
+sel.moveToElementText(PrintA);
+sel.select();
+sel.execCommand("Copy");
+oRange.Paste();
+oWD.Application.Visible = true;
+//window.close();
+}
+
+function exportExcel1(btnObj)
+{
+	ExportExcel(btnObj,"dataTable","strCols","春运道路交通安全日统计报表"," 填报单位：　　　市公安局交通警察支队   　　      统计日期：","表尾");
+}
+
+//导出到Excel，注意，表格标记内不得有注释，因为childNodes会把注释也算进去
+//如果出错，需要关闭Excel，否则Excel进程会一直运行着
+function ExportExcel(btn,TabId,strCols,sTitle,sHeader,sFooter){
+    btn.style.cursor = "wait";
+    event.returnValue = false;    
+    //try{    
+    var tab = document.getElementById("DataGrid1");
+    if(tab == null) tab = document.getElementById("dg")
+    if(tab == null) tab = document.getElementById("db")
+    if(tab == null) tab = document.getElementById(TabId)
+    if(tab == null){
+        alert("缺少表格对象");
+        btn.style.cursor = "hand";
+        return;
+    }        
+    var t = tab.firstChild;
+    var rows = t.childNodes.length;
+    //alert(t.nodeName); //test
+    var tds = t.childNodes[0].childNodes.length;
+    var cols = 0;
+    for(var i=0;i<tds;i++){
+        var td = t.childNodes[0].childNodes[i];
+        if(parseInt(td.colSpan)>1){
+            cols += parseInt(td.colSpan);
+        }
+        else{
+            cols++;
+        }
+    }
+    /////////////////////////////创建excel文档
+    try{
+        var oXL = new ActiveXObject("Excel.Application"); 
+    }catch(e){
+        alert("请确认已经安装了Excel并允许运行Excel!");
+        btn.style.cursor = "hand";
+        return;
+    }
+    oXL.Workbooks.Add(); 
+    var obook = oXL.ActiveWorkBook; 
+    var osheets = obook.Worksheets;
+    var osheet = obook.Sheets(1);
+    var xlrow = 1;
+        //添加标题
+    if((sTitle == "") || (typeof(sTitle)=="undefined") || (sTitle==null)){
+        var t_tdHeadc = document.getElementById("tdHeadc");
+        if(t_tdHeadc != null){
+            sTitle = t_tdHeadc.innerText;
+            var sk = sTitle.lastIndexOf("-->")+3;
+            sTitle = sTitle.substring(sk);
+        }
+    }
+    osheet.Cells(1, 1) = sTitle;
+    osheet.Range(osheet.Cells(xlrow, 1),osheet.Cells(xlrow,cols)).Select(); //选择该列
+    oXL.Selection.HorizontalAlignment = 3;                          //居中
+    oXL.Selection.MergeCells = true;
+    xlrow++;
+        //小标题
+    if((sHeader == "") || (typeof(sHeader)=="undefined") || (sHeader==null)){ 
+        sHeader = ""; 
+    }        
+    if(sHeader != ""){
+        osheet.Cells(2, 1) = sHeader;
+        osheet.Range(osheet.Cells(xlrow, 1),osheet.Cells(xlrow,cols)).Select(); //选择该列
+        //oXL.Selection.HorizontalAlignment = 3;                          //居中
+        oXL.Selection.MergeCells = true;
+        xlrow++;
+    }
+    var winX = (screen.width - 300) / 2;
+    var winY = (screen.height - 120) / 2;
+
+    var win = window.open("","","directories=0,location=0,memubar=0,scrollbars=0,status=0,toolbar=0,width=230,height=75,left=" + winX + ",top=" + winY);
+    win.document.write('<html><title>' + sTitle + '导出Excel</title><body><div id="m_pub_wzs_progress_x" style="background:white;overflow:hidden;padding-top:0;display:none;position:absolute;left:10px;top:25px;"><table id="m_pub_wzs_progress_tab" border=0 cellspacing=1 bgcolor="#CCCCCC" style="display:inline;border-width:1px;border-style:solid;border-left-color:#333333;border-top-color:#333333;border-right-color:#EEEEEE;border-bottom-color:#EEEEEE;">');
+
+    win.document.write('<tr height=17><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#000088"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td><td width=4 bgcolor="#CCCCCC"></td>');
+ win.document.write('</tr>');
+win.document.write('</table>');
+win.document.write('<br/>');
+win.document.write('<span id="m_pub_wzs_progress_percent" style="font-size:10pt;vertical-align:middle;color:black;font-family:宋体">总计' + rows + '行，已导出<font id="sx" color="#cc0000"></font>行！</span></div>                  ');
+win.document.write('<br />');
+win.document.write('<br />');
+win.document.write('<br />');
+win.document.write('<script type="text/javascript" src="temp.js" />');
+win.document.write('</body>');
+win.document.write('</html>');
+
+    
+ 
+    strCols = ","+strCols+",";
+    var aRowSpans = new Array();
+    for(var i=0;i<cols;i++){
+        aRowSpans[i] = 1;
+    }
+    var isProgressErr = true;
+    for(var i = 0; i < rows; i++){
+        //btn.value = i;
+        if(!isProgressErr){
+            try{
+                win.m_pub_wzs_progress_show(rows,i+1);
+            }
+            catch(e){
+                isProgressErr = true;
+            }
+        }
+        var row = t.childNodes[i];
+        var xlcol =0;            
+        var viwCol = -1; //所在表格的位置，指显示位置，如果有行合并时，会与列索引不一致
+        var colInx = -1;
+        var colSpans = 1;
+        for(var h = 0; h < cols; h++){
+            if(aRowSpans[h]>1){
+                xlcol++;
+                aRowSpans[h]--;
+                viwCol++;
+                continue;
+            }
+            else{
+                colInx++;
+            }
+            var td = t.childNodes[i].childNodes[colInx];
+            if(td == null) continue;
+            colSpans = td.colSpan;
+            var rowSpan = td.rowSpan;
+            if(isNaN(rowSpan)) rowSpan = 1;
+            for(var k=0;k<td.colSpan;k++){
+               viwCol++;
+               xlcol++;
+               aRowSpans[viwCol] = rowSpan;
+            }
+            h+=td.colSpan-1; //跳过合并列
+            if(td.className=="hideNode"){
+                xlcol--;
+                continue;
+            }
+            var s = "";
+            if(td.hasChildNodes() && td.firstChild.nodeName.toLowerCase()=="input"){
+                if(td.firstChild.type.toLowerCase()=="text"){
+                    s = td.firstChild.value;
+                }
+                else if(td.firstChild.type.toLowerCase()=="radio"){   //如果是单选框， 遍历该框所有单选框，找到选择的值
+                    for(var k=0;k<td.childNodes.length;k++){
+                        var cn = td.childNodes[k];
+                        if(cn.nodeName.toLowerCase()=="input" && cn.type.toLowerCase() == "radio" && cn.checked){
+                            s = cn.value;
+                            break;
+                        }
+                    }
+                }
+            }
+            else{
+                s = td.innerText;
+            }
+            if(strCols.indexOf("," + (xlcol-1) + ",")!=-1){
+                osheet.Cells(xlrow,xlcol).NumberFormatLocal = '@';
+            }
+            if(td.rowSpan>1 || td.colSpan>1){
+                osheet.range(osheet.cells(xlrow,xlcol),osheet.cells(xlrow-1+td.rowSpan, xlcol-td.colSpan+1)).Select();
+                oXL.Selection.MergeCells = true;       
+                osheet.Cells(xlrow,xlcol).HorizontalAlignment = 3;
+                //osheet.cells(i+td.rowSpan, xlcol-td.colSpan+1).value = s;
+                osheet.Cells(xlrow,xlcol-td.colSpan+1).value = s;//m_splitLen(s,30,'\r\n');
+            }else{
+                osheet.Cells(xlrow,xlcol).value = s;//m_splitLen(s,30,'\r\n');
+            }
+        }
+        xlrow++;            
+    }
+    //添加表尾
+    if((sFooter == "") || (typeof(sFooter)=="undefined") || (sFooter==null)){ 
+        sFooter = "";
+    }            
+    var d = new Date();
+    var sUser = "";
+    if((window.parent != null) && (window.parent.parent != null)){
+        try{
+            sUser = window.parent.parent.bottomFrame.document.getElementById("labUser").innerText.replace("用户：","").replace(/ /g,"");
+        }
+        catch(ex){
+        }                
+    }
+    var sFooterDefault = " 制表人：" + sUser + "    制表时间：" + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "    ";
+    osheet.Cells(xlrow, 1) = sFooterDefault + sFooter;
+    osheet.Range(osheet.Cells(xlrow, 1),osheet.Cells(xlrow,cols)).Select(); //选择该列//oXL.Selection.HorizontalAlignment = 4;                          //居中
+    oXL.Selection.MergeCells = true;
+    osheet.Range(osheet.Cells(1, 1),osheet.Cells(1,1)).Select(); //选择第一个单元格列
+  //  osheet.Columns.AutoFit();   //自动列宽
+  	osheet.Range("A1:H1").Font.Size=24;
+	
+	osheet.Columns("A").columnwidth=6.13;  // 设置 A 列宽度为40px
+	osheet.Columns("B").columnwidth=26.5;  // 设置 A 列宽度为40px
+	osheet.Columns("C").columnwidth=11;  // 设置 A 列宽度为40px
+	osheet.Columns("D").columnwidth=4.38;  // 设置 A 列宽度为40px
+	osheet.Columns("E").columnwidth=3.63;  // 设置 A 列宽度为40px
+	osheet.Columns("F").columnwidth=3.88;  // 设置 A 列宽度为40px
+	osheet.Columns("G").columnwidth=32.63;  // 设置 A 列宽度为40px
+	osheet.Columns("H").columnwidth=9.5;  // 设置 A 列宽度为40px
+	
+	osheet.Columns("A").HorizontalAlignment =3;//中 1左 2左 3居中 4右 
+	osheet.Columns("B").HorizontalAlignment =2;
+	osheet.Columns("C").HorizontalAlignment =3;
+	osheet.Columns("D").HorizontalAlignment =3;
+	osheet.Columns("E").HorizontalAlignment =3;
+	osheet.Columns("F").HorizontalAlignment =2;
+	osheet.Columns("G").HorizontalAlignment =2;
+	osheet.Columns("H").HorizontalAlignment =3;
+osheet.Range("F4:G15").HorizontalAlignment =2;
+osheet.Range("F20:G20").HorizontalAlignment =2;
+
+osheet.Rows("3").HorizontalAlignment =3;//中 1左 2左 3居中 4右 
+	
+	osheet.Range("F5:G5").WrapText = true; // 设置自动换行
+	osheet.Range("F4:G26").WrapText = true; // 设置自动换行
+	osheet.Range("E10:E19").WrapText = true; // 设置自动换行
+	osheet.Range("E21:F23").WrapText = true; // 设置自动换行
+	
+	osheet.Range("A3:H27").Borders.LineStyle = 1; //1实现 2虚线 3 细虚线
+
+ oXL.ActiveWorkBook.ActiveSheet.PageSetup.Orientation = 1; //正常，2横向
+ 
+  //oXL.ActiveWorkBook.ActiveSheet.PageSetup.PrintArea = "A1:H29";  //打印区域
+   oXL.ActiveWorkBook.ActiveSheet.PageSetup.Zoom = false //缩放打印
+  //oXL.ActiveWorkBook.ActiveSheet.PageSetup.FitToPagesWide = 1        ;                      //   '页面缩放：调整为1页高 
+  // oXL.ActiveWorkBook.ActiveSheet.PageSetup .FitToPagesTall = 1       ;                       //   '页面缩放：调整为1页宽 
+
+
+
+
+    for(var i=1;i<xlrow;i++){
+        //osheet.Rows(i).RowHeight = osheet.Rows(i).RowHeight + 6;   //自动大小后上下无边距，需要增加高度，要不太挤。
+		osheet.Rows(i).RowHeight = 27.5;   //自动大小后上下无边距，需要增加高度，要不太挤。
+    }    
+    if(!isProgressErr){         //关闭进度条
+        win.close();
+    }
+    oXL.Visible = true;
+    oXL.UserControl = true;
+    
+    oXL = null;
+    obook = null;
+    osheets = null;
+    osheet = null;
+    
+    btn.style.cursor = "hand";
+}
+
+</SCRIPT>
+</body>
+</html>

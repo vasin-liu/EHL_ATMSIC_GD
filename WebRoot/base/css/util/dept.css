@@ -1,0 +1,12 @@
+.deptDivClass {
+	z-index: 10000;
+	position: absolute;
+	display: inline;
+	width: 250;
+	height: 340;
+}
+
+.popup {
+	z-index: 1000;
+	border-collapse: collapse;
+}

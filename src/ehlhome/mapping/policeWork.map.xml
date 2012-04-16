@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/policeWorks">
+	<forwards />
+	<exceptions />
+	<controllers>
+  		<!--新闻材料 -->
+		<controller name="newsFiles" clazz="com.ehl.policeWorks.newsFiles.action.newsFilesAction">
+			 <action name="insertNewsFiles">
+				 <forward name="success" redirect="true"  path="/policeWork/ehl/newsFiles/newsFilesAdd.jsp" />
+				 <forward name="redirect" redirect="true" path="/policeWork/ehl/newsFiles/newsFilesAddSuccess.jsp" />
+				 <forward name="successZd" redirect="true" path="/policeWork/ehl/newsFiles/newsFilesAddZd.jsp" />
+				 <forward name="redirectZd" redirect="true" path="/policeWork/ehl/newsFiles/newsFilesAddZdSuccess.jsp" />
+			 </action> 
+			 <action name="getNewsFileInfo">  </action> 
+			 <action name="updateNewsFilesInfo">  </action>
+			 <action name="modify"></action>
+			 <action name="springStatis"></action>    
+  		</controller>
+  		
+  		<!--信息考核-->
+    	<controller name="orderContribution" clazz="com.ehl.policeWorks.newsFiles.action.OrderContributionAction">
+			<action name="add"></action>
+			<action name="get"></action>
+			<action name="modify"></action>
+			<action name="searchPromptInfo"></action>
+		</controller>
+  		
+  		<!--信息考核-->
+    	<controller name="assess" clazz="com.ehl.policeWorks.assess.action.AssessStandardAction">
+			<action name="modifyAssessStandard"></action>
+			<action name="getAssessStandardInfo"></action>
+			<action name="getAssessInfo"></action>
+			<action name="showExcel"></action>
+			<action name="scoreRecordEdit"></action>
+			<action name="scoreRecordDelete"></action>
+		</controller>
+
+        <!-- Modified bu Liuwx 2012-3-26 16:23:40 -->
+        <!--信息发布查询-->
+        <controller name="released" clazz="com.ehl.policeWorks.released.action.ReleasedInfoAction">
+            <action name="getReleasedInfo"></action>
+        </controller>
+        <!-- Modification finished -->
+  		
+	</controllers>
+</mapping>

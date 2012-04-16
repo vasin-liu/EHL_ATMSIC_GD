@@ -1,0 +1,368 @@
+<HTML>
+<HEAD>
+		<title>春运日报表统计</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<link href="../../../base/css/style1/tab.css" rel="stylesheet"  type="text/css" />
+		<link href="../../../base/css/style1/form.css" rel="stylesheet" type="text/css" />
+		<link href="../../../base/css/style1/font.css" rel="stylesheet" type="text/css" />
+		<link href="../../../base/css/style1/link.css" rel="stylesheet"	type="text/css" />
+		<style type="text/css">
+			<!--
+			table{
+				font-size:11px;
+			}
+			.tableInput{
+				border:1px solid #b5d6e6;
+			}
+			.td_r_b1{ 
+			    border-bottom:1px solid #b5d6e6; 
+				border-right:1px solid #b5d6e6; 
+			}
+			.STYLE2 {
+				color: #FF0000;
+			}
+			.input1{
+				border:0;
+				width:40px;
+			}
+			.input2{
+				border:0;
+				width:40px;
+				border-bottom:1px solid #b5d6e6; 
+			}
+			.input3{
+				border:0;
+				width:100px;
+			}
+			*{
+				margin:0;
+				pading:0;
+			}
+			-->
+        </style>
+</HEAD>
+<body>
+<BR>
+<table id = "PrintA" width="100%" border="1" cellspacing="0" cellpadding="0" bgcolor = "#61FF13">
+<TR style="text-align : center;">
+<TD>单元格A</TD>
+<TD>单元格A</TD>
+<TD>单元格A</TD>
+<TD>单元格A</TD>
+</TR>
+<TR>
+<TD colSpan=4 style="text-align : center;"><font color="BLUE" face="Verdana">单元格合并行A</FONT>
+
+</TD>
+</TR>
+</TABLE>
+<BR>
+<table id = "PrintB" width="100%" border="1" cellspacing="0" cellpadding="0">
+<TR style="text-align : center;">
+<TD>单元格B</TD>
+<TD>单元格B</TD>
+<TD>单元格B</TD>
+<TD>单元格B</TD>
+</TR>
+<TR>
+<TD colSpan=4 style="text-align : center;">单元格合并行B</TD>
+</TR>
+</TABLE>
+
+								<table width="99%" align="center" class="tableInput" id="dataTable">
+									 			<tr>
+									                <th width="10%" class="td_r_b">序号</th>
+									                <th width="28%" class="td_r_b">项目</th>
+									                <th width="8%" class="td_r_b">数量</th>
+									                <th width="10%" colspan="2" class="td_r_b">序号</th>
+									                <th width="36%" colspan="2" class="td_r_b">项目</th>
+									                <th width="8%" class="td_b">数量</th>
+									            </tr>
+									            <tr>
+									                <td class="td_r_b">1</td>
+									                <td class="td_r_b1">投入警力（人次）</td>
+									                <td class="td_r_b"><input  class="input1" value="200" type="text" id="text1" readonly/></td>
+									                <td colspan="2" class="td_r_b">25</td>
+									                <td colspan="2" class="td_r_b1">卸客转运乘客（人次）</td>
+									                <td class="td_b"><input type="text"  class="input1" value="200" id="text24" readonly/></td>
+									            </tr>
+									            <tr>
+									                <td class="td_r_b">2</td>
+									                <td class="td_r_b1">出动警车（辆次）</td>
+									                <td class="td_r_b"><input  class="input1" value="200" type="text" id="text2" readonly/></td>
+									                <td colspan="2" class="td_r_b">26</td>
+									                <td colspan="2" class="td_r_b1">通报异地超速50%以上、客车超员20%以上交通违法行为（起）</td>
+									                <td class="td_b"><input    type="text"  class="input1" value="200" id="text25" readonly/></td>
+									            </tr>
+									            <tr>
+									                <td class="td_r_b">3</td>
+									                <td class="td_r_b1">投入测速设备（台）</td>
+									              <td class="td_r_b"><input  class="input1" value="200" type="text" id="text3" readonly/></td>
+									                <td colspan="2" class="td_r_b">27</td>
+									                <td colspan="2" class="td_r_b1">排除安全隐患客车（辆）<span style="color:red;font-size:11px;">※</span></td>
+									                <td class="td_b"><input   type="text"  class="input1" value="200" id="text26" readonly/></td>
+									            </tr>
+									            <tr>
+									                <td class="td_r_b">4</td>
+									                <td class="td_r_b1">设置固定测速点（个）</td>
+									                <td class="td_r_b"><input  class="input1" value="200" type="text" id="text4" readonly/></td>
+									                <td colspan="2" class="td_r_b">28</td>
+									                <td colspan="2" class="td_r_b1">建议调整客车驾驶人（人次）</td>
+									                <td class="td_b"><input type="text"  class="input1" value="200" id="text27" readonly/></td>
+									            </tr>
+									            <tr>
+									                <td class="td_r_b">5</td>
+									                <td class="td_r_b1">设置流动测速点（个）</td>
+									                <td class="td_r_b"><input  class="input1" value="200" type="text" id="text5" readonly/></td>
+									                <td colspan="2" class="td_r_b">29</td>
+									                <td colspan="2" class="td_r_b1">强制疲劳驾驶人休息（人次）</td>
+									                <td class="td_b"><input   type="text"  class="input1" value="200" id="text28" readonly/></td>
+									            </tr>
+									            <tr>
+									                <td class="td_r_b">6</td>
+									                <td class="td_r_b1">设置春运执勤服务点（个）</td>
+									                <td class="td_r_b"><input  class="input1" value="200" type="text" id="text6" readonly/></td>
+									                <td colspan="2" class="td_r_b">30</td>
+									                <td colspan="2" class="td_r_b1">抓获车匪路霸（人）</td>
+									                <td class="td_b"><input  type="text"  class="input1" value="200" id="text29" readonly/></td>
+									            </tr>
+									            <tr>
+									                <td class="td_r_b">7</td>
+									                <td class="td_r_b1">查处交通违法行为合计（起）</td>
+									                <td class="td_r_b"><input  class="input1" value="200" type="text" id="text7" readonly/></td>
+									                <td rowspan="10" class="td_r_b">31</td>
+									                <td rowspan="10" width="4%" class="td_r_b1">交通安全宣传情况</td>
+									                <td colspan="2" class="td_r_b1">举行宣传活动（场次）</td>
+									                <td class="td_b"><input   type="text"  class="input1" value="200" id="text30" readonly/></td>
+									            </tr>
+									            <tr>
+									                <td class="td_r_b">8</td>
+									                <td class="td_r_b1">查处超速行驶（起）</td>
+									                <td class="td_r_b"><input  class="input1" value="200" type="text" id="text8" readonly/></td>
+									                <td colspan="2" class="td_r_b1">播放宣传光盘（场次）</td>
+									                <td class="td_b"><input   type="text"  class="input1" value="200" id="text31" readonly/></td>
+												</tr>
+												<tr>
+									                <td class="td_r_b">9</td>
+									                <td class="td_r_b1">查处客车超员（起）</td>
+									                <td class="td_r_b"><input  class="input1" value="200" type="text" id="text9" readonly/></td>
+									                <td colspan="2" class="td_r_b1">设固定宣传栏（处）</td>
+									                <td class="td_b"><input name="text32"  type="text"  class="input1" value="200" id="text32" readonly/></td>
+												</tr>
+												<tr>
+													<td class="td_r_b">10</td>
+													<td class="td_r_b1">查处疲劳驾驶（起）</td>
+													<td class="td_r_b"><input  class="input1" value="200" type="text" id="text10" readonly/></td>
+													<td colspan="2" class="td_r_b1">张贴宣传画（张）</td>
+													<td class="td_b"><input name="text33"  type="text"  class="input1" value="200" id="text33" readonly/></td>
+												</tr>
+												<tr>
+													<td class="td_r_b">11</td>
+													<td class="td_r_b1">查处酒后驾驶（起）</td>
+													<td class="td_r_b"><input  class="input1" value="200" type="text" id="text11" readonly/></td>
+													<td colspan="2" class="td_r_b1">发放宣传资料（份）</td>
+													<td class="td_b"><input name="text34"  type="text"  class="input1" value="200" id="text34" readonly/></td>
+												</tr>
+												<tr>
+													<td class="td_r_b">12</td>
+													<td class="td_r_b1">查处无证驾驶（起）</td>
+													<td class="td_r_b"><input  class="input1" value="200" type="text" id="text12" readonly/></td>
+													<td colspan="2" class="td_r_b1">受教育（人次）</td>
+													<td class="td_b"><input  class="input1" value="200" type="text"  id="text35" readonly/></td>
+												</tr>
+												<tr>
+													<td class="td_r_b">13</td>
+													<td class="td_r_b1">查处农用车违法载客（起）</td>
+													<td class="td_r_b"><input  class="input1" value="200" type="text" id="text13" readonly/></td>
+													<td class="td_r_b1" width="4%" rowspan="4">媒体宣传</td>
+													<td class="td_r_b1">电视宣传（条）</td>
+													<td class="td_b"><input  class="input1" value="200"   type="text" id="text36" readonly/></td>
+									            </tr>	
+									            <tr>
+									                <td class="td_r_b">14</td>
+									                <td class="td_r_b1">吊销机动车驾驶证（本）</td>
+									                <td class="td_r_b"><input  class="input1" value="200" type="text" id="text14" readonly/></td>
+									                <td class="td_r_b1">电台宣传（条）</td>
+									                <td class="td_b"><input  class="input1" value="200"  type="text" id="text37" readonly/></td>
+									            </tr>
+									            <tr>
+									                <td class="td_r_b">15</td>
+									                <td class="td_r_b1">暂扣交通违法车辆（辆次）</td>
+									                <td class="td_r_b"><input  class="input1" value="200" type="text" id="text15" readonly/></td>
+									                <td class="td_r_b1">报纸宣传（条）</td>
+									                <td class="td_b"><input   type="text"  class="input1" value="200" id="text38" readonly/></td>
+									            </tr>	
+									            <tr>
+									                <td rowspan="1" class="td_r_b">16</td>
+									                <td rowspan="1" class="td_r_b1">拘留交通违法驾驶人（人次）</td>
+									                <td rowspan="1" class="td_r_b"><input type="text"  class="input1" value="200" id="text16" readonly/></td>
+									                <td class="td_r_b1">网络宣传（条）</td>
+									                <td class="td_b"><input  type="text"  class="input1" value="200" id="text39" readonly/></td>
+									            </tr>
+									            <tr>
+													<td class="td_r_b">17</td>
+													<td class="td_r_b1">检查客运车辆（辆）<font color="red">※</font></td>
+													<td class="td_r_b"><input type="text"  class="input1" value="200" id="text17" readonly/></td>
+													<td colspan="2" class="td_r_b">32</td>
+													<td colspan="2" class="td_r_b1">为群众做好事（件）</td>
+													<td class="td_b"><input  type="text"  class="input1" value="200" id="text40" readonly/></td>
+												</tr>
+												<tr>
+													<td class="td_r_b">18</td>
+													<td class="td_r_b1">清理驾驶人记分（人）<font color="red">※</font></td>
+													<td class="td_r_b"><input type="text"  class="input1" value="200" id="text18" readonly/></td>
+													<td rowspan="6" class="td_r_b">33</td>
+													<td colspan="2" rowspan="3" class="td_r_b1" align="center">交通事故情况</td>
+													<td class="td_r_b1">交通事故宗数（起）</td>
+													<td class="td_b"><input  type="text"  class="input1" value="200" id="text41" readonly/></td>
+												</tr>
+												<tr>
+													<td class="td_r_b">19</td>
+													<td class="td_r_b1">深入专业运输企业（个）<font color="red">※</font></td>
+													<td class="td_r_b"><input type="text"  class="input1" value="200" id="text19" readonly/></td>
+													<td class="td_r_b1">死亡人数（人次）</td>
+													<td class="td_b"><input   type="text"  class="input1" value="200" id="text42" readonly/></td>
+												</tr>
+												<tr>
+													<td class="td_r_b">20</td>
+													<td class="td_r_b1">教育运输企业驾驶人（人次）<font color="red">※</font></td>
+													<td class="td_r_b"><input  type="text"  class="input1" value="200" id="text20" readonly/></td>
+													<td class="td_r_b1">受伤人数（人次）</td>
+													<td class="td_b"><input   type="text"   class="input1" value="200" value="200" id="text43" readonly/></td>
+												</tr>
+												<tr>
+													<td class="td_r_b">21</td>
+													<td class="td_r_b1">启动恶劣天气应急预案（次）<font color="red">※</font></td>
+													<td class="td_r_b"><input  type="text"   class="input1" value="200" value="200" id="text21" readonly/></td>
+													<td colspan="2" rowspan="3" class="td_r_b1" align="center">其中</td>
+													<td class="td_r_b1">特大事故宗数（起）</td>
+													<td class="td_b"><input  type="text"   class="input1" value="200" value="200" id="text44" readonly/></td>
+												</tr>
+												<tr>
+													<td class="td_r_b">22</td>
+													<td class="td_r_b1">应急疏导、分流车辆（辆）<font color="red">※</font></td>
+													<td class="td_r_b"><input  type="text"   class="input1" value="200" value="200" id="text22" readonly/></td>
+													<td class="td_r_b1">死亡人数（人次）</td>
+													<td class="td_b"><input  type="text"   class="input1" value="200" value="200" id="text45" readonly/></td>
+												</tr>
+												<tr>
+													<td class="td_r_b">23</td>
+													<td class="td_r_b1">整治危险路段（处）<font color="red">※</font></td>
+													<td class="td_r_b"><input  type="text"   class="input1" value="200" value="200" id="text23" readonly/></td>
+													<td class="td_r_b1">受伤人数（人次）</td>
+													<td class="td_b"><input  type="text"   class="input1" value="200" value="200" id="text46" readonly/></td>
+												</tr>
+												<tr>
+													<td class="td_r_b">24</td>
+													<td class="td_r_b1">设置临时执勤点（个）<font color="red">※</font></td>
+													<td class="td_r_b"><input  type="text"  class="input1" value="200" id="text47" readonly/></td>
+													<td class="td_r_b" ></td>
+													<td class="td_r_b" colspan='4'></td>
+												</tr>
+									
+												<tr>
+													<td colspan='8' id="tfm">
+										<!-- 在js里面拼此表格，所以注释掉。
+									
+									
+													<table width="100%" align="center" class="tableInput" id="tfmTable">
+														  <tr><td colspan="5" class="td_r_b" align="center">辖区日车流量最大的路段：</td></tr>
+													      <tr>
+													             	<td width="28%" class="td_r_b">道路名称</td>
+															<td width="27%" class="td_r_b">路段名称</td>
+															<td width="15%" class="td_r_b">交通流量（车次）</td>
+															<td width="15%" class="td_r_b">客车（车次）</td>
+															<td width="15%" class="td_r_b">自驾车（车次）</td>	
+													             </tr>
+													</table>
+												-->													</td>
+												</tr>
+											</table>
+							        
+<br><br><br>
+
+<input type="button" onclick="javascript:AllAreaExcel();" value="导出页面指定区域内容到Excel">
+
+<SCRIPT LANGUAGE="javascript">
+//指定页面区域内容导入Excel
+
+function input2test()
+{
+	
+	inputs = document.getElementsByTagName("input");
+	var tmpInputs = new Array();
+	var count = 0;
+	//debugger;
+
+	for(i=0;i<inputs.length;i++)
+	{
+		if(inputs[i].className == "input1" )
+		{
+			tmpInputs[count]=inputs[i];
+			count++;
+		}
+	}
+	//count = 0;
+	
+	for(i=(tmpInputs.length-1);i>=0;i--)
+	{
+		tmpInputs[i].parentNode.innerText=tmpInputs[i].value;
+	}
+	
+
+}
+
+
+
+
+function AllAreaExcel() 
+{
+
+
+input2test();
+
+var oXL = new ActiveXObject("Excel.Application"); 
+var oWB = oXL.Workbooks.Add(); 
+var oSheet = oWB.ActiveSheet; 
+var sel=document.body.createTextRange();
+sel.moveToElementText(dataTable);
+sel.select();
+sel.execCommand("Copy");
+oSheet.Paste();
+oXL.Visible = true;
+}
+//指定页面区域“单元格”内容导入Excel
+function CellAreaExcel() 
+{
+var oXL = new ActiveXObject("Excel.Application"); 
+var oWB = oXL.Workbooks.Add(); 
+var oSheet = oWB.ActiveSheet; 
+var Lenr = PrintA.rows.length;
+for (i=0;i<Lenr;i++) 
+{ 
+   var Lenc = PrintA.rows(i).cells.length; 
+   for (j=0;j<Lenc;j++) 
+   {
+    oSheet.Cells(i+1,j+1).value = PrintA.rows(i).cells(j).innerText; 
+   } 
+} 
+oXL.Visible = true; 
+}
+
+//指定页面区域内容导入Word
+function AllAreaWord()
+{
+var oWD = new ActiveXObject("Word.Application");
+var oDC = oWD.Documents.Add("",0,1);
+var oRange =oDC.Range(0,1);
+var sel = document.body.createTextRange();
+sel.moveToElementText(PrintA);
+sel.select();
+sel.execCommand("Copy");
+oRange.Paste();
+oWD.Application.Visible = true;
+//window.close();
+}
+</SCRIPT>
+</body></html>

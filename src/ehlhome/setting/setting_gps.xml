@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+	
+	
+	
+	<!-- GPS刷新间隔秒数 -->
+  	<property name="gpsInterval" value="20"></property>
+  	
+  	<!-- 停止时间过长报警（分钟） -->
+  	<property name="stopingAlarmSetting" value="20"></property>
+  
+  	<!-- GPS轨迹，箭头绘制，根据箭头来设置信息，点间隔数 -->
+  	<property name="gpsTracePointInterval" value="20"></property>
+  	
+  	<!--GPS轨迹点间隔多长时间对轨迹进行打断,单位秒   -->
+  	<property name="gpsTraceBreakTime" value="60"></property>
+  	
+  	<!--GSP车辆机构树关联树 根结点层次编码-->
+   	<property name="GPS_ROOT_LEVEL_CODE" value="01"></property>
+  	 
+</properties>

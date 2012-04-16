@@ -1,0 +1,30 @@
+table.solid,table.solid td {
+	border-style: solid;
+	border-color: #a5d1ec;
+}
+
+table.solid {
+	width: 100%;
+	font-size: 12px;
+	border-width: 1px 0px 0px 1px;
+}
+
+table.solid caption {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+table.solid td {
+	border-width: 0px 1px 1px 0px;
+}
+
+table.solid thead td {
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	word-break: keep-all;
+}
+
+table.solid tbody td {
+	word-break: break-all;
+}

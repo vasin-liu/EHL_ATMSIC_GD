@@ -1,0 +1,97 @@
+* { margin:0; padding:0;}
+body { font-size:12px; font-family:"ËÎÌו", Helvetica, sans-serif; line-height:15px;}
+
+.head {width:1020px;  background:url(../image/head/head.png) repeat-x; height:45px;text-align:right;}
+.head span .a:link { color:#ffffff; text-decoration:none;} 
+.head span a:hover { color:#ff0000; text-decoration:none;}
+.head span a:active { color:#0000ff; text-decoration:none;}
+.head span { color:#ffffff; text-decoration:none;}
+.head ul { list-style-type:none; text-align:right; margin-right:10px !important; padding-top:0px;}
+.head ul li { display:block; line-height:17px; font-size:12px; font-weight:bold; color:#ffffff}
+.clr01{ clear:both; height:0px; font-size:1px; background-color:#919497}
+.body { margin:0 auto; width:1020px;}
+
+.nav a:link {text-decoration: none;color: #ffffff;}
+.nav a:hover {text-decoration: none;color: #1855BD;}
+.nav a:active {text-decoration: none;color: #1855BD;}
+
+.nav { width:1020px; background:#B8DCFF; height:10px;text-align:left;}
+.nav ul { list-style:none; padding-left:0px;}
+.nav ul li { line-height:25px; color:#ffffff; display:inline; padding-left:0px;}
+
+.tabon {color: #1855BD;font-weight: bold;}
+.taboff {color: black;}
+
+a:link {text-decoration: none;}
+a:visited {text-decoration: none;}
+a:hover {text-decoration: none;}
+a:active {text-decoration: none;}
+
+.foot { background-color:#589CDB; text-align:center; line-height:21px; margin:0 auto; width:1020px; color:#ffffff;}
+#roadMap {background:url(../image/welcome/mapInfo.gif) repeat-x;}
+#roadInfo {background:url(../image/welcome/roadinfo.gif) repeat-x;}
+
+
+*{margin:0;padding:0;border:0;}
+
+#navg {
+line-height: 24px; list-style-type: none; background:url(../image/head/nav_back.png) repeat-x;
+}
+#navg a {
+display: block;  text-align:center;
+}
+#navg a:link {
+color:#666; text-decoration:none;
+}
+#navg a:visited {
+color:#666;text-decoration:none;
+}
+#navg a:hover {
+color:#FFF;text-decoration:none;font-weight:bold;
+}
+#navg li {
+	
+float: left; width:10%;
+}
+#navg li a:hover{
+background:#4b9fd3;  background:url(../image/head/nav_hover.gif);
+background-repeat: no-repeat;
+
+
+
+}
+
+
+#navg li ul {
+line-height: 27px; list-style-type: none;text-align:left;
+left: -999em; width: 80px; position: absolute; 
+}
+#navg li ul li{
+float: left; width: 80px;
+background: #F6F6F6; 
+}
+#navg li ul a{
+display: block;width: 80px;text-align:center;padding-left:0px;
+}
+#navg li ul a:link {
+color:#666; text-decoration:none;
+}
+#navg li ul a:visited {
+color:#666;text-decoration:none;
+}
+#navg li ul a:hover {
+color:#F3F3F3;text-decoration:none;font-weight:normal;
+background:#71c0ea;
+}
+#navg li:hover ul {
+left: auto;
+}
+#navg li.sfhover ul {
+left: auto;
+}
+#content {
+clear: left; 
+}
+#alist{
+line-height: 24px; list-style-type: none; background:url(../image/head/nav_back.png) repeat-x;
+}

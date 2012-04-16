@@ -1,0 +1,122 @@
+﻿/*
+主体界面布局
+*/
+body {
+	padding: 0px;
+	margin: 0px;
+	overflow: auto;
+}
+
+/*---外部表格START------------------------------------------------------------*/
+/*顶部表格设计----------------------------------------------------------------*/
+.wTableTopCenter {
+	height: 30px;
+	background: url(../../image/cssimg/table/tabtopcenter.gif)
+		repeat-x;
+}
+
+.wTableTopLeft {
+	width: 12px;
+	height: 30px;
+	background: url(../../image/cssimg/table/tabtopleft.gif) no-repeat left;
+}
+
+.wTableTopRight {
+	width: 16px;
+	height: 30px;
+	background: url(../../image/cssimg/table/tabtopright.gif) no-repeat
+		right;
+}
+
+/*中部表格设计----------------------------------------------------------------*/
+.wTableCenterCenter {
+	background-color: #fff;
+}
+
+.wTableCenterLeft {
+	width: 8px;
+	background: url(../../image/cssimg/table/tabcenterleft.gif) repeat-y
+		left;
+}
+
+.wTableCenterRight {
+	width: 8px;
+	background: url(../../image/cssimg/table/tabcenterright.gif) repeat-y
+		right;
+}
+
+/*底部表格设计----------------------------------------------------------------*/
+.wTableBottomCenter {
+	height: 35px;
+	background: url(../../image/cssimg/table/tabbottomcenter.gif) repeat-x;
+}
+
+.wTableBottomLeft {
+	width: 12px;
+	height: 35px;
+	background: url(../../image/cssimg/table/tabbottomleft.gif) no-repeat
+		left top;
+}
+
+.wTableBottomRight {
+	width: 16px;
+	height: 35px;
+	background: url(../../image/cssimg/table/tabbottomright.gif) no-repeat
+		right top;
+}
+/*---外部表格 END-------------------------------------------------------------*/
+
+/** 标题 */
+/** 1.界面 样式*/
+/** 1.1.容器样式*/
+.title_page{
+	font-size: 12px;
+	text-align: left;
+}
+
+/** 1.2.图片  */
+.title_page td.image{
+	width: 5%;
+	text-align:center;
+}
+.title_page image.image{
+	width: 16px;
+	height: 16px;
+}
+
+/** 1.3.标签  */
+.title_page .label{
+	font-weight: bold;
+}
+/** 1.4.值 */
+.title_page .value{
+	
+}
+
+/**操作按钮，包括按钮样式和容器样式 */
+/**1.一般 化样式 */
+/**1.1.按钮样式 */
+.operate_common,.operate_query,.operate_detail {
+	display: inline;
+	width: 82px;
+	height: 22px;
+	background: url(../../image/button/btn.png) center;
+	text-decoration: none;
+	text-align: center;
+	line-height: 22px;
+	color: white;
+	overflow: hidden;
+}
+/**1.1.按钮样式悬浮 */
+.operate_common:hover,.operate_query:hover,.operate_detail:hover {
+	color: #dae76b;
+	filter: glow(color = #ffffff, strength =  1);
+}
+/**1.2.按钮容器样式 */
+.operates_common {
+	margin-top: 20px;
+}
+/**1.3.按钮位于按钮容器中样式 */
+.operates_common .operate_common {
+	margin: 0px 10px;
+}

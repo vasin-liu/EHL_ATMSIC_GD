@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	功能说明：公告信息展示
+	创建日期：2011-12-12
+	创建人：Vasin 
+ -->
+<mapping prefix="/general">
+	<forwards />
+	<exceptions />
+	<controllers>	    
+	    <!--值班人员信息-->  	
+		<controller name="dutyPersonInfoAction" clazz="com.ehl.general.action.DutyPersonInfoAction">
+		    <action name="getDutyPersonInfo"></action>
+	    </controller>	
+	    
+	    <!--在线人员信息-->  	
+		<controller name="onlinePersonInfoAction" clazz="com.ehl.general.action.OnlinePersonInfoAction">
+		    <action name="getOnlinePersonInfo"></action>
+	    </controller>
+	    
+	    <!--警情信息数量统计-->  	
+		<controller name="generalInfoAction" clazz="com.ehl.general.action.GeneralInfoAction">
+		    <action name="getGeneralInfoCount"></action>
+	    </controller>   	    
+	</controllers>
+</mapping>

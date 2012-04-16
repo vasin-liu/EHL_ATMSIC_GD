@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/tmkr">
+	<forwards />
+	<exceptions />
+	<controllers>
+
+		<!--预案方案管理  -->
+		<controller name="schemePlan" clazz="com.ehl.tmkr.action.SchemePlanAction">
+			<action name="add"></action>
+			<action name="get"></action>
+			<action name="modify"></action>
+			<action name="delete"></action>
+		</controller>
+		<!--法律法规 -->
+		<controller name="lawRule" clazz="com.ehl.tmkr.action.LawRuleAction">
+			<action name="add"></action>
+			<action name="get"></action>
+			<action name="modify"></action>
+			<action name="delete"></action>
+		</controller>
+		<!--工作规定  -->
+		<controller name="workRule" clazz="com.ehl.tmkr.action.WorkRuleAction">
+			<action name="add"></action>
+			<action name="get"></action>
+			<action name="modify"></action>
+			<action name="delete"></action>
+		</controller>
+		<!--其他  -->
+		<controller name="else" clazz="com.ehl.tmkr.action.ElseAction">
+			<action name="add"></action>
+			<action name="get"></action>
+			<action name="modify"></action>
+			<action name="delete"></action>
+		</controller>
+		
+	</controllers>
+</mapping>

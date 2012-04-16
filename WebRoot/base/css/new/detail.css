@@ -1,0 +1,62 @@
+/*
+明细界面样式
+*/
+
+
+/** 数据 */
+/** 1.明细界面 */
+.data_detail{
+	border-left: 1px solid #a5d1ec;
+	border-top: 1px solid #a5d1ec;
+	vertical-align: middle;
+	font-size: 12px;
+}
+/** 1.1.数据项 */
+.data_detail tr.item{
+	height: 30px;
+}
+.data_detail td.item{
+	border-right: 1px solid #a5d1ec;
+	border-bottom: 1px solid #a5d1ec;
+}
+/** 1.2.标签 */
+.data_detail .item .label{
+	width: 125px;
+	background-color: #F0FFFF;
+	text-align: center;
+	white-space: nowrap;
+}
+/** 1.2.值 */
+.data_detail .item .value{
+	width: 250px;
+	text-align: left;
+}
+.data_detail .item .value input,select{
+	width: 200px;
+}
+.data_detail .item .value textarea{
+	height: 150px;
+	word-break:break-all;
+}
+.data_detail .item .value .colspan3 {
+	width: 603px;
+}
+/**4.操作按钮 */
+/**4.1.按钮样式，与一般样式相同 */
+.operate_detail {
+	
+}
+/**4.1.按钮悬浮样式，与一般样式相同 */
+.operate_detail:hover{
+	
+}
+/**4.2.按钮容器样式 */
+.operates_detail {
+	margin-top: 20px;
+	text-align:center;
+	font-size:12px;
+}
+/**4.3.按钮位于按钮容器中样式 */
+.operates_detail .operate_detail {
+	margin: 0px 10px;
+}

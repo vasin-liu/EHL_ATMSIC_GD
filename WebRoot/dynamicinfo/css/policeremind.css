@@ -1,0 +1,62 @@
+div.record {
+	padding: 10 10 0 10;
+}
+
+div.record.bottomborder {
+	border-bottom: 1px solid #a5d1ec;
+}
+
+div.record textarea.copy_text {
+	text-indent: 2em;
+	display: block;
+}
+
+ul.line {
+	margin: 0px;
+	overflow: visible;
+}
+
+ul.line li {
+	display: inline;
+	margin-left: 1em;
+}
+
+ul.line li.first {
+	margin-left: 0em;
+}
+
+ul.line li span {
+	font-size: 12px;
+}
+
+div.record ul.line {
+	margin-top: 5px;
+}
+
+table.solid {
+	font-size: 15px;
+}
+
+table.solid col.index {
+	width: 10px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.solid col.name {
+	width: 40px;
+	vertical-align: top;
+	padding: 10 5 10 5;
+}
+
+table.solid col.value {
+	vertical-align: bottom;
+}
+
+table.data_detail .item.label {
+	font-size: 15px;
+}
+
+table.title_page {
+	font-size: 15px;
+}

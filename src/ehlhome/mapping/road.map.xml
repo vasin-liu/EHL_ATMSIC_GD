@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/road">
+	<forwards />
+	<exceptions />
+	<controllers>
+		<!--道路信息管理2010-1-16 by wangxt -->
+		<controller name="roadmanage" clazz="com.ehl.dispatch.cdispatch.action.RoadManageAction">			
+			<action name="modifyRoadInfo"></action>
+			<action name="deleteRoadInfo"></action>
+			<action name="getRoadInfo"></action>
+			<action name="modifyRoadInfo1"></action>
+		</controller>
+	</controllers>
+</mapping>

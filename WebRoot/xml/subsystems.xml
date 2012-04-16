@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<subsystems>
+		<!-- 
+		该配置文件配置了系统导航的各个子系统,以传统和九宫格方式登录的子系统均出自该配置文件
+			分组对应子系统如下： 1.分控中心包括：指挥调度系统、特勤任务系统、预案管理系统、热点管理系统等；
+			2.态势监控包括：路况监控系统、视频监控系统、GPS定位系统等；
+			3.缉查防控包括： 机动车缉查布控系统、机动车查控分析系统等；
+			4.综合研判包括：研判平台、研判网站、综合查询系统等；
+			5.业务应用包括：勤务管理系统、设备管理系统、事故预防与分析系统、交通秩序管理系统（施工占道管理、交通管制管理、交通标志管理、通行证管理）、警务考核管理系统等；
+			6.系统管理包括：系统管理中心等；
+		
+			配置必填项说明： 1.<items>中name属性为导航分组名称,sysid为系统编号(在新窗口打开的不用配置); homepage为子系统首页(不带head区);
+			isdisplay-是否显示("block"-显示 "none"-不显示); opennewpage-是否在新窗口打开("yes"-在新窗口打开 "no"-不在新窗口打开);
+			image-九宫格登录页面中子系统图标名称,图片统一存放webroot/image/login/GD/目录下; default-是否系统默认首页("t"-是 "f"-否;不支持九宫格方式); 文本区为子系统名称.
+		-->
+		<atmsictitle>广东道路交通信息集成与警务协作平台</atmsictitle>
+		<items id="5" name="交通警情">
+			<item id="dispatch" sysid="57" homepage="dispatch/index_dispatch.jsp" isdisplay="block" opennewpage="no" image="dispatch.png" default="f">交通警情</item>
+		</items>
+		<items id="" name="交通动态">
+			<item id="sm" sysid="" homepage="dynamicinfo/index_dynamicinfo.jsp" isdisplay="block" opennewpage="no" image="lmdt.png" default="t">路面动态</item>
+		</items>
+		<!--
+			<items id="4" name="综合查询"> <item id="tira" sysid="54"
+			homepage="query/index_tira.jsp" isdisplay="block" opennewpage="no"
+			image="query.png">综合查询</item> </items>
+		-->
+		<item id="prmplanManage" sysid="93" homepage="prmplan/index_prmplan.jsp" isdisplay="block" opennewpage="no" image="jmhd.png">警民互动</item>
+		<items id="1" name="节日警务统计">
+			<items id="4" name="综合分析">
+				<item id="tira" sysid="30" homepage="tira/index_tira.jsp" isdisplay="block" opennewpage="no" image="query.png" default="f">分析研判</item>
+			</items>
+			<items id="" name="信息编报管理">
+				<item id="" sysid="88" homepage="policeWork/index_policeWork.jsp" isdisplay="block" opennewpage="no" image="jwgz.png" default="f">信息编报管理</item>
+			</items>
+			<!--
+				<item id="roadManage" sysid=""
+				homepage="drpt/ehl/Roadmanage/roadManage.jsp" isdisplay="block"
+				opennewpage="no" image="roadManage.png">道路管理</item>
+			-->
+			<item id="drpt" sysid="90" homepage="drpt/index_drpt.jsp" isdisplay="block" opennewpage="no" image="cygz.png" default="f">春运管理</item>
+			<items id="" name="系统管理">
+				<item id="sm" sysid="01" homepage="sm/index_sm.jsp" isdisplay="" opennewpage="no" image="xtgl.png" default="f">系统管理</item>
+			</items>
+			 <!-- 交管知识库 traffic manage knowledge repository -->
+			<item id="tmkr" sysid="58" homepage="tmkr/index_tmkr.jsp" isdisplay="block" opennewpage="no" image="zhcx.png" default="f">交管知识库</item>
+			<item id="help" sysid="94" homepage="help/index_help.jsp" isdisplay="block" opennewpage="no" image="yhbz.png" default="f">用户反馈</item>
+		</items>
+	</subsystems>
+</root>

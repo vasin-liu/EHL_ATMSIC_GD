@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+	<!-- 视频相关配置参数  -->
+	<property name="codebaseurl" value="http://10.2.61.175:8081/EHL_CCTV/EhlCctvActiveX.rar"></property><!--控件下载URL-->
+	<property name="strDataServiceUrl" value="http://192.168.1.228/vmsDataService/Service/DataService.asmx"></property><!--atms　WebService-->
+	<property name="strMessageServerIP" value="192.168.1.228"></property><!--消息服务器IP-->
+	<property name="strMessageServerPort" value="8836"></property><!--消息服务器端口-->
+	
+	<property name="isVideoPlay" value="true"></property><!--是否查看视频,值为true或false-->	
+	<property name="isVideoBack" value="false"></property><!--是否查看视频回放,值为true或false-->	
+	<property name="modelType" value="1"></property><!--视频模式:1,视频(默认);2,只展示卡口视频;3加载卡口视频和视频-->	
+</properties>

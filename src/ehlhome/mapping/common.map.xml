@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/common">
+	<forwards />
+	<exceptions />
+	<controllers>
+	    <!--首页登录 -->
+		<controller name="login" clazz="com.ehl.login.Login">
+			<action name="login"></action>
+			<action name="isLogin"></action>
+			<action name="logout"></action>
+		</controller>
+		<!--下拉框生成2008-03-18 -->
+		<controller name="fillListBox" clazz="com.ehl.sm.common.util.FillListBox">
+			<action name="createList"></action>
+		</controller>
+		
+		<!--下拉框复选框生成 2011-12-27-->
+		<controller name="dropDown" clazz="com.ehl.util.DropDown">
+			<action name="createDropDown"></action>
+		</controller>
+
+		<!--统计图表生成2008-03-21 -->
+		<controller name="buildChart" clazz="com.ehl.sm.common.output.BuildChart">
+			<action name="chart"></action>
+		</controller>
+	
+		<!--转存Excel2008-03-23 -->
+		<controller name="saveAsExcel" clazz="com.ehl.sm.common.output.SaveAsExcel">
+			<action name="toExcel"></action>
+			<action name="fieldToExcel"></action>
+		</controller>
+
+		<!--分页控制2008-09-18 -->
+		<controller name="PageCtrl" clazz="com.ehl.sm.common.page.PageCtrl">
+			<action name="getPageUtil"></action>
+		</controller>
+	
+		<!--日志管理2007-09-07-->
+		<controller name="log" clazz="com.ehl.sm.sysmanage.LogManage">
+		    <action name="filter"></action>
+		    <action name="getDataById"></action>
+		</controller>
+		
+		<!--工具条生成 2008-6-5-->
+		<controller name="toolbar" clazz="com.ehl.sm.common.toolbar.ToolbarManager">
+		    <action name="createToolbar"></action>
+		</controller>
+		
+		<!--用户管理2008-03-17-->
+		<controller name="usermanage" clazz="com.ehl.sm.user.UserManage">
+		    <action name="filter"></action>
+			<action name="delete"></action>
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+			<action name="onload"></action>
+		</controller>
+		
+		<!--代码类别管理2008-04-01-->
+		<controller name="codeTypeManage" clazz="com.ehl.sm.sysmanage.CodeTypeManage">
+		    <action name="filter"></action>
+			<action name="delete"></action>
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+		</controller>
+		
+		<!--数据字典管理2008-04-01-->
+		<controller name="codemanage" clazz="com.ehl.sm.sysmanage.CodeManage">
+		    <action name="filter"></action>
+			<action name="delete"></action>
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+			<action name="editCodeList"></action>	
+			<action name="getCodeList"></action>						
+		</controller>
+		<!--警用辖区权限分配2009-06-10-->
+		<controller name="deptdommanage" clazz="com.ehl.sm.sysmanage.DeptDomManage">
+		    <action name="query"></action>
+		    <action name="save"></action>
+			<action name="delete"></action>
+			<action name="getDeptdomById"></action>						
+		</controller>		
+		<!--功能树的加载2007-09-18-->
+		<controller name="treectrl" clazz="com.ehl.sm.common.tree.TreeCtrl">			
+			<action name="load"></action>
+			<action name="loadCustom"></action>
+			<action name="query"></action>			
+			<action name="delete"></action>
+			<action name="filter"></action>			
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+			<action name="getCtrlDataAll"></action>
+		</controller>		
+		
+		<!-- 数据窗口定义2007-09-20 -->
+		<controller name="pageCust" clazz="com.ehl.sm.common.table.PageCustom">
+			<action name="settingReport"></action>
+		</controller>
+		<controller name="pageUtil" clazz="com.ehl.sm.common.table.PageUtil">
+			<action name="getPageUtil"></action>
+		</controller>
+		<controller name="pageTreeTable" clazz="com.ehl.sm.common.table.PageTreeTable">
+			<action name="getPageUtil"></action>
+			<action name="getXML"></action>
+		</controller>
+		<controller name="datatable" clazz="com.ehl.sm.common.table.DataTable">
+			<action name="getData"></action>
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+			<action name="delete"></action>
+			<action name="filter"></action>
+		</controller>
+		<controller name="datafield" clazz="com.ehl.sm.common.table.DataField" >
+			<action name="getData"></action>
+			<action name="getDataById"></action>
+			<action name="getDataByTableId"></action>
+			<action name="updateData"></action>
+			<action name="delete"></action>
+			<action name="filter"></action>
+		</controller>
+		<controller name="datawin" clazz="com.ehl.sm.common.table.DataWin">
+			<action name="getData"></action>
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+			<action name="delete"></action>
+			<action name="filter"></action>
+		</controller>
+		
+		<!--用户登录-->  	
+		<controller name="userlogin" clazz="com.ehl.sm.login.Login">
+		    <action name="login">
+       			<forward name="success"   forward="true" path="sm/index.jsp" />
+		    	<forward name="failure"   redirect="true" path="sm/index.jsp" />
+		    </action>
+		    <action name="logout"></action>
+		</controller>
+		
+		<!--权限管理-->
+		<controller name="PrivManage" clazz="com.ehl.sm.user.PrivManage">
+			<action name="load"></action>
+		    <action name="filter"></action>
+			<action name="delete"></action>
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+			<action name="loadChildSys"></action>
+		</controller>
+		
+		 <!-- 基本操作管理2008-06-04--> 
+		 <controller name="operationmanage" clazz="com.ehl.sm.user.OperationManage">
+		  <action name="updateData" /> 
+		  <action name="loadFilter" /> 
+		  <action name="getDataById" /> 
+		   <action name="filter" /> 
+		  </controller>
+		  
+		  <!-- 角色管理--> 
+		 <controller name="RoleManage" clazz="com.ehl.sm.user.RoleManage">
+		  <action name="load" /> 
+		  <action name="checkTree" /> 
+		  <action name="checkTree2" /> 
+		  <action name="filter" /> 
+		  <action name="delete" /> 
+		  <action name="getDataById" /> 
+		  <action name="updateData" /> 
+		  <action name="loadChildSys"></action>	
+		  <action name="loadTree"></action>		  
+		  </controller>				
+		
+		<!--功能管理-->
+		<controller name="functionmanager" clazz="com.ehl.sm.user.FunctionManage">
+			<action name="fresh"></action>
+		    <action name="filter"></action>
+			<action name="delete"></action>
+			<action name="getDataById"></action>
+			<action name="updateData"></action>
+		</controller>
+		
+		<!--用户与角色管理-->
+		<controller name="userandjs" clazz="com.ehl.sm.priv.Userandjs">
+			<action name="filter"></action>
+			<action name="save"></action>
+			<action name="delete"></action>		
+		</controller>
+		
+		<!-- 单点登录系统 -->
+		<controller name="ssoutil" clazz="com.ehl.sm.sso.SsoUtil">
+		     <action name="addCookie"></action>
+		     <action name="delCookie"></action>
+			<action name="checkCookiet"></action>
+			<action name="getUrlByPcode"></action>
+			<action name="getAndCheckCookiet"></action>
+		</controller>
+		<!-- 单点登录用户关系管理 -->
+		<controller name="ssouserrela" clazz="com.ehl.sm.sso.UserRelaManager">
+     		<action name="getDataById"></action>
+	     	<action name="addOrUpdate"></action>
+			<action name="loadFilter"></action>
+			<action name="delete"></action>
+		</controller>
+		<!-- 单点登录操作管理 -->
+		<controller name="ssosysdistribt" clazz="com.ehl.sm.sso.SysDistribtManager">
+     		<action name="getDataById"></action>
+	     	<action name="addOrUpdate"></action>
+			<action name="loadFilter"></action>
+			<action name="delete"></action>
+		</controller>
+
+		<!-- 系统配置 -->
+		<controller name="sysparamdata" clazz="com.ehl.sm.sysmanage.SysParamData">
+		    <action name="paramAdd"> </action>
+   		    <action name="paramUpdate"> </action>
+   		    <action name="paramDelete"> </action>
+  		</controller>
+  		
+		<!-- 系统接口 -->
+		<controller name="uinterfacecs" clazz="com.ehl.sm.common.ui.UInterfaceCS">
+		    <action name="checkUser"> </action>
+  		</controller>
+
+		<!-- begin 王文江的测试，勿动 2007/10/24 -->		
+		<controller name="wwjssotest" clazz="com.ehl.sm.wwjsso.SSOLogin">
+			<action name="login">
+	   			<forward name="success" redirect="true" path="index.jsp" />
+		    	<forward name="failure" redirect="true" path="wwjsso/login.jsp" />
+		    </action>
+		</controller>
+		<!--UTF8编码测试-->
+		<controller name="testutf8" clazz="com.ehl.sm.demo.UTF8test">
+			<action name="select">
+				<forward name="success" redirect="true" path="demo/isok.jsp" />
+				<forward name="failure" redirect="true" path="demo/isno.jsp" />
+			</action>
+			<action name="load"></action>
+			<action name="modify"></action>
+		</controller>
+		<!-- end 王文江的测试，勿动 2007/10/24 -->	
+
+		<!--设置默认页面，Modified by Leisx_2011-11-22-->
+		<controller name="homePageUtil" clazz="com.ehl.util.HomePageCtrl">
+			<action name="getHomePage"></action>
+		</controller>
+		<!-- end -->
+		
+		<!-- 系统公告 Modified by Liuwx 2012年2月7日10:57:53 -->
+		<controller name="systemNotices" clazz="com.ehl.notices.action.SystemNoticesAction">
+			<action name="getSystemNoticesList"></action>
+			<action name="getSystemNoticesDetail"></action>
+		    <action name="updateSystemNotices"></action>
+  		</controller>
+  		<!-- Modification finished -->
+	</controllers>
+</mapping>

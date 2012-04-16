@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/crowd">
+	<forwards />
+	<exceptions />
+	<controllers>
+		<!--道路信息管理2010-1-16 by wkz -->
+		<controller name="crowdmanage" clazz="com.ehl.dispatch.cdispatch.action.CrowdManageAction">			
+			<action name="modifyCrowdInfo"></action>
+			<action name="deleteCrowdInfo"></action>
+			<action name="getCrowdInfo"></action>
+			<action name="getAddName"></action>
+			<action name="cancelCrowdInfo"></action>
+			<action name="showExcel"></action>
+			<action name="getPromptCrowdCount"></action>
+			<action name="getPromptCrowdInfo"></action>
+			<action name="getLcbptmisZt"></action>
+			<action name="getTroubCrowdCount"></action>
+			<action name="getPTroubCrowdInfo"></action>
+			<action name="updateCADRS"></action>
+            <action name="getOutToDateCrowdInfo"></action>
+		</controller>
+	</controllers>
+</mapping>

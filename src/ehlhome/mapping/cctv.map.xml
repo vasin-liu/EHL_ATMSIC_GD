@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--任何controller和action都不允许重名-->
+<mapping prefix="/cctv">
+	<forwards />
+	<exceptions />
+	<controllers>
+   		<!--摄像机标注 -->
+		<controller name="vidicon" clazz="com.ehl.cctv.VidiconInfoMap">
+		    <action name="readVidiconPoints"></action>
+		    <action name="getVidiconInfo"></action>
+		    <action name="getVidiconInfoByCond"></action>
+		    <action name="getPointFromID"></action>	
+		    <action name="getChannelInfo"></action>    
+  		</controller> 
+	</controllers>
+</mapping>

@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	指挥调度 action配置
+	创建日期：2009-4-8 
+ -->
+<mapping prefix="/dispatch">
+	<forwards />
+	<exceptions />
+	<controllers>
+		<!-- 分页 2009-4-14.by luchunqiang -->
+		<controller name="bpaging" clazz="com.ehl.dispatch.bdispatch.util.DhtmlPaging">			
+			<action name="dhtmlPaging"></action>
+		</controller>
+		
+		<!--用户登录-->  	
+		<controller name="userlogin" clazz="com.ehl.sm.login.Login">
+		    <action name="login">
+       			<forward name="success"  forward="true" path="dispatch/index_dispatch.jsp" />
+		    	<forward name="failure"  redirect="true" path="dispatch/login.jsp" />
+		    </action>
+		    <action name="logout"></action>
+		    <action name="updatPW"></action>
+	    </controller>
+	    
+	    <!--警情关注信息查询-->  	
+		<controller name="affairWatch" clazz="com.ehl.dispatch.bdispatch.ctrl.AlarmAffairQueryCtrl">
+		    <action name="readMergeAffairs"></action>
+		    <action name="getAffairDetail"></action>
+	    </controller>
+	    
+	    <!--警情合并-->  	
+		<controller name="mergeAffair" clazz="com.ehl.dispatch.ctrl.MergeAffairsCtrl">
+		    <action name="queryNoticedAffair"> </action>
+		    <action name="mergeAffairs">>
+		    </action>
+	    </controller>
+	    
+	    <!-- 领导指令指示 -->
+	    <controller name="dictate" clazz="com.ehl.dispatch.ctrl.DictateDisposalCtrl">
+		    <action name="getDictateById"></action>
+		    <action name="getFullfillById"></action>
+		    <action name="writeFullfillData"> </action>
+	    </controller>
+	    <!-- 事件处理评价 -->
+	    <controller name="appraise" clazz="com.ehl.dispatch.ctrl.AlarmAffairAppraiseCtrl">
+		    <action name="getAppariseByAlarmId"></action>
+	    </controller>
+	    
+	    <!-- 设备监控 -->
+	    <controller name="videoInspect" clazz="com.ehl.dispatch.ctrl.VideoInspectCtrl">
+		    <action name="getVideoById"></action>
+		    <action name="getVideoList">
+		    </action>
+	    </controller>
+	    
+	    <!-- GPS实时信息 -->
+		<controller name="GPSMap" clazz="com.ehl.dispatch.ctrl.GPSMap">
+			<!-- 从数据库中获取GPS车辆信息 -->
+			<action name="ReadPoints"></action>			
+			<action name="getGPSInfoByPosition"></action>
+			<action name="ReadTracePoints"></action>
+			<action name="QueryGPSCar"></action>
+		</controller>
+	    
+	    
+	    <!--警情汇总-->  	
+		<controller name="policeCollect" clazz="com.ehl.dispatch.ctrl.PoliceCollect">
+		    <action name="getJgById"></action>
+		    <action name="getEventByType"></action>
+	    </controller>
+	    
+	     <!--警情编辑-->  	
+		<controller name="policeEdit" clazz="com.ehl.dispatch.bdispatch.ctrl.AlarmInfoEditControl">		   
+		    <action name="getNearRoadByMouse"></action>
+		    <action name="editAccidentInfo"></action>
+	     	<action name="editCongestionInfo"></action>
+		    <action name="getAlarmInfo"></action>	
+		    <action name="editExceptionCarInfo"></action>		    
+		    <action name="editPoliceEventInfo"></action>
+		    <action name="editBlackListInfo"></action>	
+		    <action name="editBadWeatherInfo"></action>	
+		    <action name="editTownplanInfo"></action>	
+		    <action name="editGeoLogicDisasterInfo"></action>	
+		    <action name="editFireAndBlastInfo"></action>	
+		    <action name="getSonList"></action>	
+		    <action name="getNewInfo"></action>
+		    <action name="getDictInfo"></action>
+		    <action name="getPointOnRoad"></action>	
+	    </controller>
+	    
+	    <!--值班信息统计-->  	
+		<controller name="dutyInfo" clazz="com.ehl.dispatch.cdispatch.action.DutyInfoCountAction">
+		    <action name="buildChart"></action>
+		    <action name="accType"></action>
+		    <action name="alarmType"></action>
+	    </controller>
+	    
+	    <!--警情反馈-->  	
+		<controller name="feedBack" clazz="com.ehl.dispatch.ctrl.PoliceFeedBackCtrl">
+		    <action name="getEventById"></action>
+		    <action name="getEventListById"></action>
+	    </controller>
+	    
+	    <!--反馈单-->  	
+		<controller name="feedBackModify" clazz="com.ehl.dispatch.ctrl.FeedBackModify">
+		    <action name="editForAccident"></action>
+		    <action name="getEventByType"></action>
+	    </controller>
+	   
+	    <!-- 督办 -->  	
+		<controller name="supervise" clazz="com.ehl.dispatch.ctrl.SuperviseCtrl">
+		    <action name="getSupervise"></action>
+	    </controller>
+	    
+	    
+	     <!--警情补录-->  	
+		<controller name="compleEdit" clazz="com.ehl.dispatch.ctrl.CompleAlarmInfoEdit">			  
+		    <action name="editCompleAccidentInfo"></action>
+	     	<action name="editCompleCongestionInfo"></action>		  
+		    <action name="editCompleExceptionCarInfo"></action>		    
+		    <action name="editComplePoliceEventInfo"></action>
+		    <action name="editCompleBlackListInfo"></action>	
+		    <action name="editCompleBadWeatherInfo"></action>	
+		    <action name="editCompleTownplanInfo"></action>	
+		    <action name="editCompleGeoLogicDisasterInfo"></action>	
+		    <action name="editCompleFireAndBlastInfo"></action>		   		    
+	    </controller>
+	    
+	     <!--b警情处理-->  	
+		<controller name="dispose" clazz="com.ehl.dispatch.bctrl.PoliceDisoposeCtrl">
+		    
+	    </controller>
+	    
+	      <!--警情详细查询-->  	
+		<controller name="alarmQuery" clazz="com.ehl.dispatch.ctrl.AlarmInfoQueryCtrl">
+		    
+	    </controller>
+	    
+	    <!-- c交通事故上报 -->  	
+		<controller name="caccident" clazz="com.ehl.dispatch.cdispatch.action.AccCtrl">
+		    <action name="editAccidentInfo"></action>
+		    <action name="getAccidentInfo"></action>
+		    <action name="delPoliceInfo"></action>
+		    <action name="getPoliceOnTime"></action>
+		    <action name="getNewInfo"></action>		    
+	    </controller>
+	    
+	    <!-- c接收上报 -->  	
+		<controller name="creportEdit" clazz="com.ehl.dispatch.cdispatch.action.ReceiveReportCtrl">
+		    <action name="addReceiveReport"></action>
+	    </controller>
+	    
+	    <!-- c路段管理 -->  	
+		<controller name="csectionEdit" clazz="com.ehl.dispatch.cdispatch.action.RoadSectionCtrl">
+		    <action name="editRoadSection"></action>
+		    <action name="delRoadSection"></action>
+		    <action name="getRoadSection"></action>
+	    </controller>
+	    
+	    <!-- c方向管理 -->  	
+		<controller name="croadPath" clazz="com.ehl.dispatch.cdispatch.action.RoadPath">
+		    <action name="editRoadPath"></action>
+		    <action name="delRoadPath"></action>
+		    <action name="getRoadPath"></action>
+		    <action name="getRoadPaths"></action>
+	    </controller>
+	    
+	    
+	    <!-- c辖区管理 -->  	
+		<controller name="croadDepartment" clazz="com.ehl.dispatch.cdispatch.action.RoadDepartment">
+		    <action name="editRoadDepartment"></action>
+		    <action name="delRoadDepartment"></action>
+		    <action name="getRoadDepartment"></action>
+	    </controller>
+	    
+	    <controller name="allMaterialInfo" clazz="com.ehl.dispatch.cdispatch.action.AllMaterialInfoAction">
+	   		<action name="getAllMaterialInfo"></action>
+	   		<action name="getMaterialInfo"></action>
+	   		<action name="getCrowdInfo"></action>
+	   		<action name="getRoadBuildInfo"></action>
+	   		<action name="getXCBKInfo"></action>
+	   		<action name="getNoticeInfo"></action>
+	    </controller>
+	    
+	    <!-- c重大警情 -->
+		<controller name="cmaterialInfo" clazz="com.ehl.dispatch.cdispatch.action.MaterialInfoAction">
+		    <action name="modifyMaterialInfo"></action>
+		    <action name="deleteMaterialInfo"></action>
+		    <action name="getMaterialInfo"></action>
+		    <action name="getMaterialInfo0"></action>
+		    <action name="modifyFlow"></action>
+		    <action name="getAccidentCarId"></action>
+		    <action name="modifyAccidentCar"></action>
+		    <action name="deleteAccidentCar"></action>
+		    <action name="getAccidentForeignerId"></action>
+		    <action name="modifyAccidentForeigner"></action>
+		    <action name="deleteAccidentForeigner"></action>
+		    <action name="getFlapperType"></action>
+		    <action name="getPromptCount"></action>
+		    <action name="getPromptInfo"></action>
+		    <action name="getPromptTbInfo"></action>
+		    <action name="deleteFile"></action>
+		    <action name="getMaterialState"></action>
+		    <!-- c重大警情续报追加 （杜）-->
+		    <action name="getFlowInitInfo"></action>
+		    <action name="insertXbInfo"></action>
+		    <action name="searchXbInfo"></action>
+		    <action name="uploadFile"></action>
+		    <action name="getNoticeCount"></action>
+		    <action name="getNoticeInfo"></action>
+		    <action name="updateXBInfo"></action>
+		    <action name="updateMaterialInfo"></action>
+		    <action name="getPromptXBCount"></action>
+		    <action name="getPromptXBInfo"></action>
+		    <action name="getXBInfo"></action>
+		    <action name="updateXbByOpid"></action>
+		    <action name="updateXbInfoByOpid"></action>
+		    <action name="updateEventState"></action>
+		    <action name="getDepatMentName"></action>
+		    <action name="getServerFilePath"></action>
+		    <action name="searchTotalInfo"></action>
+		    <action name="buildChart"></action>
+		    <action name="insertNewXb"></action>
+	    	<action name="deleteAttachmentFile"></action>
+	    	<action name="XBUploadFile"></action>
+	    </controller>
+	    
+	    <controller name="PersonTree" clazz="com.ehl.dispatch.common.Tree">			
+			<action name="setTree"></action>			
+	    </controller>
+		
+	 <!-- 卡口流量统计 -->
+	  <controller name="login" clazz="com.ehl.dispatch.cdispatch.action.BayonetCountsActoin">
+	    	<action name="getData"></action>
+	    	<action name="getRoadDate"></action>
+	    	<actoin name="getTime"></actoin>
+	    	<action name="load"></action>
+	    </controller>
+	    
+	     <!-- 警情 -->
+        	<controller name="alarmInfo" clazz="com.ehl.dispatch.cdispatch.action.alarmInfoActoin">
+	    	<action name="insertAlarmInfo"></action>
+	    </controller>
+	    
+	      <!-- 警情信息发布 -->
+	    <controller name="alarmPublish" clazz="com.ehl.dispatch.cdispatch.action.AlarmPublishAction">
+    	   	<action name="getAllZdAllAlarmCount">
+    	   		<forward name="success"  redirect="false" path="/dispatch/ehl/cpoliceedit/alarmZdPublish.jsp" />
+    	   	</action>
+    	   	<action name="getZdAllDdAlarmCount">
+    	   		<forward name="success"  redirect="false" path="/dispatch/ehl/cpoliceedit/alarmDdPublish.jsp" />
+    	   	</action>
+    	   	<action name="getPoliceRemind">
+    	   		<forward name="success"  redirect="false" path="/dynamicinfo/ehl/dynamicinfo/policeRemindPublish.jsp" />
+    	   	</action>
+    	</controller>
+    	   	
+	    
+	     <!-- 接收单位 -->
+	    <controller name="accdept" clazz="com.ehl.dispatch.accdept.action.AccDeptAction">
+	    	<action name="addAccDept"></action>
+	    	<action name="searchCount"></action>
+    	   	<action name="updateState"></action>
+    	</controller>
+		<!-- 车辆协查布控 -->
+	    <controller name="xcbk" clazz="com.ehl.dispatch.xcbk.action.XcbkAction">
+	    	<action name="addXcbk"></action>
+	    	<action name="searchXcbk"></action>
+	    	<action name="getXcbk"></action>
+	    	<action name="updateXcbk"></action>
+	    	<action name="modifyXcbk"></action>
+	    	<action name="signinXcbk"></action>
+	    	<action name="cancleXcbk"></action>
+	    	<action name="showExcel"></action>
+	    </controller>
+	    
+	    <!-- 其他重特大情况 -->
+	    <controller name="notice" clazz="com.ehl.dispatch.notice.action.NoticeAction">
+	    	<action name="addNotice"></action>
+	    	<action name="send"></action>
+	    	<action name="searchNotice"></action>
+	    	<action name="getNotice"></action>
+	    	<action name="updateNotice"></action>
+	    	<action name="modifyNotice"></action>
+	    	<action name="getPromptCount"></action>
+	    	<action name="getPromptInfo"></action>
+	    	<action name="showExcel"></action>
+	    	<action name="deleteById"></action>
+	    </controller>
+	    <!-- 其他重大情况续报 -->
+	    <controller name="noticeFlow" clazz="com.ehl.dispatch.notice.action.ContentAction">
+	    	<action name="addContent"></action>
+	    </controller>
+	       
+	    <!-- 值班信息 -->
+	    <controller name="duty" clazz="com.ehl.dispatch.duty.action.DutyAction">
+	    	<action name="insert"></action>
+	    	<action name="update"></action>
+	    	<action name="uploadFile"></action>
+	    	<action name="modifyTel"></action>
+	    	<action name="getTel"></action>
+	    	<action name="getTelAll"></action>
+	    	<action name="showExcel"></action>
+	    </controller>
+	    
+	     <!-- 交通报料 -->
+	    <controller name="feedNews" clazz="com.ehl.dispatch.cdispatch.action.TrafficNewsFeedsCtrl">
+    	   	<action name="addNewsInfo"></action>
+    	   	<action name="getNewsInfo"></action>
+			<action name="upNewsInfo"></action>
+			<action name="feedbackNewsInfo"></action>
+			<action name="delNewsInfo"></action>
+			<action name="getPromptCount"></action>
+			<action name="getPromptInfo"></action>
+			<action name="getDlFxByRoadName"></action>
+	    </controller>
+	    
+	   
+	    
+	    <!-- 机构树 -->
+	    <controller name="tree" clazz="com.ehl.dispatch.common.Tree">
+	    	<action name="getDeptTree"></action>
+	    	<action name="setAllTree"></action>
+			<action name="setTree"></action>
+			<action name="setZhiTree"></action>
+			<action name="setDaTree"></action>
+	    </controller>
+	    <!-- 当前登录用户信息 -->
+	    <controller name="onlineUsers" clazz="com.ehl.loginstate.StateListenerAction">
+			<action name="showOnlineUsers"></action>
+	    </controller>
+	    
+	    <!-- 道路机构 -->
+	    <controller name="roaddept" clazz="com.ehl.dispatch.cdispatch.action.RoadDeptAction">
+			<action name="getDeptByRoad"></action>
+			<action name="getRoadByDept"></action>
+			<action name="getRoadDept"></action>
+	    </controller>
+	    
+	     <!-- 文件上传下载 -->
+	    <controller name="fileUpDownLoad" clazz="com.ehl.dispatch.common.FileUpDownLoad">
+			<action name="upload"></action>
+			<action name="download"></action>
+	    </controller>
+	    <!-- 快捷获取数据 -->
+	    <controller name="shortcut" clazz="com.ehl.dispatch.common.ShortcutAction">
+			<action name="getSimpleResult"></action>
+	    </controller>
+	</controllers>
+</mapping>
+
+<!-- 2011-08-31更新，雷适兴  -->

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?> 
+<properties>
+	<property name="dsname" value="" />
+	<property name="multidsname" value="" />
+	<property name="Debug" value="true" />
+	<property name="AppServer" value="tomcat" />
+  	<!--  系统级别配置，勿动 --> 
+  	<property name="action.controllerFactory" value="com.appframe.action.impl.ControllerFactoryImpl" /> 
+  	<property name="action.actionFactory" value="com.appframe.action.impl.ActionFactoryImpl" /> 
+  	<property name="action.forwardHandler" value="com.appframe.action.impl.ForwardHandlerImpl" /> 
+  	<property name="action.exceptionHandler" value="com.appframe.action.impl.ExceptionHandlerImpl" /> 
+  	<property name="security.accessChecker" value="" /> 
+	
+	<!--  Kill Idle Session --> 
+  	<property name="driver" value="oracle.jdbc.driver.OracleDriver" /> 
+  	<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:myora92" /> 
+  	<property name="user" value="subdesktop" /> 
+  	<property name="password" value="ehl1234" /> 
+  	<property name="interval" value="1" /> 
+  	<property name="machine" value="Kiss" /> `
+  	<property name="connections" value="0" /> 
+  	<property name="thread" value="" /> 
+  	<property name="checkinteval" value="480" /> 
+ 
+   	<!-- 警情关注时间（单位：小时） -->
+  	<property name="msgWatchingTimeRange" value="24"></property>
+  	
+  	<!-- 是否与消息服务器通信 1为通信，0不通信-->
+  	<property name="isMesServer" value="0"></property>
+  	
+  	<!-- 警情列表刷新时间间隔（单位：秒） -->
+  	<property name="msgListRefreshInterval" value="10"></property>
+	<!-- 配置I18N文件. -->
+	<property name="I18N" value="zh"></property>
+	<!--系统重定向URL-->
+	<property name="redirecturl" value="/EHL_ATMSIC_GD/loginToGrid.jsp"></property>
+	
+	<!-- 包含文件列表. -->
+	<include>setting_sys.xml</include>
+	<include>setting_gzzd.xml</include>
+	<include>setting_webgis.xml</include>
+	<include>setting_drpt.xml</include>
+	<include>setting_query.xml</include>
+	<include>setting_tfm.xml</include>
+	<include>setting_dispatch.xml</include>
+	<!-- 值日时间间隔设定表 -->
+	<include>setting_duty_time.xml</include>
+  </properties>

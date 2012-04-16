@@ -1,0 +1,27 @@
+body {
+	margin: 0px;
+	padding: 0 5 0 5;
+}
+
+.marquee {
+	width: 100%;
+	height: 100%;
+	cursor: hand;
+	background-color: white;
+	font-size: 12px;
+	text-align: left;
+}
+
+.message {
+	width: 100%;
+	word-break: break-all;
+}
+
+.message .have {
+	text-indent: 24px;
+	text-align: left;
+}
+
+.message .no {
+	text-align: center;
+}

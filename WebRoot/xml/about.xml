@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rows>
+    <version no="VER 1.0.1.1">
+      <row>● 系统管理中心 Version 3.0.7.0(3.0.7.0)</row> 
+      <row>● 勤务管理系统 Version 4.0.3.0(4.0.3.0)</row> 
+      <row>● 设备管理系统 Version 1.0.2.0(1.0.2.0)</row>
+      <row>● 警情接报系统 Version 1.0.0.0(1.0.0.0)</row> 
+      <row>● 交通路况系统 Version 1.0.1.0(1.0.1.0)</row>  
+      <row>● 视频监控系统 Version 1.0.0.0(1.0.0.0)</row> 
+      <row>● 交通秩序管理系统 Version 1.0.1.0(1.0.1.0)</row> 
+      <row>● GPS信息系统 Version 1.0.0.2(1.0.0.2)</row> 
+      <row>● 静态信息系统 Version 1.0.0.0(1.0.0.0)</row>      
+      <row>● 统一界面显示风格，将显示分辨率统一调整到1024×768，在其它分辨率下界面居中显示。</row>    
+    </version>
+</rows>

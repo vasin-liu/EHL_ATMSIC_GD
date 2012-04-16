@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+	<!-- GPS跑动间隔秒数，箭头间隔点数  -->
+  	<property name="gpsInterval" value="5"></property>
+  	<property name="gpsTraceInterval" value="20"></property>
+   
+</properties>

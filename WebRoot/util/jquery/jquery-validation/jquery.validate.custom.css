@@ -1,0 +1,21 @@
+.validate input.valid,
+.validate select.valid,
+.validate textarea.valid {
+	background: url(images/valid.png) no-repeat right top;
+}
+
+.validate input.error,
+.validate select.error,
+.validate textarea.error {
+	background: url(images/error.png) no-repeat right top;
+}
+
+
+.validate label.error{
+	position: absolute;
+	white-space: nowrap;
+	border: 1px solid red;
+	background-color: white;
+	padding: 2 5;
+	font-weight: bold;
+}

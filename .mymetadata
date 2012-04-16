@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="EHL_ATMSIC_GD"
+  id="myeclipse.1305686802218"
+  context-root="/EHL_ATMSIC_GD"
+  j2ee-spec="5.0"
+  archive="EHL_ATMSIC_GD.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

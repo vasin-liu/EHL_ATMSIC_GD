@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	任何controller和action都不允许重名
+-->
+<mapping prefix="/webgis">
+	<forwards />
+	<exceptions />
+	<controllers>
+		<!-- GIS相关参数 -->
+		<controller name="GIS" clazz="com.ehl.webgis.data.GISParameters">
+			<action name="GetTileLoadParams">
+			</action>
+		</controller>
+		
+		<!--下拉框生成2008-03-18 -->
+		<controller name="fillListBox" clazz="com.ehl.common.util.FillListBox">
+			<action name="createList"></action>
+		</controller>
+
+		<!--分页控制2008-09-18 -->
+		<controller name="PageCtrl" clazz="com.ehl.common.page.PageCtrl">
+			<action name="getPageUtil"></action>
+		</controller>
+		
+		<!--地图标签 -->
+		<controller name="MapLabel" clazz="com.ehl.webgis.util.MapLabel">
+			<action name="newLabel"></action>
+			<action name="getLabels"></action>
+			<action name="getLabelInfoById"></action>
+			<action name="updateLabel"></action>
+			<action name="deleteById"></action>
+			<action name="getAreaCenter"></action>
+		</controller>
+		
+		<!--地图模糊查询 -->
+		<controller name="MapSearch" clazz="com.ehl.webgis.util.MapSearch">
+			<action name="preSearch"></action>
+			<action name="getSearchTypes"></action>
+			<action name="genSql"></action>
+			<action name="gISShow"></action>
+		</controller>
+ 	
+	</controllers>
+</mapping>

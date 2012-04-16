@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties> 
+	<property name="POLICE_DUTY_BEGIN_TIME" value="08:30:00"></property><!-- 值日开始时间-->
+	<property name="POLICE_DUTY_END_TIME" value="08:30:00"></property><!-- 值日结束时间-->
+	<property name="POLICE_DUTY_DURATION_TIME" value="24"></property><!-- 持续时间[小时]-->
+</properties>

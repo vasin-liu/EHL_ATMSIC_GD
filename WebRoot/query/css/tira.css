@@ -1,0 +1,225 @@
+body {
+	background-color: #FFFFFF;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;	
+	margin-bottom:0;
+	align：center;
+	overflow: hidden
+	}
+
+/*查询区域样式*/	
+.tagContent { 
+	background:url(imgs/bg.gif) repeat-x; 
+	height:50; 
+	padding:10px; 
+	border:0px;
+	color:#474747;
+	width:100%; 
+	display:none
+	}
+/*左侧页面表格样式*/	
+.table_tab {
+	font-size: 12px;
+	text-decoration: none;
+	height:99%;
+	width: 100%;
+	margin-top: 3px;	
+	margin-left: 3px;
+	margin-bottom: 2px;
+	border: 1px solid #97BECE;
+	}		
+/*弹出页面表格样式*/	
+.table_tab1 {
+	font-size: 12px;
+	text-decoration: none;
+	height:99%;
+	width: 80%;
+	margin-top: 3px;	
+	margin-left: 3px;
+	margin-bottom: 2px;
+	border: 1px solid #97BECE;
+	}	
+/*数据表格样式*/
+.table_grid {
+	font-size: 12px;
+	text-decoration: none;
+	height:70%;
+	width: 785px;
+	margin-top: 10px;	
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	OVERFLOW-Y: scroll;
+	align :center;
+	border: 1px solid #BFBFBF;
+	}
+/*数据表格样式1*/
+.table_webgis {
+	font-size: 12px;
+	text-decoration: none;
+	height:50%;
+	width: 785px;
+	margin-top: 10px;	
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	OVERFLOW-Y: scroll;
+	align :center;
+	border: 1px solid #BFBFBF;
+	}	
+/*数据表格样式1*/
+.table_grid1 {
+	font-size: 12px;
+	text-decoration: none;
+	height:25%;
+	width: 785px;
+	margin-top: 10px;	
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	OVERFLOW-Y: scroll;
+	align :center;
+	border: 1px solid #BFBFBF;
+	}
+	/*数据表格样式2*/
+.table_grid2 {
+	font-size: 12px;
+	text-decoration: none;
+	height:70%;
+	width: 100%;
+	margin-top: 10px;	
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	OVERFLOW-Y: scroll;
+	align :center;
+	border: 1px solid #BFBFBF;
+	}	
+	
+/*表头部分TR样式*/
+.tr_1 {
+	font-size: 12px;
+	text-decoration: none;
+	background-color: #B4C1E2;
+	line-height: 20px;
+	}
+
+/*表体部分TR样式*/
+.tr_2 {
+	font-size: 12px;
+	text-decoration: none;
+	background-color: #EFEFFE;
+	line-height: 20px;
+	}	
+	
+/*分析条件部分TD样式1*/		
+.td_1{
+	align:center;
+	color: #000000;
+	font-size: 12px;
+	border: 1px solid #BFBFBF;
+	text-decoration: none;
+	}
+	
+/*分析条件部分TD样式2*/
+.td_2{
+	align:center;
+	color: #000000;
+	font-size: 12px;
+	text-decoration: none;
+	}	
+.td_3{
+	font-size: 12px;
+	text-decoration: none;
+	background-color: #B4C1E2;
+	line-height: 20px;
+	}	
+.td_4{
+	align:center;
+	font-size: 12px;
+	text-decoration: none;
+	background-color: #ffffff;
+	}
+.titlebar {
+	font-size: 14px;
+	font-weight: bolder;
+	color: #ffffff;
+	BACKGROUND-COLOR: #ffffff;
+	COLOR: #000000;
+    }
+.input_text {
+	background-color:expression
+
+((this.readOnly&&this.readOnly==true)?"#D9D9D9":"");
+	font-size: 12px;
+	text-decoration: none;
+	background-position: 1px 1px;
+	padding: 1px;
+	border: 1px solid #666666;
+	}
+
+/*固定表头样式*/
+.scrollColThead {
+    position: relative; 
+    top: expression
+    (this.parentElement.parentElement.parentElement.scrollTop);
+    z-index:2;
+    overflow: hidden; 
+    height:25px;
+    width:100%
+    text-overflow:ellipsis
+}
+
+/*固定列样式*/
+.scrollRowThead
+{
+     position: relative; 
+     left: expression(this.parentElement.parentElement.parentElement.parentElement.scrollLeft);
+     z-index:0;
+     text-align:left;
+     background-color: #B4C1E2;
+}
+
+.scrolltable
+{
+	border-bottom:1px solid #CCCCCC; 
+	border-right:1px solid #CCCCCC; 
+}
+
+.scrolltable td,.scrollTable th
+{
+     border-left: 1px solid #CCCCCC; 
+     border-top: 1px solid #CCCCCC; 
+     padding: 1px; 
+}
+
+.rollDiv
+{
+    height: 100%;
+	clear: both; 
+	border: thin;
+	OVERFLOW: auto;
+	width: 100%; 
+}
+
+.rowstyle
+{
+	height: 25px;
+	cursor: hand; 
+	align:center;
+}
+
+.scrollDiv {
+	height: 300px;
+	border: 1px solid;
+	overflow-x: hidden;
+	overflow-y: auto;
+	width: 300px;
+	top:0px;
+	position: relative;
+	padding: 0px;
+	left: 0px;
+}
+
+	

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+
+	<!-- 消息服务配置 -->
+	<property name="msgServiceIp" value="127.0.0.1"></property>
+	<property name="msgServicePort" value="8836"></property>
+
+
+	<!-- 警情关注时间（单位：小时） -->
+	<property name="msgWatchingTimeRange" value="24"></property>
+
+	<!-- 警情列表刷新时间间隔（单位：秒） -->
+	<property name="msgListRefreshInterval" value="10"></property>
+
+	<!-- 默认省份 -->
+	<property name="deafultArea" value="粤"></property>
+
+	<property name="ZHKJSR" value="446012000000"></property> <!-- 发送指挥科 -->
+	<property name="ZHCJSR" value="446000000000"></property> <!-- 发送交通指挥处 -->
+	<property name="JLDJSR" value="440000000000"></property> <!-- 发送局领导 -->
+	<property name="YWCCBR" value="'446100000000','446200000000','446300000000'"></property> <!-- 业务处承办人 -->
+	<property name="YWCJSR" value="'446100000000','446200000000','446300000000'"></property><!-- 发送业务处主管部门 -->
+	<property name="ZDJGID" value="'440100000000','440200000000','440300000000','440400000000','440500000000','440600000000','440700000000','440800000000','440900000000','441200000000','441300000000','441300000000','441400000000','441500000000','441600000000','441700000000','441800000000','441900000000','442000000000','445100000000','445300000000','445200000000','440200000000'"></property> <!-- 下发支队 -->
+	<property name="DDJGID" value="440922000000"></property> <!-- 下发大队 -->
+	
+	<!-- 交警提示发布时间 -->
+	<!-- 起始时间 -->
+	<property name="policeremind_publish_stime" value="08:00"></property>
+	<!-- 终止时间 -->
+	<property name="policeremind_publish_etime" value="21:00"></property>
+
+</properties>

@@ -1,0 +1,54 @@
+/*Added by liuwx 2012年3月26日*/
+/*change the pager input size*/
+.ui-jqgrid .ui-pg-input {
+	height: 18px !important;
+	font-size: .8em;
+	margin: 0em;
+}
+/* /* auto row height*/ */
+.ui-jqgrid tr.jqgrow td {
+	white-space: normal !important;
+	height: auto;
+	vertical-align: text-top;
+	padding-top: 2px;
+}
+
+/* no records*/
+.norecords {
+	border-width: 2px !important;
+	display: none;
+	font-weight: bold;
+	font-size: 24px;
+	left: 30%;
+	margin: 50px;
+	padding: 50px;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	width: auto;
+	z-index: 102;
+}
+
+/*Added by xiayx 2012年4月1日*/
+/*将标题居中对齐*/
+.ui-jqgrid .ui-jqgrid-titlebar {
+	text-align: center;
+}
+
+.ui-jqgrid .ui-jqgrid-title {
+	float: none;
+}
+
+/*设置表格字体*/
+.ui-jqgrid .ui-jqgrid-view {
+	font-size: 15px;
+}
+/*设置表头字体*/
+.ui-jqgrid .ui-jqgrid-sortable {
+	font-size: .8em;
+	font-weight: bold;
+}
+/*设置数据行字体*/
+.ui-jqgrid .jqgrow {
+	font-size: .8em;
+}

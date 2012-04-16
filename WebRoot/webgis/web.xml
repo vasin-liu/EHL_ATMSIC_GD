@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" 
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<filter>
+		<filter-name>I18N</filter-name>
+			<filter-class>com.appframe.i18n.I18NFilter</filter-class>
+		</filter>
+		<filter-mapping>
+			<filter-name>I18N</filter-name>
+			<url-pattern>*.jsp</url-pattern>
+		</filter-mapping>
+		<filter-mapping>
+			<filter-name>I18N</filter-name>
+			<url-pattern>*.d</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>RandomCode</servlet-name>
+		<servlet-class>servlet.RandCodeServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AppframeServlet</servlet-name>
+		<servlet-class>com.appframe.core.AppframeServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>	
+	<!-- 显示统计图表 -->
+	<servlet>
+        <servlet-name>DisplayChart</servlet-name> 
+	    <servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>RandomCode</servlet-name>
+		<url-pattern>*.img</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 事故点标住 
+	<servlet>
+      <servlet-name>SpServlet</servlet-name> 
+	    <servlet-class>com.ehl.acctask.SpServlet</servlet-class>
+	    <load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpServlet</servlet-name>
+		<url-pattern>*.a</url-pattern>
+	</servlet-mapping> --> 
+	
+	<servlet-mapping>
+		<servlet-name>AppframeServlet</servlet-name>
+		<url-pattern>*.d</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 显示统计图表 -->
+    <servlet-mapping>
+        <servlet-name>DisplayChart</servlet-name> 
+        <url-pattern>/chart/DisplayChart</url-pattern> 
+    </servlet-mapping>
+    
+    <!-- Session保存时间，单位分钟 -->
+	<session-config>
+	   <session-timeout>30</session-timeout> 
+	</session-config>
+	
+    <!-- 欢迎页配置 -->
+    <welcome-file-list>
+    	<welcome-file>loginToGrid.jsp</welcome-file> 
+	</welcome-file-list>
+    
+</web-app>
