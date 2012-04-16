@@ -232,7 +232,16 @@
             var internalPublishId = remindId + "_1"; //公安网发布checkbox ID
             var internetPublish = $(internetPublishId).checked?$(internetPublishId).value:"";
             var internalPublish = $(internalPublishId).checked?$(internalPublishId).value:"";
-            var publishType = internalPublish == ""?internetPublish:(internalPublish + "," + internetPublish);
+            var publishType = "";
+            if(internalPublish == ""){
+                publishType = internetPublish;
+            }else if(internetPublish == ""){
+                publishType = internalPublish;
+            }else if(internalPublish != "" && internetPublish != ""){
+                publishType = internalPublish + "," + internetPublish;
+            }else{
+                publishType = "";
+            }
             data = "remindId=" + remindId + "&publishType="+publishType;
             this.request(data);
         },
